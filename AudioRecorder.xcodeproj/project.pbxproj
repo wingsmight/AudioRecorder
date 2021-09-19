@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE40136426F79630007D3C78 /* ToastUI in Frameworks */ = {isa = PBXBuildFile; productRef = CE40136326F79630007D3C78 /* ToastUI */; };
 		CE6D71CC26F6042D005BDA30 /* AudioRecorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71CB26F6042D005BDA30 /* AudioRecorderApp.swift */; };
 		CE6D71CE26F6042D005BDA30 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71CD26F6042D005BDA30 /* ContentView.swift */; };
 		CE6D71D026F60430005BDA30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6D71CF26F60430005BDA30 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE40136426F79630007D3C78 /* ToastUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +104,9 @@
 			dependencies = (
 			);
 			name = AudioRecorder;
+			packageProductDependencies = (
+				CE40136326F79630007D3C78 /* ToastUI */,
+			);
 			productName = AudioRecorder;
 			productReference = CE6D71C826F6042D005BDA30 /* AudioRecorder.app */;
 			productType = "com.apple.product-type.application";
@@ -129,6 +134,9 @@
 				Base,
 			);
 			mainGroup = CE6D71BF26F6042D005BDA30;
+			packageReferences = (
+				CE40136226F79630007D3C78 /* XCRemoteSwiftPackageReference "ToastUI" */,
+			);
 			productRefGroup = CE6D71C926F6042D005BDA30 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -348,6 +356,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CE40136226F79630007D3C78 /* XCRemoteSwiftPackageReference "ToastUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/quanshousio/ToastUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CE40136326F79630007D3C78 /* ToastUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE40136226F79630007D3C78 /* XCRemoteSwiftPackageReference "ToastUI" */;
+			productName = ToastUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CE6D71C026F6042D005BDA30 /* Project object */;
 }

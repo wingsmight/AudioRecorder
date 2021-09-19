@@ -61,6 +61,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing:0) {
+            Spacer()
             ZStack {
                 switch selectedTabIndex {
                 case 0:
