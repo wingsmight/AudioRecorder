@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE40136426F79630007D3C78 /* ToastUI in Frameworks */ = {isa = PBXBuildFile; productRef = CE40136326F79630007D3C78 /* ToastUI */; };
+		CE66445D26F8D02A00A554FB /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = CE66445C26F8D02A00A554FB /* AlertToast */; };
 		CE6D71CC26F6042D005BDA30 /* AudioRecorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71CB26F6042D005BDA30 /* AudioRecorderApp.swift */; };
 		CE6D71CE26F6042D005BDA30 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71CD26F6042D005BDA30 /* ContentView.swift */; };
 		CE6D71D026F60430005BDA30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6D71CF26F60430005BDA30 /* Assets.xcassets */; };
@@ -34,7 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE40136426F79630007D3C78 /* ToastUI in Frameworks */,
+				CE66445D26F8D02A00A554FB /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,7 +105,7 @@
 			);
 			name = AudioRecorder;
 			packageProductDependencies = (
-				CE40136326F79630007D3C78 /* ToastUI */,
+				CE66445C26F8D02A00A554FB /* AlertToast */,
 			);
 			productName = AudioRecorder;
 			productReference = CE6D71C826F6042D005BDA30 /* AudioRecorder.app */;
@@ -135,7 +135,7 @@
 			);
 			mainGroup = CE6D71BF26F6042D005BDA30;
 			packageReferences = (
-				CE40136226F79630007D3C78 /* XCRemoteSwiftPackageReference "ToastUI" */,
+				CE66445B26F8D02A00A554FB /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = CE6D71C926F6042D005BDA30 /* Products */;
 			projectDirPath = "";
@@ -358,21 +358,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CE40136226F79630007D3C78 /* XCRemoteSwiftPackageReference "ToastUI" */ = {
+		CE66445B26F8D02A00A554FB /* XCRemoteSwiftPackageReference "AlertToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/quanshousio/ToastUI";
+			repositoryURL = "https://github.com/elai950/AlertToast.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				minimumVersion = 1.3.7;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CE40136326F79630007D3C78 /* ToastUI */ = {
+		CE66445C26F8D02A00A554FB /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CE40136226F79630007D3C78 /* XCRemoteSwiftPackageReference "ToastUI" */;
-			productName = ToastUI;
+			package = CE66445B26F8D02A00A554FB /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

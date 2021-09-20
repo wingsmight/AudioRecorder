@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AlertToast
 
 struct Tab {
     private let DEFAULT_ICON_SIZE : Float = 25
@@ -51,6 +52,8 @@ struct Tab {
 
 struct ContentView: View {
     @State private var selectedTabIndex = 1
+    @State public var isRecordingToastShowing : Bool = false
+    @State private var isRecording : Bool = false
     
     private var tabs = [
         Tab("arrow.up.left"),
@@ -68,13 +71,13 @@ struct ContentView: View {
                     SettingsTab()
                     
                 case 1:
-                    MainMenuTab()
+                    MainMenuTab(isRecordingToastShowing: self.$isRecordingToastShowing, isRecording: self.$isRecording)
                     
                 case 2:
                     RecordsTab()
                     
                 default:
-                    MainMenuTab()
+                    MainMenuTab(isRecordingToastShowing: self.$isRecordingToastShowing, isRecording: self.$isRecording)
                 }
             }
             Spacer()
@@ -103,6 +106,9 @@ struct ContentView: View {
                 }
             }
         }
+        .toast(isPresenting: $isRecordingToastShowing, duration: 1.25, tapToDismiss: false, offsetY: -40, alert: {
+            AlertToast(displayMode: .banner(.slide), type: .regular, title: "Приложение запущено")
+        })
     }
 }
 

@@ -2,12 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "ToastUI",
-        "repositoryURL": "https://github.com/quanshousio/ToastUI",
+        "package": "AlertToast",
+        "repositoryURL": "https://github.com/elai950/AlertToast.git",
         "state": {
           "branch": null,
-          "revision": "e1fd43336630b40a4273a346bd9e6c250151c88d",
-          "version": "2.0.0"
+          "revision": "a4f4267f6454259ba4ed8f9dadb87334a789c26c",
+          "version": "1.3.7"
         }
       }
     ]
