@@ -65,47 +65,51 @@ struct ContentView: View {
     var body: some View {
         ZStack(alignment: Alignment.bottom) {
             TabView(selection: $selectedTabIndex) {
-                SettingsTab()
-                    .tabItem {
-                        Text("")
-                    }
-                    .tag(0)
-                MainMenuTab(isRecordingToastShowing: self.$isRecordingToastShowing)
-                    .tabItem () {
-                        Text("")
-                    }
-                    .tag(1)
-                RecordsTab()
-                    .tabItem {
-                        Text("")
-                    }
-                    .tag(2)
+                NavigationView {
+                    SettingsTab()
+                }
+                .tabItem {
+                    Text("")
+                }
+                .tag(0)
+                NavigationView {
+                    MainMenuTab(isRecordingToastShowing: self.$isRecordingToastShowing)
+                }
+                .tabItem {
+                    Text("")
+                }
+                .tag(1)
+                NavigationView {
+                    RecordsTab()
+                }
+                .tabItem {
+                    Text("")
+                }
+                .tag(2)
             }
             .toast(isPresenting: $isRecordingToastShowing, duration: 1.25, tapToDismiss: false, offsetY: -40, alert: {
                 AlertToast(displayMode: .banner(.slide), type: .regular, title: "Приложение запущено")
             })
             HStack {
-                ForEach(0..<3, id: \.self) {
-                                    tabIndex in
-                                    
-                                    VStack {
-                                        HStack {
-                                            Spacer()
-                                            Button(action: {
-                                                self.selectedTabIndex = tabIndex
-                                            }, label: {
-                                                let tab = tabs[tabIndex]
-                                                
-                                                Image(systemName: tab.IconName)
-                                                    .font(.system(size: CGFloat(tab.IconSize), weight: .regular, design: .default))
-                                                    .foregroundColor(selectedTabIndex == tabIndex ? tab.SelectedColor : tab.InactiveColor)
-                                            })
-                                            .disabled(self.selectedTabIndex == tabIndex)
-                                            Spacer()
-                                        }
-                                        .padding(.top)
-                                    }
-                                }
+                ForEach(0..<3, id: \.self) { tabIndex in
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                self.selectedTabIndex = tabIndex
+                            }, label: {
+                                let tab = tabs[tabIndex]
+                                
+                                Image(systemName: tab.IconName)
+                                    .font(.system(size: CGFloat(tab.IconSize), weight: .regular, design: .default))
+                                    .foregroundColor(selectedTabIndex == tabIndex ? tab.SelectedColor : tab.InactiveColor)
+                            })
+                                .disabled(self.selectedTabIndex == tabIndex)
+                            Spacer()
+                        }
+                        .padding(.top)
+                    }
+                }
             }
         }
     }

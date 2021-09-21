@@ -32,6 +32,7 @@ struct MainMenuTab: View {
                     .clipShape(Circle())
             }
         }
+        .navigationTitle("Аудиорегистратор")
     }
 }
 
