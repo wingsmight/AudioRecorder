@@ -9,21 +9,19 @@ import SwiftUI
 
 struct SettingsTab: View {
     @State var isToggleOn : Bool = false
+    @State private var selectedStrength = "Mild"
+    @Binding var colorScheme : AppColorScheme
+    let strengths = ["Mild", "Medium", "Mature"]
     
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                Toggle("Title 0", isOn: $isToggleOn)
-                    .lineLimit(nil)
-                    .padding(7)
-                    .background(Color("optionBackgroundColor"))
-                Divider()
-                Toggle("Title 1", isOn: $isToggleOn)
-                    .lineLimit(nil)
-                    .padding(7)
-                    .background(Color("optionBackgroundColor"))
-                Spacer()
+        Form {
+            Section(header: Text("Внешний вид")) {
+                Picker("Главная тема", selection: self.$colorScheme) {
+                    ForEach(AppColorScheme.allCases, id: \.self) { value in
+                        Text(value.localizedName)
+                    }
+                }
             }
         }
         .navigationTitle("Настройки")
@@ -33,6 +31,6 @@ struct SettingsTab: View {
 
 struct SettingsTab_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsTab()
+        SettingsTab(colorScheme: .constant(AppColorScheme.System))
     }
 }

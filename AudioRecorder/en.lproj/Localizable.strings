@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  AudioRecorder
+
+  Created by Igoryok on 22.09.2021.
+  
+*/
+"Light" = "Light";
+"Dark" = "Dark";
+"System" = "System";
