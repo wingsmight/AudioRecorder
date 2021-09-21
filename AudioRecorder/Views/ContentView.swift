@@ -52,7 +52,7 @@ struct Tab {
 
 struct ContentView: View {
     @State private var selectedTabIndex = 1
-    @State public var isRecordingToastShowing : Bool = false
+    @State private var isRecordingToastShowing : Bool = false
     @State private var isRecording : Bool = false
     
     private var tabs = [
@@ -63,52 +63,51 @@ struct ContentView: View {
         
     
     var body: some View {
-        VStack(spacing:0) {
-            Spacer()
-            ZStack {
-                switch selectedTabIndex {
-                case 0:
-                    SettingsTab()
-                    
-                case 1:
-                    MainMenuTab(isRecordingToastShowing: self.$isRecordingToastShowing, isRecording: self.$isRecording)
-                    
-                case 2:
-                    RecordsTab()
-                    
-                default:
-                    MainMenuTab(isRecordingToastShowing: self.$isRecordingToastShowing, isRecording: self.$isRecording)
-                }
+        ZStack(alignment: Alignment.bottom) {
+            TabView(selection: $selectedTabIndex) {
+                SettingsTab()
+                    .tabItem {
+                        Text("")
+                    }
+                    .tag(0)
+                MainMenuTab(isRecordingToastShowing: self.$isRecordingToastShowing)
+                    .tabItem () {
+                        Text("")
+                    }
+                    .tag(1)
+                RecordsTab()
+                    .tabItem {
+                        Text("")
+                    }
+                    .tag(2)
             }
-            Spacer()
-            Divider()
+            .toast(isPresenting: $isRecordingToastShowing, duration: 1.25, tapToDismiss: false, offsetY: -40, alert: {
+                AlertToast(displayMode: .banner(.slide), type: .regular, title: "Приложение запущено")
+            })
             HStack {
                 ForEach(0..<3, id: \.self) {
-                    tabIndex in
-                    
-                    VStack {
-                        HStack {
-                            Spacer()
-                            Button(action: {
-                                self.selectedTabIndex = tabIndex
-                            }, label: {
-                                let tab = tabs[tabIndex]
-                                
-                                Image(systemName: tab.IconName)
-                                    .font(.system(size: CGFloat(tab.IconSize), weight: .regular, design: .default))
-                                    .foregroundColor(selectedTabIndex == tabIndex ? tab.SelectedColor : tab.InactiveColor)
-                            })
-                            .disabled(self.selectedTabIndex == tabIndex)
-                            Spacer()
-                        }
-                        .padding(.top)
-                    }
-                }
+                                    tabIndex in
+                                    
+                                    VStack {
+                                        HStack {
+                                            Spacer()
+                                            Button(action: {
+                                                self.selectedTabIndex = tabIndex
+                                            }, label: {
+                                                let tab = tabs[tabIndex]
+                                                
+                                                Image(systemName: tab.IconName)
+                                                    .font(.system(size: CGFloat(tab.IconSize), weight: .regular, design: .default))
+                                                    .foregroundColor(selectedTabIndex == tabIndex ? tab.SelectedColor : tab.InactiveColor)
+                                            })
+                                            .disabled(self.selectedTabIndex == tabIndex)
+                                            Spacer()
+                                        }
+                                        .padding(.top)
+                                    }
+                                }
             }
         }
-        .toast(isPresenting: $isRecordingToastShowing, duration: 1.25, tapToDismiss: false, offsetY: -40, alert: {
-            AlertToast(displayMode: .banner(.slide), type: .regular, title: "Приложение запущено")
-        })
     }
 }
 

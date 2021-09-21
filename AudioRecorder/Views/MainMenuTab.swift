@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MainMenuTab: View {
     @Binding var isRecordingToastShowing : Bool
-    @Binding var isRecording : Bool
+    @State private var isRecording : Bool = false
     
     
     var recordingButtonImage : String {
@@ -37,6 +37,6 @@ struct MainMenuTab: View {
 
 struct MainMenuTab_Previews: PreviewProvider {
     static var previews: some View {
-        MainMenuTab(isRecordingToastShowing: .constant(false), isRecording: .constant(false))
+        MainMenuTab(isRecordingToastShowing: .constant(false))
     }
 }
