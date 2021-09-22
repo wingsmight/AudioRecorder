@@ -17,6 +17,7 @@
 		CE6D71DF26F60988005BDA30 /* RecordsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DE26F60988005BDA30 /* RecordsTab.swift */; };
 		CE773AA726FB65FA00EA8284 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE773AA626FB65FA00EA8284 /* User.swift */; };
 		CE773AAB26FB770600EA8284 /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE773AAA26FB770600EA8284 /* DateExt.swift */; };
+		CE773AB026FB7A4600EA8284 /* AppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE773AAF26FB7A4600EA8284 /* AppInfoView.swift */; };
 		CEBF0BEA26FA5D6000C9B906 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBF0BEC26FA5D6000C9B906 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		CE6D71DE26F60988005BDA30 /* RecordsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsTab.swift; sourceTree = "<group>"; };
 		CE773AA626FB65FA00EA8284 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CE773AAA26FB770600EA8284 /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
+		CE773AAF26FB7A4600EA8284 /* AppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoView.swift; sourceTree = "<group>"; };
 		CEBF0BEB26FA5D6000C9B906 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEBF0BEF26FA5E2E00C9B906 /* ru */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 4; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,10 +92,10 @@
 		CE6D71E026F60998005BDA30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CE773AAE26FB7A0C00EA8284 /* RecordsTab */,
+				CE773AAD26FB7A0300EA8284 /* MainMenuTab */,
+				CE773AAC26FB79FB00EA8284 /* SettingsTab */,
 				CE6D71CD26F6042D005BDA30 /* ContentView.swift */,
-				CE6D71DA26F60943005BDA30 /* SettingsTab.swift */,
-				CE6D71DC26F60979005BDA30 /* MainMenuTab.swift */,
-				CE6D71DE26F60988005BDA30 /* RecordsTab.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -112,6 +114,31 @@
 				CE773AAA26FB770600EA8284 /* DateExt.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CE773AAC26FB79FB00EA8284 /* SettingsTab */ = {
+			isa = PBXGroup;
+			children = (
+				CE6D71DA26F60943005BDA30 /* SettingsTab.swift */,
+				CE773AAF26FB7A4600EA8284 /* AppInfoView.swift */,
+			);
+			path = SettingsTab;
+			sourceTree = "<group>";
+		};
+		CE773AAD26FB7A0300EA8284 /* MainMenuTab */ = {
+			isa = PBXGroup;
+			children = (
+				CE6D71DC26F60979005BDA30 /* MainMenuTab.swift */,
+			);
+			path = MainMenuTab;
+			sourceTree = "<group>";
+		};
+		CE773AAE26FB7A0C00EA8284 /* RecordsTab */ = {
+			isa = PBXGroup;
+			children = (
+				CE6D71DE26F60988005BDA30 /* RecordsTab.swift */,
+			);
+			path = RecordsTab;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +222,7 @@
 				CE6D71DB26F60943005BDA30 /* SettingsTab.swift in Sources */,
 				CE773AAB26FB770600EA8284 /* DateExt.swift in Sources */,
 				CE773AA726FB65FA00EA8284 /* User.swift in Sources */,
+				CE773AB026FB7A4600EA8284 /* AppInfoView.swift in Sources */,
 				CE6D71DD26F60979005BDA30 /* MainMenuTab.swift in Sources */,
 				CE6D71CE26F6042D005BDA30 /* ContentView.swift in Sources */,
 				CE6D71CC26F6042D005BDA30 /* AudioRecorderApp.swift in Sources */,

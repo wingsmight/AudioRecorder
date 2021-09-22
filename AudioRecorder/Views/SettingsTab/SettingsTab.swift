@@ -31,6 +31,7 @@ struct SettingsTab: View {
     @State private var selectedStrength = "Mild"
     @Binding var colorScheme : AppColorScheme
     @State var user = User(photoLocation: "", name: "name", surname: "surname", birthDate: Date(), email: "email", phoneNumber: "+79134807883", facebookProfileUrl: "")
+    @State var isAppInfoShowing = false
     
     let strengths = ["Mild", "Medium", "Mature"]
     
@@ -53,6 +54,14 @@ struct SettingsTab: View {
                 TextInfo(key: "Телефон", value: user.phoneNumber)
                 Link("Профиль Facebook", destination: URL(string: "https://facebook.com")!)
             }
+            Section(header: Text("Справка")) {
+                Button {
+                    isAppInfoShowing.toggle()
+                } label: {
+                    Text("О принципах работы приложения")
+                }
+                
+            }
             Section(header: Text("Внешний вид")) {
                 Picker("Главная тема", selection: self.$colorScheme) {
                     ForEach(AppColorScheme.allCases, id: \.self) { value in
@@ -61,8 +70,14 @@ struct SettingsTab: View {
                 }
             }
         }
+        .sheet(isPresented: $isAppInfoShowing) {
+            AppInfoView(isShowing: self.$isAppInfoShowing)
+        }
         .navigationTitle("Настройки")
         .padding(.top, 1)
+        .sheet(isPresented: $isAppInfoShowing) {
+            AppInfoView(isShowing: self.$isAppInfoShowing)
+        }
     }
 }
 
