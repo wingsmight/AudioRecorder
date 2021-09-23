@@ -34,8 +34,6 @@ struct SettingsTab: View {
     @State private var isAppInfoShowing = false
     @State private var isCloudStorageChoiceShowing = false
     
-    let strengths = ["Mild", "Medium", "Mature"]
-    
     
     var body: some View {
         Form {

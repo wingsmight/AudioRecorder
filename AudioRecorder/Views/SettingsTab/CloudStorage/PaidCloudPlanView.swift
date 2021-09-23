@@ -13,7 +13,7 @@ struct PaidCloudPlanView: View {
     
     var body: some View {
         ZStack(alignment: Alignment.top) {
-            Color(UIColor.gray)
+            Color("cloudPlanBackgroundColor")
                 .opacity(isPressed ? 0.5 : 0.3)
                 .blur(radius: 20)
             VStack {
@@ -23,14 +23,14 @@ struct PaidCloudPlanView: View {
                         .scaledToFit()
                         .frame(width: 100, height: 100)
                         .padding()
-                        .foregroundColor(Color(UIColor.blue))
+                        .foregroundColor(Color("paidCloudColor"))
                     Spacer()
                     VStack {
                         Text("2 GB")
                             .font(.largeTitle)
                             .bold()
                             .padding()
-                            .foregroundColor(Color(UIColor.blue))
+                            .foregroundColor(Color("paidCloudColor"))
                             .shadow(color: .secondary.opacity(0.8), radius: 10)
                         Text("99.99 $")
                             .font(SwiftUI.Font.headline)
