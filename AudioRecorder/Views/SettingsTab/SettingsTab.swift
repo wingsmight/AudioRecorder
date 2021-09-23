@@ -96,6 +96,9 @@ struct SettingsTab: View {
                 }
                 
             }
+            Section(header: Text("Контакты")) {
+                
+            }
         }
         .sheet(isPresented: $isAppInfoShowing) {
             AppInfoView(isShowing: self.$isAppInfoShowing)
