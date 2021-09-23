@@ -12,6 +12,9 @@ struct AudioRecorderApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear {
+                    Theme.colorScheme = Theme.colorScheme
+                }
         }
     }
 }

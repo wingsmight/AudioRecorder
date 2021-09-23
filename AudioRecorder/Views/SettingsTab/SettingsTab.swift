@@ -27,11 +27,12 @@ struct TextInfo : View {
     }
 }
 struct SettingsTab: View {
-    @State var isToggleOn : Bool = false
+    @State private var isToggleOn : Bool = false
     @State private var selectedStrength = "Mild"
     @Binding var colorScheme : AppColorScheme
-    @State var user = User(photoLocation: "", name: "name", surname: "surname", birthDate: Date(), email: "email", phoneNumber: "+79134807883", facebookProfileUrl: "")
-    @State var isAppInfoShowing = false
+    @State private var user = User(photoLocation: "", name: "name", surname: "surname", birthDate: Date(), email: "email", phoneNumber: "+79134807883", facebookProfileUrl: "")
+    @State private var isAppInfoShowing = false
+    @State private var isCloudStorageChoiceShowing = false
     
     let strengths = ["Mild", "Medium", "Mature"]
     
@@ -54,6 +55,37 @@ struct SettingsTab: View {
                 TextInfo(key: "Телефон", value: user.phoneNumber)
                 Link("Профиль Facebook", destination: URL(string: "https://facebook.com")!)
             }
+            Section(header: Text("Внешний вид")) {
+                Picker("Главная тема", selection: $colorScheme) {
+                    ForEach(AppColorScheme.allCases, id: \.self) { value in
+                        Text(value.localizedName)
+                    }
+                }
+                .onChange(of: colorScheme) { newValue in
+                    Theme.colorScheme = newValue
+                    colorScheme = newValue
+                }
+            }
+            Section(header: Text("Облако")) {
+                Button {
+                    
+                } label: {
+                    Text("Проверить состояние облака")
+                }
+                Button {
+                    self.isCloudStorageChoiceShowing = true
+                } label: {
+                    HStack {
+                        Text("Размер облака")
+                        Spacer()
+                        Text("200 MB")
+                            .accentColor(.secondary)
+                        Image(systemName: "chevron.forward")
+                            .accentColor(.secondary)
+                    }
+                    .accentColor(Color(UIColor.label))
+                }
+            }
             Section(header: Text("Справка")) {
                 Button {
                     isAppInfoShowing.toggle()
@@ -62,16 +94,12 @@ struct SettingsTab: View {
                 }
                 
             }
-            Section(header: Text("Внешний вид")) {
-                Picker("Главная тема", selection: self.$colorScheme) {
-                    ForEach(AppColorScheme.allCases, id: \.self) { value in
-                        Text(value.localizedName)
-                    }
-                }
-            }
         }
         .sheet(isPresented: $isAppInfoShowing) {
             AppInfoView(isShowing: self.$isAppInfoShowing)
+        }
+        .sheet(isPresented: $isCloudStorageChoiceShowing) {
+            CloudStorageChoiceView(isShowing: self.$isCloudStorageChoiceShowing)
         }
         .navigationTitle("Настройки")
         .padding(.top, 1)

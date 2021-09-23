@@ -18,6 +18,10 @@
 		CE773AA726FB65FA00EA8284 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE773AA626FB65FA00EA8284 /* User.swift */; };
 		CE773AAB26FB770600EA8284 /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE773AAA26FB770600EA8284 /* DateExt.swift */; };
 		CE773AB026FB7A4600EA8284 /* AppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE773AAF26FB7A4600EA8284 /* AppInfoView.swift */; };
+		CE773AB226FB874400EA8284 /* CloudStorageChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE773AB126FB874400EA8284 /* CloudStorageChoiceView.swift */; };
+		CE7773C326FB93CD000DBBC4 /* FreeCloudPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7773C226FB93CD000DBBC4 /* FreeCloudPlanView.swift */; };
+		CE7773C526FB93F2000DBBC4 /* PaidCloudPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7773C426FB93F2000DBBC4 /* PaidCloudPlanView.swift */; };
+		CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE841E7826FC7AD500FE79BF /* Theme.swift */; };
 		CEBF0BEA26FA5D6000C9B906 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBF0BEC26FA5D6000C9B906 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +38,10 @@
 		CE773AA626FB65FA00EA8284 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CE773AAA26FB770600EA8284 /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
 		CE773AAF26FB7A4600EA8284 /* AppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoView.swift; sourceTree = "<group>"; };
+		CE773AB126FB874400EA8284 /* CloudStorageChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorageChoiceView.swift; sourceTree = "<group>"; };
+		CE7773C226FB93CD000DBBC4 /* FreeCloudPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeCloudPlanView.swift; sourceTree = "<group>"; };
+		CE7773C426FB93F2000DBBC4 /* PaidCloudPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidCloudPlanView.swift; sourceTree = "<group>"; };
+		CE841E7826FC7AD500FE79BF /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		CEBF0BEB26FA5D6000C9B906 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEBF0BEF26FA5E2E00C9B906 /* ru */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 4; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +85,7 @@
 				CE6D71D426F60430005BDA30 /* Info.plist */,
 				CE6D71D126F60430005BDA30 /* Preview Content */,
 				CE773AA826FB660000EA8284 /* Data */,
+				CE841E7826FC7AD500FE79BF /* Theme.swift */,
 			);
 			path = AudioRecorder;
 			sourceTree = "<group>";
@@ -119,6 +128,7 @@
 		CE773AAC26FB79FB00EA8284 /* SettingsTab */ = {
 			isa = PBXGroup;
 			children = (
+				CE7773C126FB9382000DBBC4 /* CloudStorage */,
 				CE6D71DA26F60943005BDA30 /* SettingsTab.swift */,
 				CE773AAF26FB7A4600EA8284 /* AppInfoView.swift */,
 			);
@@ -139,6 +149,16 @@
 				CE6D71DE26F60988005BDA30 /* RecordsTab.swift */,
 			);
 			path = RecordsTab;
+			sourceTree = "<group>";
+		};
+		CE7773C126FB9382000DBBC4 /* CloudStorage */ = {
+			isa = PBXGroup;
+			children = (
+				CE773AB126FB874400EA8284 /* CloudStorageChoiceView.swift */,
+				CE7773C226FB93CD000DBBC4 /* FreeCloudPlanView.swift */,
+				CE7773C426FB93F2000DBBC4 /* PaidCloudPlanView.swift */,
+			);
+			path = CloudStorage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +245,10 @@
 				CE773AB026FB7A4600EA8284 /* AppInfoView.swift in Sources */,
 				CE6D71DD26F60979005BDA30 /* MainMenuTab.swift in Sources */,
 				CE6D71CE26F6042D005BDA30 /* ContentView.swift in Sources */,
+				CE7773C526FB93F2000DBBC4 /* PaidCloudPlanView.swift in Sources */,
+				CE7773C326FB93CD000DBBC4 /* FreeCloudPlanView.swift in Sources */,
+				CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */,
+				CE773AB226FB874400EA8284 /* CloudStorageChoiceView.swift in Sources */,
 				CE6D71CC26F6042D005BDA30 /* AudioRecorderApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

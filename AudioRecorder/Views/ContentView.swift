@@ -50,26 +50,12 @@ struct Tab {
     }
 }
 
-public enum AppColorScheme : String, Equatable, CaseIterable {
-    case Light, Dark, System
-    
-    var description : String {
-      switch self {
-      // Use Internationalization, as appropriate.
-      case .Light: return "Светлая"
-      case .Dark: return "Темная"
-      case .System: return "Системная"
-      }
-    }
-    
-    var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
-}
-
 struct ContentView: View {
     @State private var selectedTabIndex = 1
     @State private var isRecordingToastShowing : Bool = false
     @State private var isRecording : Bool = false
-    @State private var colorScheme = AppColorScheme.System
+    @State var colorScheme = Theme.colorScheme
+    
     
     private var tabs = [
         Tab("arrow.up.left"),
@@ -77,22 +63,12 @@ struct ContentView: View {
         Tab("recordingtape"),
     ]
     
-    private var currentColorScheme : ColorScheme? {
-        if colorScheme == AppColorScheme.Dark {
-            return ColorScheme.dark
-        } else if colorScheme == AppColorScheme.Light {
-            return ColorScheme.light
-        } else {
-            return nil
-        }
-    }
-        
     
     var body: some View {
         ZStack(alignment: Alignment.bottom) {
             TabView(selection: $selectedTabIndex) {
                 NavigationView {
-                    SettingsTab(colorScheme: $colorScheme)
+                    SettingsTab(colorScheme: self.$colorScheme)
                 }
                 .tabItem {
                     Text("")
@@ -137,7 +113,6 @@ struct ContentView: View {
                     }
                 }
             }
-            .preferredColorScheme(currentColorScheme)
         }
     }
 }
