@@ -41,15 +41,19 @@ struct SettingsTab: View {
         Form {
             Section(header: Text("Профиль")) {
                 HStack {
-                    Spacer()
                     Image(systemName: user.photoLocation == "" ? "person.crop.circle" : user.photoLocation)
                         .resizable()
                         .scaledToFit()
                         .frame(height: 100, alignment: Alignment.center)
                     Spacer()
+                    VStack(alignment: .trailing) {
+                        Text(user.name + " " + user.surname)
+                            .bold()
+                            .font(.title2)
+                            .minimumScaleFactor(0.5)
+                            .lineLimit(2)
+                    }
                 }
-                TextInfo(key: "Имя", value: user.name)
-                TextInfo(key: "Фамилия", value: user.surname)
                 TextInfo(key: "Дата рождения", value: user.birthDate.ToString())
                 TextInfo(key: "Почта", value: user.email)
                 TextInfo(key: "Телефон", value: user.phoneNumber)
