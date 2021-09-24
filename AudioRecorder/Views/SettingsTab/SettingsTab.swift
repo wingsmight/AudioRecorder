@@ -127,6 +127,14 @@ struct SettingsTab: View {
                 }
             }
         }
+        .onAppear() {
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithOpaqueBackground()
+            navigationBarAppearance.shadowColor = .separator
+
+             UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+             UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        }
         .sheet(isPresented: $isAppInfoShowing) {
             AppInfoView(isShowing: self.$isAppInfoShowing)
         }
