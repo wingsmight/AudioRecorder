@@ -115,6 +115,14 @@ struct ContentView: View {
                 }
             }
         }
+        .onAppear() {
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithOpaqueBackground()
+            navigationBarAppearance.shadowColor = .clear
+
+             UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+             UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        }
     }
 }
 

@@ -125,7 +125,6 @@ struct SettingsTab: View {
                 } label: {
                     Text("Поблагодарить разработчика")
                 }
-
             }
         }
         .sheet(isPresented: $isAppInfoShowing) {
