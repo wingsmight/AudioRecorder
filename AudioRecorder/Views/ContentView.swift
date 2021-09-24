@@ -51,11 +51,10 @@ struct Tab {
 }
 
 struct ContentView: View {
+    @State private var colorScheme = Theme.colorScheme
     @State private var selectedTabIndex = 1
     @State private var isRecordingToastShowing : Bool = false
     @State private var isRecording : Bool = false
-    @State var colorScheme = Theme.colorScheme
-    @StateObject var store = Store()
     
     
     private var tabs = [

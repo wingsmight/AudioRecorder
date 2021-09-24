@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE12A22326FCE8770042AEE8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE12A22226FCE8770042AEE8 /* StoreKit.framework */; };
 		CE66445D26F8D02A00A554FB /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = CE66445C26F8D02A00A554FB /* AlertToast */; };
 		CE6D71CC26F6042D005BDA30 /* AudioRecorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71CB26F6042D005BDA30 /* AudioRecorderApp.swift */; };
 		CE6D71CE26F6042D005BDA30 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71CD26F6042D005BDA30 /* ContentView.swift */; };
@@ -21,11 +22,14 @@
 		CE773AB226FB874400EA8284 /* CloudStorageChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE773AB126FB874400EA8284 /* CloudStorageChoiceView.swift */; };
 		CE7773C326FB93CD000DBBC4 /* FreeCloudPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7773C226FB93CD000DBBC4 /* FreeCloudPlanView.swift */; };
 		CE7773C526FB93F2000DBBC4 /* PaidCloudPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7773C426FB93F2000DBBC4 /* PaidCloudPlanView.swift */; };
+		CE78EF9226FDE6F700547BD0 /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE78EF9126FDE6F700547BD0 /* SwiftyStoreKit */; };
+		CE78EF9426FE46A300547BD0 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78EF9326FE46A300547BD0 /* Store.swift */; };
 		CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE841E7826FC7AD500FE79BF /* Theme.swift */; };
 		CEBF0BEA26FA5D6000C9B906 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBF0BEC26FA5D6000C9B906 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE12A22226FCE8770042AEE8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CE6D71C826F6042D005BDA30 /* AudioRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6D71CB26F6042D005BDA30 /* AudioRecorderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderApp.swift; sourceTree = "<group>"; };
 		CE6D71CD26F6042D005BDA30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -41,6 +45,8 @@
 		CE773AB126FB874400EA8284 /* CloudStorageChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorageChoiceView.swift; sourceTree = "<group>"; };
 		CE7773C226FB93CD000DBBC4 /* FreeCloudPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeCloudPlanView.swift; sourceTree = "<group>"; };
 		CE7773C426FB93F2000DBBC4 /* PaidCloudPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidCloudPlanView.swift; sourceTree = "<group>"; };
+		CE78EF8F26FDCF1800547BD0 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		CE78EF9326FE46A300547BD0 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		CE841E7826FC7AD500FE79BF /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		CEBF0BEB26FA5D6000C9B906 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEBF0BEF26FA5E2E00C9B906 /* ru */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 4; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -51,18 +57,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE78EF9226FDE6F700547BD0 /* SwiftyStoreKit in Frameworks */,
 				CE66445D26F8D02A00A554FB /* AlertToast in Frameworks */,
+				CE12A22326FCE8770042AEE8 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE12A22126FCE8770042AEE8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE12A22226FCE8770042AEE8 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CE6D71BF26F6042D005BDA30 = {
 			isa = PBXGroup;
 			children = (
 				CE6D71CA26F6042D005BDA30 /* AudioRecorder */,
 				CE6D71C926F6042D005BDA30 /* Products */,
+				CE12A22126FCE8770042AEE8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +103,7 @@
 				CE6D71D126F60430005BDA30 /* Preview Content */,
 				CE773AA826FB660000EA8284 /* Data */,
 				CE841E7826FC7AD500FE79BF /* Theme.swift */,
+				CE78EF8F26FDCF1800547BD0 /* Configuration.storekit */,
 			);
 			path = AudioRecorder;
 			sourceTree = "<group>";
@@ -101,10 +119,10 @@
 		CE6D71E026F60998005BDA30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CE6D71CD26F6042D005BDA30 /* ContentView.swift */,
 				CE773AAE26FB7A0C00EA8284 /* RecordsTab */,
 				CE773AAD26FB7A0300EA8284 /* MainMenuTab */,
 				CE773AAC26FB79FB00EA8284 /* SettingsTab */,
-				CE6D71CD26F6042D005BDA30 /* ContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -113,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				CE773AA626FB65FA00EA8284 /* User.swift */,
+				CE78EF9326FE46A300547BD0 /* Store.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -179,6 +198,7 @@
 			name = AudioRecorder;
 			packageProductDependencies = (
 				CE66445C26F8D02A00A554FB /* AlertToast */,
+				CE78EF9126FDE6F700547BD0 /* SwiftyStoreKit */,
 			);
 			productName = AudioRecorder;
 			productReference = CE6D71C826F6042D005BDA30 /* AudioRecorder.app */;
@@ -210,6 +230,7 @@
 			mainGroup = CE6D71BF26F6042D005BDA30;
 			packageReferences = (
 				CE66445B26F8D02A00A554FB /* XCRemoteSwiftPackageReference "AlertToast" */,
+				CE78EF9026FDE6F700547BD0 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
 			);
 			productRefGroup = CE6D71C926F6042D005BDA30 /* Products */;
 			projectDirPath = "";
@@ -245,6 +266,7 @@
 				CE773AB026FB7A4600EA8284 /* AppInfoView.swift in Sources */,
 				CE6D71DD26F60979005BDA30 /* MainMenuTab.swift in Sources */,
 				CE6D71CE26F6042D005BDA30 /* ContentView.swift in Sources */,
+				CE78EF9426FE46A300547BD0 /* Store.swift in Sources */,
 				CE7773C526FB93F2000DBBC4 /* PaidCloudPlanView.swift in Sources */,
 				CE7773C326FB93CD000DBBC4 /* FreeCloudPlanView.swift in Sources */,
 				CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */,
@@ -391,6 +413,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"AudioRecorder/Preview Content\"";
 				DEVELOPMENT_TEAM = D86YAFJU4P;
@@ -403,6 +426,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wingsmight.AudioRecorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -415,7 +439,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"AudioRecorder/Preview Content\"";
-				DEVELOPMENT_TEAM = D86YAFJU4P;
+				DEVELOPMENT_TEAM = C9M7M3PL3X;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = AudioRecorder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -462,6 +486,14 @@
 				minimumVersion = 1.3.7;
 			};
 		};
+		CE78EF9026FDE6F700547BD0 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bizz84/SwiftyStoreKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -469,6 +501,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE66445B26F8D02A00A554FB /* XCRemoteSwiftPackageReference "AlertToast" */;
 			productName = AlertToast;
+		};
+		CE78EF9126FDE6F700547BD0 /* SwiftyStoreKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE78EF9026FDE6F700547BD0 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */;
+			productName = SwiftyStoreKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

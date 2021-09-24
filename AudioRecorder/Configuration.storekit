@@ -1,0 +1,38 @@
+{
+  "identifier" : "DD8E5810",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "B7E7CB49",
+      "localizations" : [
+        {
+          "description" : "Small tip to support the developer",
+          "displayName" : "Support developer",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Небольшой донат для поддержки разработчика",
+          "displayName" : "Поддержать разработчика",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "com.wingsmight.AudioRecorder.SupportDeveloper",
+      "referenceName" : "SupportDeveloper",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 1
+  }
+}
