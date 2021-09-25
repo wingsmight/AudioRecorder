@@ -28,13 +28,56 @@ struct TextInfo : View {
     }
 }
 
+struct SectionButton : View {
+    private var key : String
+    private var value : String
+    private var action : () -> Void
+    
+    
+    init(key: String, value: String, action: @escaping () -> Void) {
+        self.key = key
+        self.value = value
+        self.action = action
+    }
+    
+    
+    var body: some View {
+        Button (action: action, label: {
+            HStack {
+                Text(key)
+                Spacer()
+                Text(value)
+                    .accentColor(.secondary)
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(1)
+                Image(systemName: "chevron.forward")
+                    .accentColor(.secondary)
+            }
+            .accentColor(Color(UIColor.label))
+        })
+    }
+}
+
 struct SettingsTab: View {
+    private static let DEFAULT_DO_NOT_DISTURB_START_HOUR = 20
+    private static let DEFAULT_DO_NOT_DISTURB_START_MINUTE = 0
+    private static let DEFAULT_DO_NOT_DISTURB_FINISH_HOUR = 20
+    private static let DEFAULT_DO_NOT_DISTURB_FINISH_MINUTE = 0
+    
+    
+    @Binding var colorScheme : AppColorScheme
+    
     @State private var isToggleOn : Bool = false
     @State private var selectedStrength = "Mild"
-    @Binding var colorScheme : AppColorScheme
     @State private var user = User(photoLocation: "", name: "name", surname: "surname", birthDate: Date(), email: "email", phoneNumber: "+79134807883", facebookProfileUrl: "")
     @State private var isAppInfoShowing = false
     @State private var isCloudStorageChoiceShowing = false
+    @State private var isDoNotDisturbIntervalViewShowing = false
+    
+    @AppStorage("isFacebookHackingAlertOn") private var isFacebookHackingAlertOn = false
+    @AppStorage("doNotDisturbStartTime") private var doNotDisturbStartTime = Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: Date())!
+    @AppStorage("doNotDisturbFinishTime") private var doNotDisturbFinishTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!
+    @AppStorage("isTurnOnByVoice") private var isTurnOnByVoice = false
     
     
     var body: some View {
@@ -59,6 +102,17 @@ struct SettingsTab: View {
                 TextInfo(key: "Телефон", value: user.phoneNumber)
                 Link("Профиль Facebook", destination: URL(string: "https://facebook.com")!)
             }
+            Section(header: Text("Опции")) {
+                Toggle(isOn: $isFacebookHackingAlertOn) {
+                    Text("Сообщать о взломе в Facebook")
+                }
+                SectionButton(key: "Не записывать в", value: "\(doNotDisturbStartTime.getTimeString()) - \(doNotDisturbFinishTime.getTimeString())") {
+                    isDoNotDisturbIntervalViewShowing = true
+                }
+                Toggle(isOn: $isTurnOnByVoice) {
+                    Text("Включение записи по голосу")
+                }
+            }
             Section(header: Text("Внешний вид")) {
                 Picker("Главная тема", selection: $colorScheme) {
                     ForEach(AppColorScheme.allCases, id: \.self) { value in
@@ -76,18 +130,8 @@ struct SettingsTab: View {
                 } label: {
                     Text("Проверить состояние облака")
                 }
-                Button {
+                SectionButton(key: "Размер облака", value: "200 MB") {
                     self.isCloudStorageChoiceShowing = true
-                } label: {
-                    HStack {
-                        Text("Размер облака")
-                        Spacer()
-                        Text("200 MB")
-                            .accentColor(.secondary)
-                        Image(systemName: "chevron.forward")
-                            .accentColor(.secondary)
-                    }
-                    .accentColor(Color(UIColor.label))
                 }
             }
             Section(header: Text("Справка")) {
@@ -140,6 +184,9 @@ struct SettingsTab: View {
         }
         .sheet(isPresented: $isCloudStorageChoiceShowing) {
             CloudStorageChoiceView(isShowing: self.$isCloudStorageChoiceShowing)
+        }
+        .sheet(isPresented: $isDoNotDisturbIntervalViewShowing) {
+            TimeIntervalPickerView(startTime: $doNotDisturbStartTime, finishTime: $doNotDisturbFinishTime, isShowing: $isDoNotDisturbIntervalViewShowing)
         }
         .navigationTitle("Настройки")
         .padding(.top, 1)

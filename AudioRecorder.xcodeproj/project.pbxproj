@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE12A22326FCE8770042AEE8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE12A22226FCE8770042AEE8 /* StoreKit.framework */; };
 		CE66445D26F8D02A00A554FB /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = CE66445C26F8D02A00A554FB /* AlertToast */; };
 		CE6D71CC26F6042D005BDA30 /* AudioRecorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71CB26F6042D005BDA30 /* AudioRecorderApp.swift */; };
 		CE6D71CE26F6042D005BDA30 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71CD26F6042D005BDA30 /* ContentView.swift */; };
@@ -16,6 +15,7 @@
 		CE6D71DB26F60943005BDA30 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DA26F60943005BDA30 /* SettingsTab.swift */; };
 		CE6D71DD26F60979005BDA30 /* MainMenuTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DC26F60979005BDA30 /* MainMenuTab.swift */; };
 		CE6D71DF26F60988005BDA30 /* RecordsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DE26F60988005BDA30 /* RecordsTab.swift */; };
+		CE7525D626FF80A1003DA83E /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7525D526FF80A1003DA83E /* ViewExt.swift */; };
 		CE773AA726FB65FA00EA8284 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE773AA626FB65FA00EA8284 /* User.swift */; };
 		CE773AAB26FB770600EA8284 /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE773AAA26FB770600EA8284 /* DateExt.swift */; };
 		CE773AB026FB7A4600EA8284 /* AppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE773AAF26FB7A4600EA8284 /* AppInfoView.swift */; };
@@ -25,11 +25,11 @@
 		CE78EF9226FDE6F700547BD0 /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE78EF9126FDE6F700547BD0 /* SwiftyStoreKit */; };
 		CE78EF9426FE46A300547BD0 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78EF9326FE46A300547BD0 /* Store.swift */; };
 		CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE841E7826FC7AD500FE79BF /* Theme.swift */; };
+		CE9F908626FF32BF00F53B02 /* TimeIntervalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F908526FF32BF00F53B02 /* TimeIntervalPickerView.swift */; };
 		CEBF0BEA26FA5D6000C9B906 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBF0BEC26FA5D6000C9B906 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CE12A22226FCE8770042AEE8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CE6D71C826F6042D005BDA30 /* AudioRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6D71CB26F6042D005BDA30 /* AudioRecorderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderApp.swift; sourceTree = "<group>"; };
 		CE6D71CD26F6042D005BDA30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -39,6 +39,7 @@
 		CE6D71DA26F60943005BDA30 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		CE6D71DC26F60979005BDA30 /* MainMenuTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTab.swift; sourceTree = "<group>"; };
 		CE6D71DE26F60988005BDA30 /* RecordsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsTab.swift; sourceTree = "<group>"; };
+		CE7525D526FF80A1003DA83E /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
 		CE773AA626FB65FA00EA8284 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CE773AAA26FB770600EA8284 /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
 		CE773AAF26FB7A4600EA8284 /* AppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoView.swift; sourceTree = "<group>"; };
@@ -48,6 +49,7 @@
 		CE78EF8F26FDCF1800547BD0 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		CE78EF9326FE46A300547BD0 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		CE841E7826FC7AD500FE79BF /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		CE9F908526FF32BF00F53B02 /* TimeIntervalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalPickerView.swift; sourceTree = "<group>"; };
 		CEBF0BEB26FA5D6000C9B906 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEBF0BEF26FA5E2E00C9B906 /* ru */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 4; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,7 +61,6 @@
 			files = (
 				CE78EF9226FDE6F700547BD0 /* SwiftyStoreKit in Frameworks */,
 				CE66445D26F8D02A00A554FB /* AlertToast in Frameworks */,
-				CE12A22326FCE8770042AEE8 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,7 +70,6 @@
 		CE12A22126FCE8770042AEE8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CE12A22226FCE8770042AEE8 /* StoreKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -140,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				CE773AAA26FB770600EA8284 /* DateExt.swift */,
+				CE7525D526FF80A1003DA83E /* ViewExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -150,6 +151,7 @@
 				CE7773C126FB9382000DBBC4 /* CloudStorage */,
 				CE6D71DA26F60943005BDA30 /* SettingsTab.swift */,
 				CE773AAF26FB7A4600EA8284 /* AppInfoView.swift */,
+				CE9F908526FF32BF00F53B02 /* TimeIntervalPickerView.swift */,
 			);
 			path = SettingsTab;
 			sourceTree = "<group>";
@@ -261,10 +263,12 @@
 			files = (
 				CE6D71DF26F60988005BDA30 /* RecordsTab.swift in Sources */,
 				CE6D71DB26F60943005BDA30 /* SettingsTab.swift in Sources */,
+				CE9F908626FF32BF00F53B02 /* TimeIntervalPickerView.swift in Sources */,
 				CE773AAB26FB770600EA8284 /* DateExt.swift in Sources */,
 				CE773AA726FB65FA00EA8284 /* User.swift in Sources */,
 				CE773AB026FB7A4600EA8284 /* AppInfoView.swift in Sources */,
 				CE6D71DD26F60979005BDA30 /* MainMenuTab.swift in Sources */,
+				CE7525D626FF80A1003DA83E /* ViewExt.swift in Sources */,
 				CE6D71CE26F6042D005BDA30 /* ContentView.swift in Sources */,
 				CE78EF9426FE46A300547BD0 /* Store.swift in Sources */,
 				CE7773C526FB93F2000DBBC4 /* PaidCloudPlanView.swift in Sources */,
@@ -437,9 +441,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"AudioRecorder/Preview Content\"";
-				DEVELOPMENT_TEAM = C9M7M3PL3X;
+				DEVELOPMENT_TEAM = D86YAFJU4P;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = AudioRecorder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -449,6 +454,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wingsmight.AudioRecorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
