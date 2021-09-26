@@ -116,14 +116,18 @@ struct ContentView: View {
             }
         }
         .onAppear() {
-            let navigationBarAppearance = UINavigationBarAppearance()
-            navigationBarAppearance.configureWithOpaqueBackground()
-            navigationBarAppearance.shadowColor = .clear
-
-             UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-             UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+            makeNavigationBarStretchable(shadowColor: .clear)
         }
     }
+}
+
+func makeNavigationBarStretchable(shadowColor: UIColor) {
+    let navigationBarAppearance = UINavigationBarAppearance()
+    navigationBarAppearance.configureWithOpaqueBackground()
+    navigationBarAppearance.shadowColor = shadowColor
+
+    UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+    UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
 }
 
 struct ContentView_Previews: PreviewProvider {

@@ -59,12 +59,6 @@ struct SectionButton : View {
 }
 
 struct SettingsTab: View {
-    private static let DEFAULT_DO_NOT_DISTURB_START_HOUR = 20
-    private static let DEFAULT_DO_NOT_DISTURB_START_MINUTE = 0
-    private static let DEFAULT_DO_NOT_DISTURB_FINISH_HOUR = 20
-    private static let DEFAULT_DO_NOT_DISTURB_FINISH_MINUTE = 0
-    
-    
     @Binding var colorScheme : AppColorScheme
     
     @State private var isToggleOn : Bool = false
@@ -171,14 +165,6 @@ struct SettingsTab: View {
                     Text("Поблагодарить разработчика")
                 }
             }
-        }
-        .onAppear() {
-            let navigationBarAppearance = UINavigationBarAppearance()
-            navigationBarAppearance.configureWithOpaqueBackground()
-            navigationBarAppearance.shadowColor = .separator
-
-             UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-             UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
         }
         .sheet(isPresented: $isAppInfoShowing) {
             AppInfoView(isShowing: self.$isAppInfoShowing)
