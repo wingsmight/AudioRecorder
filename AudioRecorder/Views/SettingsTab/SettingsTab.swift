@@ -143,7 +143,8 @@ struct SettingsTab: View {
                 
             }
             Section(header: Text("Контакты")) {
-                
+                Text("...")
+                    .foregroundColor(.secondary)
             }
             Section(header: Text("Другое")) {
                 Button {
