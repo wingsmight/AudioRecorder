@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AlertToast
+import AVKit
 
 struct Tab {
     private let DEFAULT_ICON_SIZE : Float = 25
@@ -55,6 +56,8 @@ struct ContentView: View {
     @State private var selectedTabIndex = 1
     @State private var isRecordingToastShowing : Bool = false
     @State private var isRecording : Bool = false
+    @State private var audioSession : AVAudioSession!
+    @State private var isMicPermissionDenyAlertShowing = false
     
     
     private var tabs = [
@@ -89,6 +92,7 @@ struct ContentView: View {
                 }
                 .tag(2)
             }
+            .blur(radius: AVCaptureDevice.authorizationStatus(for: .audio) == AVAuthorizationStatus.authorized ? 0 : 10)
             .toast(isPresenting: $isRecordingToastShowing, duration: 1.25, tapToDismiss: false, offsetY: -40, alert: {
                 AlertToast(displayMode: .banner(.slide), type: .regular, title: "Приложение запущено")
             })
@@ -114,10 +118,54 @@ struct ContentView: View {
                     }
                 }
             }
+            .blur(radius: AVCaptureDevice.authorizationStatus(for: .audio) == AVAuthorizationStatus.authorized ? 0 : 10)
+            if AVCaptureDevice.authorizationStatus(for: .audio) != AVAuthorizationStatus.authorized {
+                DisabledAppOverlayView()
+                    .ignoresSafeArea(.all)
+            }
         }
         .onAppear() {
             makeNavigationBarStretchable(shadowColor: .clear)
+            initAudioSession()
         }
+        .alert(isPresented: $isMicPermissionDenyAlertShowing) {
+            Alert(
+                title: Text("Предоставьте доступ"),
+                message: Text("Приложение не может работать без доступа к микрофону!"),
+                dismissButton: .default(Text("OK"), action: {
+                    if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(settingsUrl)
+                    }
+            }))
+        }
+    }
+    
+    private func requestRecordPermission() {
+        self.audioSession.requestRecordPermission { (status) in
+            if !status {
+                // error msg...
+                self.isMicPermissionDenyAlertShowing = true
+            } else {
+                // if permission granted means fetching all data...
+                self.getAudios()
+            }
+        }
+    }
+    private func initAudioSession() {
+        do {
+            // Intializing...
+            self.audioSession = AVAudioSession.sharedInstance()
+            try self.audioSession.setCategory(.playAndRecord)
+    
+            // requesting permission
+            requestRecordPermission()
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+    }
+    private func getAudios() {
+        
     }
 }
 
