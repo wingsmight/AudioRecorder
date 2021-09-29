@@ -58,6 +58,7 @@ struct ContentView: View {
     @State private var isRecording : Bool = false
     @State private var audioSession : AVAudioSession!
     @State private var isMicPermissionDenyAlertShowing = false
+    @State private var audios : [URL] = []
     
     
     private var tabs = [
@@ -92,7 +93,7 @@ struct ContentView: View {
                 }
                 .tag(2)
             }
-            .blur(radius: AVCaptureDevice.authorizationStatus(for: .audio) == AVAuthorizationStatus.authorized ? 0 : 10)
+            //.blur(radius: AVCaptureDevice.authorizationStatus(for: .audio) == AVAuthorizationStatus.authorized ? 0 : 10)
             .toast(isPresenting: $isRecordingToastShowing, duration: 1.25, tapToDismiss: false, offsetY: -40, alert: {
                 AlertToast(displayMode: .banner(.slide), type: .regular, title: "Приложение запущено")
             })
@@ -118,26 +119,26 @@ struct ContentView: View {
                     }
                 }
             }
-            .blur(radius: AVCaptureDevice.authorizationStatus(for: .audio) == AVAuthorizationStatus.authorized ? 0 : 10)
-            if AVCaptureDevice.authorizationStatus(for: .audio) != AVAuthorizationStatus.authorized {
-                DisabledAppOverlayView()
-                    .ignoresSafeArea(.all)
-            }
+            //.blur(radius: AVCaptureDevice.authorizationStatus(for: .audio) == AVAuthorizationStatus.authorized ? 0 : 10)
+//            if AVCaptureDevice.authorizationStatus(for: .audio) != AVAuthorizationStatus.authorized {
+//                DisabledAppOverlayView()
+//                    .ignoresSafeArea(.all)
+//            }
         }
         .onAppear() {
             makeNavigationBarStretchable(shadowColor: .clear)
             initAudioSession()
         }
-        .alert(isPresented: $isMicPermissionDenyAlertShowing) {
-            Alert(
-                title: Text("Предоставьте доступ"),
-                message: Text("Приложение не может работать без доступа к микрофону!"),
-                dismissButton: .default(Text("OK"), action: {
-                    if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
-                        UIApplication.shared.open(settingsUrl)
-                    }
-            }))
-        }
+//        .alert(isPresented: $isMicPermissionDenyAlertShowing) {
+//            Alert(
+//                title: Text("Предоставьте доступ"),
+//                message: Text("Приложение не может работать без доступа к микрофону!"),
+//                dismissButton: .default(Text("OK"), action: {
+//                    if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
+//                        UIApplication.shared.open(settingsUrl)
+//                    }
+//            }))
+//        }
     }
     
     private func requestRecordPermission() {
@@ -165,7 +166,22 @@ struct ContentView: View {
         }
     }
     private func getAudios() {
-        
+        do {
+            let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            
+            // fetch all data from document directory...
+            let result = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .producesRelativePathURLs)
+            
+            // updated means remove all old data..
+            self.audios.removeAll()
+            
+            for i in result {
+                self.audios.append(i)
+            }
+        }
+        catch {
+            print(error.localizedDescription)
+        }
     }
 }
 

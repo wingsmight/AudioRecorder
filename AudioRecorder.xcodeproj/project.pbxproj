@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CE66445D26F8D02A00A554FB /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = CE66445C26F8D02A00A554FB /* AlertToast */; };
+		CE6A03A8270451A1001C96E4 /* AudioRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A03A7270451A1001C96E4 /* AudioRecord.swift */; };
+		CE6A03AA270453AC001C96E4 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A03A9270453AC001C96E4 /* FileManager.swift */; };
 		CE6D71CC26F6042D005BDA30 /* AudioRecorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71CB26F6042D005BDA30 /* AudioRecorderApp.swift */; };
 		CE6D71CE26F6042D005BDA30 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71CD26F6042D005BDA30 /* ContentView.swift */; };
 		CE6D71D026F60430005BDA30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6D71CF26F60430005BDA30 /* Assets.xcassets */; };
@@ -31,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE6A03A7270451A1001C96E4 /* AudioRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecord.swift; sourceTree = "<group>"; };
+		CE6A03A9270453AC001C96E4 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		CE6D71C826F6042D005BDA30 /* AudioRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6D71CB26F6042D005BDA30 /* AudioRecorderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderApp.swift; sourceTree = "<group>"; };
 		CE6D71CD26F6042D005BDA30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 			children = (
 				CE773AA626FB65FA00EA8284 /* User.swift */,
 				CE78EF9326FE46A300547BD0 /* Store.swift */,
+				CE6A03A7270451A1001C96E4 /* AudioRecord.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 			children = (
 				CE773AAA26FB770600EA8284 /* DateExt.swift */,
 				CE7525D526FF80A1003DA83E /* ViewExt.swift */,
+				CE6A03A9270453AC001C96E4 /* FileManager.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -279,6 +285,8 @@
 				CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */,
 				CE8F83CF270085A700E9E45B /* DisabledAppOverlayView.swift in Sources */,
 				CE773AB226FB874400EA8284 /* CloudStorageChoiceView.swift in Sources */,
+				CE6A03AA270453AC001C96E4 /* FileManager.swift in Sources */,
+				CE6A03A8270451A1001C96E4 /* AudioRecord.swift in Sources */,
 				CE6D71CC26F6042D005BDA30 /* AudioRecorderApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
