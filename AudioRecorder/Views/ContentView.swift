@@ -56,9 +56,8 @@ struct ContentView: View {
     @State private var selectedTabIndex = 1
     @State private var isRecordingToastShowing : Bool = false
     @State private var isRecording : Bool = false
-    @State private var audioSession : AVAudioSession!
     @State private var isMicPermissionDenyAlertShowing = false
-    @State private var audios : [URL] = []
+    @ObservedObject private var audioRecorder = AudioRecorder()
     
     
     private var tabs = [
@@ -79,14 +78,14 @@ struct ContentView: View {
                 }
                 .tag(0)
                 NavigationView {
-                    MainMenuTab(isRecordingToastShowing: self.$isRecordingToastShowing)
+                    MainMenuTab(isRecordingToastShowing: self.$isRecordingToastShowing, audioRecorder: self.audioRecorder)
                 }
                 .tabItem {
                     Text("")
                 }
                 .tag(1)
                 NavigationView {
-                    RecordsTab()
+                    RecordsTab(audioRecorder: self.audioRecorder)
                 }
                 .tabItem {
                     Text("")
@@ -127,7 +126,6 @@ struct ContentView: View {
         }
         .onAppear() {
             makeNavigationBarStretchable(shadowColor: .clear)
-            initAudioSession()
         }
 //        .alert(isPresented: $isMicPermissionDenyAlertShowing) {
 //            Alert(
@@ -139,49 +137,6 @@ struct ContentView: View {
 //                    }
 //            }))
 //        }
-    }
-    
-    private func requestRecordPermission() {
-        self.audioSession.requestRecordPermission { (status) in
-            if !status {
-                // error msg...
-                self.isMicPermissionDenyAlertShowing = true
-            } else {
-                // if permission granted means fetching all data...
-                self.getAudios()
-            }
-        }
-    }
-    private func initAudioSession() {
-        do {
-            // Intializing...
-            self.audioSession = AVAudioSession.sharedInstance()
-            try self.audioSession.setCategory(.playAndRecord)
-    
-            // requesting permission
-            requestRecordPermission()
-        }
-        catch {
-            print(error.localizedDescription)
-        }
-    }
-    private func getAudios() {
-        do {
-            let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            
-            // fetch all data from document directory...
-            let result = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .producesRelativePathURLs)
-            
-            // updated means remove all old data..
-            self.audios.removeAll()
-            
-            for i in result {
-                self.audios.append(i)
-            }
-        }
-        catch {
-            print(error.localizedDescription)
-        }
     }
 }
 

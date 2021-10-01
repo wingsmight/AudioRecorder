@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE44AEB52707700B00EFA18B /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44AEB02707700B00EFA18B /* AudioPlayer.swift */; };
+		CE44AEB62707700B00EFA18B /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44AEB12707700B00EFA18B /* AudioRecorder.swift */; };
 		CE66445D26F8D02A00A554FB /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = CE66445C26F8D02A00A554FB /* AlertToast */; };
 		CE6A03A8270451A1001C96E4 /* AudioRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A03A7270451A1001C96E4 /* AudioRecord.swift */; };
 		CE6A03AA270453AC001C96E4 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A03A9270453AC001C96E4 /* FileManager.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE44AEB02707700B00EFA18B /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		CE44AEB12707700B00EFA18B /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		CE6A03A7270451A1001C96E4 /* AudioRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecord.swift; sourceTree = "<group>"; };
 		CE6A03A9270453AC001C96E4 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		CE6D71C826F6042D005BDA30 /* AudioRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +84,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE44AEAF2707700B00EFA18B /* Audio Managers */ = {
+			isa = PBXGroup;
+			children = (
+				CE44AEB02707700B00EFA18B /* AudioPlayer.swift */,
+				CE44AEB12707700B00EFA18B /* AudioRecorder.swift */,
+			);
+			name = "Audio Managers";
+			path = "../../../../../.Trash/Audio Managers";
+			sourceTree = "<group>";
+		};
 		CE6D71BF26F6042D005BDA30 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +114,7 @@
 		CE6D71CA26F6042D005BDA30 /* AudioRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				CE44AEAF2707700B00EFA18B /* Audio Managers */,
 				CE773AA926FB76EA00EA8284 /* Extensions */,
 				CE6D71CB26F6042D005BDA30 /* AudioRecorderApp.swift */,
 				CEBF0BEC26FA5D6000C9B906 /* Localizable.strings */,
@@ -272,6 +287,7 @@
 			files = (
 				CE6D71DF26F60988005BDA30 /* RecordsTab.swift in Sources */,
 				CE6D71DB26F60943005BDA30 /* SettingsTab.swift in Sources */,
+				CE44AEB62707700B00EFA18B /* AudioRecorder.swift in Sources */,
 				CE9F908626FF32BF00F53B02 /* TimeIntervalPickerView.swift in Sources */,
 				CE773AAB26FB770600EA8284 /* DateExt.swift in Sources */,
 				CE773AA726FB65FA00EA8284 /* User.swift in Sources */,
@@ -280,6 +296,7 @@
 				CE7525D626FF80A1003DA83E /* ViewExt.swift in Sources */,
 				CE6D71CE26F6042D005BDA30 /* ContentView.swift in Sources */,
 				CE78EF9426FE46A300547BD0 /* Store.swift in Sources */,
+				CE44AEB52707700B00EFA18B /* AudioPlayer.swift in Sources */,
 				CE7773C526FB93F2000DBBC4 /* PaidCloudPlanView.swift in Sources */,
 				CE7773C326FB93CD000DBBC4 /* FreeCloudPlanView.swift in Sources */,
 				CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */,

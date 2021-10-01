@@ -91,7 +91,7 @@ struct SettingsTab: View {
                             .lineLimit(2)
                     }
                 }
-                TextInfo(key: "Дата рождения", value: user.birthDate.ToString())
+                TextInfo(key: "Дата рождения", value: user.birthDate.toString(dataStyle: .short))
                 TextInfo(key: "Почта", value: user.email)
                 TextInfo(key: "Телефон", value: user.phoneNumber)
                 Link("Профиль Facebook", destination: URL(string: "https://facebook.com")!)

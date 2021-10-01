@@ -8,6 +8,8 @@
 import Foundation
 
 struct AudioRecord {
-    var size: Int
-    var duration: Int
+    let fileURL: URL
+    let createdAt: Date
+    let size: Int
+    let duration: Int
 }

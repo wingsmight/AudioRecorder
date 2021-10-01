@@ -16,4 +16,12 @@ extension FileManager {
         // just send back the first one, which ought to be the only one
         return paths[0]
     }
+    static func getCreationDate(for file: URL) -> Date {
+        if let attributes = try? FileManager.default.attributesOfItem(atPath: file.path) as [FileAttributeKey: Any],
+            let creationDate = attributes[FileAttributeKey.creationDate] as? Date {
+            return creationDate
+        } else {
+            return Date()
+        }
+    }
 }
