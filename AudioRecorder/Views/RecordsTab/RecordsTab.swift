@@ -22,33 +22,14 @@ struct RecordsTab: View {
         }
         .navigationTitle("Аудиозаписи")
         .padding(.top, 1)
-        .onAppear() {
-            getAudios();
-        }
     }
     
     private func delete(at offsets: IndexSet) {
-        
         var urlsToDelete = [URL]()
         for index in offsets {
             urlsToDelete.append(audioRecorder.recordings[index].fileURL)
         }
         audioRecorder.deleteRecording(urlsToDelete: urlsToDelete)
-    }
-    private func getAudios() {
-        do {
-            let filesDictionaryURL = FileManager.getDocumentsDirectory().appendingPathComponent("AudioRecords", isDirectory: true)
-            let storedAudios = try FileManager.default.contentsOfDirectory(at: filesDictionaryURL, includingPropertiesForKeys: nil, options: .producesRelativePathURLs)
-            
-            self.audios.removeAll()
-            
-            for storedAudio in storedAudios {
-                self.audios.append(storedAudio.path)
-            }
-        }
-        catch {
-            print(error.localizedDescription)
-        }
     }
 }
 
@@ -79,15 +60,6 @@ struct RecordingRow: View {
             }
         }
     }
-    
-//    
-//    func delete(at offsets: IndexSet) {
-//        var urlsToDelete = [URL]()
-//        for index in offsets {
-//            urlsToDelete.append(audioRecorder.recordings[index].fileURL)
-//        }
-//        audioRecorder.deleteRecording(urlsToDelete: urlsToDelete)
-//    }
 }
 
 struct RecordsTab_Previews: PreviewProvider {
