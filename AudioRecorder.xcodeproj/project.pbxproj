@@ -32,6 +32,8 @@
 		CE8F83CF270085A700E9E45B /* DisabledAppOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F83CE270085A700E9E45B /* DisabledAppOverlayView.swift */; };
 		CE9F908626FF32BF00F53B02 /* TimeIntervalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F908526FF32BF00F53B02 /* TimeIntervalPickerView.swift */; };
 		CEBF0BEA26FA5D6000C9B906 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBF0BEC26FA5D6000C9B906 /* Localizable.strings */; };
+		CECE0154270CA6FB003906ED /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE0153270CA6FB003906ED /* TimeIntervalExt.swift */; };
+		CED26E12270BEE43007674B8 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED26E11270BEE43007674B8 /* RecordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		CE9F908526FF32BF00F53B02 /* TimeIntervalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalPickerView.swift; sourceTree = "<group>"; };
 		CEBF0BEB26FA5D6000C9B906 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEBF0BEF26FA5E2E00C9B906 /* ru */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 4; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CECE0153270CA6FB003906ED /* TimeIntervalExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExt.swift; sourceTree = "<group>"; };
+		CED26E11270BEE43007674B8 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +169,7 @@
 				CE773AAA26FB770600EA8284 /* DateExt.swift */,
 				CE7525D526FF80A1003DA83E /* ViewExt.swift */,
 				CE6A03A9270453AC001C96E4 /* FileManager.swift */,
+				CECE0153270CA6FB003906ED /* TimeIntervalExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -192,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				CE6D71DE26F60988005BDA30 /* RecordsTab.swift */,
+				CED26E11270BEE43007674B8 /* RecordView.swift */,
 			);
 			path = RecordsTab;
 			sourceTree = "<group>";
@@ -292,11 +298,13 @@
 				CE773AAB26FB770600EA8284 /* DateExt.swift in Sources */,
 				CE773AA726FB65FA00EA8284 /* User.swift in Sources */,
 				CE773AB026FB7A4600EA8284 /* AppInfoView.swift in Sources */,
+				CECE0154270CA6FB003906ED /* TimeIntervalExt.swift in Sources */,
 				CE6D71DD26F60979005BDA30 /* MainMenuTab.swift in Sources */,
 				CE7525D626FF80A1003DA83E /* ViewExt.swift in Sources */,
 				CE6D71CE26F6042D005BDA30 /* ContentView.swift in Sources */,
 				CE78EF9426FE46A300547BD0 /* Store.swift in Sources */,
 				CE44AEB52707700B00EFA18B /* AudioPlayer.swift in Sources */,
+				CED26E12270BEE43007674B8 /* RecordView.swift in Sources */,
 				CE7773C526FB93F2000DBBC4 /* PaidCloudPlanView.swift in Sources */,
 				CE7773C326FB93CD000DBBC4 /* FreeCloudPlanView.swift in Sources */,
 				CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */,
