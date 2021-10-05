@@ -79,6 +79,7 @@ struct RecordView: View {
                         
                         Button {
                             audioPlayer.currentTime -= 15
+                            
                             updateSlider()
                             self.isPlaying = self.audioPlayer.isPlaying
                         } label: {
@@ -105,7 +106,14 @@ struct RecordView: View {
                         }
                         
                         Button {
-                            audioPlayer.currentTime += 15
+                            let newTime = audioPlayer.currentTime + 15
+                            if newTime >= audioPlayer.duration {
+                                audioPlayer.currentTime = 0.0
+                                audioPlayer.stop()
+                            } else {
+                                audioPlayer.currentTime = newTime
+                            }
+                            
                             updateSlider()
                             self.isPlaying = self.audioPlayer.isPlaying
                         } label: {
