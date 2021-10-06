@@ -14,7 +14,7 @@ struct RecordsTab: View {
     var body: some View {
         List {
             ForEach(audioRecorder.recordings, id: \.createdAt) { recording in
-                RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: Date(), size: 10))
+                RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: Date()))
             }
             .onDelete(perform: delete)
         }

@@ -27,7 +27,6 @@ struct RecordView: View {
         
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: audioRecord.fileURL)
-            audioPlayer.prepareToPlay()
         } catch {
             print(error)
         }
@@ -51,6 +50,7 @@ struct RecordView: View {
                     
                     Text("\(audioRecord.createdAt.toString(dataStyle: DateFormatter.Style.short))")
                     Image(systemName: "calendar")
+                        .foregroundColor(.red)
                 }
             }
             .foregroundColor(.primary)
@@ -131,10 +131,22 @@ struct RecordView: View {
                 Divider()
                 
                 HStack {
-                    Text("Размер:")
-                    Spacer()
+                    Text("Размер: ")
                     Text(audioRecord.fileURL.fileSizeString)
                         .foregroundColor(.secondary)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        share(items: [audioRecord.fileURL])
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 28, height: 28)
+                    }
+                    .foregroundColor(.blue)
+                    .buttonStyle(PlainButtonStyle())
                 }
                 .padding(.vertical, 4)
             }
@@ -162,7 +174,7 @@ struct RecorderView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             List(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                RecordView(audioRecord: AudioRecord(fileURL: URL(fileURLWithPath: "TEST"), createdAt: Date(), size: 10))
+                RecordView(audioRecord: AudioRecord(fileURL: URL(fileURLWithPath: "file:///private/var/mobile/Containers/Data/Application/DA11F2D2-0ADC-4F26-9ADD-1A93665807FE/Documents/03-10-21_at_4:54:22%20AM.m4a"), createdAt: Date()))
             }
         }
     }
