@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE44AEB52707700B00EFA18B /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44AEB02707700B00EFA18B /* AudioPlayer.swift */; };
 		CE44AEB62707700B00EFA18B /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44AEB12707700B00EFA18B /* AudioRecorder.swift */; };
 		CE66445D26F8D02A00A554FB /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = CE66445C26F8D02A00A554FB /* AlertToast */; };
 		CE6A03A8270451A1001C96E4 /* AudioRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A03A7270451A1001C96E4 /* AudioRecord.swift */; };
@@ -19,6 +18,7 @@
 		CE6D71DB26F60943005BDA30 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DA26F60943005BDA30 /* SettingsTab.swift */; };
 		CE6D71DD26F60979005BDA30 /* MainMenuTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DC26F60979005BDA30 /* MainMenuTab.swift */; };
 		CE6D71DF26F60988005BDA30 /* RecordsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DE26F60988005BDA30 /* RecordsTab.swift */; };
+		CE704905270D8FE50045B498 /* UrlExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE704904270D8FE50045B498 /* UrlExt.swift */; };
 		CE7525D626FF80A1003DA83E /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7525D526FF80A1003DA83E /* ViewExt.swift */; };
 		CE773AA726FB65FA00EA8284 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE773AA626FB65FA00EA8284 /* User.swift */; };
 		CE773AAB26FB770600EA8284 /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE773AAA26FB770600EA8284 /* DateExt.swift */; };
@@ -37,7 +37,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CE44AEB02707700B00EFA18B /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		CE44AEB12707700B00EFA18B /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		CE6A03A7270451A1001C96E4 /* AudioRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecord.swift; sourceTree = "<group>"; };
 		CE6A03A9270453AC001C96E4 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		CE6D71DA26F60943005BDA30 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		CE6D71DC26F60979005BDA30 /* MainMenuTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTab.swift; sourceTree = "<group>"; };
 		CE6D71DE26F60988005BDA30 /* RecordsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsTab.swift; sourceTree = "<group>"; };
+		CE704904270D8FE50045B498 /* UrlExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlExt.swift; sourceTree = "<group>"; };
 		CE7525D526FF80A1003DA83E /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
 		CE773AA626FB65FA00EA8284 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CE773AAA26FB770600EA8284 /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
@@ -91,7 +91,6 @@
 		CE44AEAF2707700B00EFA18B /* Audio Managers */ = {
 			isa = PBXGroup;
 			children = (
-				CE44AEB02707700B00EFA18B /* AudioPlayer.swift */,
 				CE44AEB12707700B00EFA18B /* AudioRecorder.swift */,
 			);
 			name = "Audio Managers";
@@ -166,6 +165,7 @@
 		CE773AA926FB76EA00EA8284 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CE704904270D8FE50045B498 /* UrlExt.swift */,
 				CE773AAA26FB770600EA8284 /* DateExt.swift */,
 				CE7525D526FF80A1003DA83E /* ViewExt.swift */,
 				CE6A03A9270453AC001C96E4 /* FileManager.swift */,
@@ -296,6 +296,7 @@
 				CE44AEB62707700B00EFA18B /* AudioRecorder.swift in Sources */,
 				CE9F908626FF32BF00F53B02 /* TimeIntervalPickerView.swift in Sources */,
 				CE773AAB26FB770600EA8284 /* DateExt.swift in Sources */,
+				CE704905270D8FE50045B498 /* UrlExt.swift in Sources */,
 				CE773AA726FB65FA00EA8284 /* User.swift in Sources */,
 				CE773AB026FB7A4600EA8284 /* AppInfoView.swift in Sources */,
 				CECE0154270CA6FB003906ED /* TimeIntervalExt.swift in Sources */,
@@ -303,7 +304,6 @@
 				CE7525D626FF80A1003DA83E /* ViewExt.swift in Sources */,
 				CE6D71CE26F6042D005BDA30 /* ContentView.swift in Sources */,
 				CE78EF9426FE46A300547BD0 /* Store.swift in Sources */,
-				CE44AEB52707700B00EFA18B /* AudioPlayer.swift in Sources */,
 				CED26E12270BEE43007674B8 /* RecordView.swift in Sources */,
 				CE7773C526FB93F2000DBBC4 /* PaidCloudPlanView.swift in Sources */,
 				CE7773C326FB93CD000DBBC4 /* FreeCloudPlanView.swift in Sources */,

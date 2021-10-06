@@ -127,6 +127,16 @@ struct RecordView: View {
                     }
                     .foregroundColor(.primary)
                 }
+                
+                Divider()
+                
+                HStack {
+                    Text("Размер:")
+                    Spacer()
+                    Text(audioRecord.fileURL.fileSizeString)
+                        .foregroundColor(.secondary)
+                }
+                .padding(.vertical, 4)
             }
         }
         .onAppear() {
@@ -152,7 +162,7 @@ struct RecorderView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             List(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                RecordView(audioRecord: AudioRecord(fileURL: URL(fileURLWithPath: "TEST"), createdAt: Date(), size: 10, duration: 1234))
+                RecordView(audioRecord: AudioRecord(fileURL: URL(fileURLWithPath: "TEST"), createdAt: Date(), size: 10))
             }
         }
     }

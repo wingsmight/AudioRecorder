@@ -9,14 +9,12 @@ import SwiftUI
 import AVKit
 
 struct RecordsTab: View {
-    @State var audios : [String] = []
-    
     @ObservedObject var audioRecorder: AudioRecorder
     
     var body: some View {
         List {
             ForEach(audioRecorder.recordings, id: \.createdAt) { recording in
-                RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: Date(), size: 10, duration: 1234))
+                RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: Date(), size: 10))
             }
             .onDelete(perform: delete)
         }
