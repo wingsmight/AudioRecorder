@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE0286C4270EE3A800D81755 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0286C3270EE3A800D81755 /* LogInView.swift */; };
+		CE0286C6270EEC4200D81755 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0286C5270EEC4200D81755 /* SignUpView.swift */; };
+		CE0286C8270F395A00D81755 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE0286C7270F395A00D81755 /* GoogleService-Info.plist */; };
+		CE0286CB270F3A9300D81755 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CE0286CA270F3A9300D81755 /* FirebaseAuth */; };
 		CE44AEB62707700B00EFA18B /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44AEB12707700B00EFA18B /* AudioRecorder.swift */; };
 		CE66445D26F8D02A00A554FB /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = CE66445C26F8D02A00A554FB /* AlertToast */; };
 		CE6A03A8270451A1001C96E4 /* AudioRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A03A7270451A1001C96E4 /* AudioRecord.swift */; };
@@ -35,9 +39,13 @@
 		CEBF0BEA26FA5D6000C9B906 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBF0BEC26FA5D6000C9B906 /* Localizable.strings */; };
 		CECE0154270CA6FB003906ED /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE0153270CA6FB003906ED /* TimeIntervalExt.swift */; };
 		CED26E12270BEE43007674B8 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED26E11270BEE43007674B8 /* RecordView.swift */; };
+		CEE10440270F3E6D0026492A /* AppAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1043F270F3E6D0026492A /* AppAuth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE0286C3270EE3A800D81755 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
+		CE0286C5270EEC4200D81755 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		CE0286C7270F395A00D81755 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE44AEB12707700B00EFA18B /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		CE6A03A7270451A1001C96E4 /* AudioRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecord.swift; sourceTree = "<group>"; };
 		CE6A03A9270453AC001C96E4 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
@@ -68,6 +76,7 @@
 		CEBF0BEF26FA5E2E00C9B906 /* ru */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 4; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CECE0153270CA6FB003906ED /* TimeIntervalExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExt.swift; sourceTree = "<group>"; };
 		CED26E11270BEE43007674B8 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		CEE1043F270F3E6D0026492A /* AppAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAuth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +85,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE78EF9226FDE6F700547BD0 /* SwiftyStoreKit in Frameworks */,
+				CE0286CB270F3A9300D81755 /* FirebaseAuth in Frameworks */,
 				CE66445D26F8D02A00A554FB /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,6 +136,7 @@
 				CE6D71E026F60998005BDA30 /* Views */,
 				CE6D71CF26F60430005BDA30 /* Assets.xcassets */,
 				CE6D71D426F60430005BDA30 /* Info.plist */,
+				CE0286C7270F395A00D81755 /* GoogleService-Info.plist */,
 				CE6D71D126F60430005BDA30 /* Preview Content */,
 				CE773AA826FB660000EA8284 /* Data */,
 				CE841E7826FC7AD500FE79BF /* Theme.swift */,
@@ -151,6 +162,8 @@
 				CE773AAD26FB7A0300EA8284 /* MainMenuTab */,
 				CE773AAC26FB79FB00EA8284 /* SettingsTab */,
 				CE8F83CE270085A700E9E45B /* DisabledAppOverlayView.swift */,
+				CE0286C3270EE3A800D81755 /* LogInView.swift */,
+				CE0286C5270EEC4200D81755 /* SignUpView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -161,6 +174,7 @@
 				CE773AA626FB65FA00EA8284 /* User.swift */,
 				CE78EF9326FE46A300547BD0 /* Store.swift */,
 				CE6A03A7270451A1001C96E4 /* AudioRecord.swift */,
+				CEE1043F270F3E6D0026492A /* AppAuth.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -234,6 +248,7 @@
 			packageProductDependencies = (
 				CE66445C26F8D02A00A554FB /* AlertToast */,
 				CE78EF9126FDE6F700547BD0 /* SwiftyStoreKit */,
+				CE0286CA270F3A9300D81755 /* FirebaseAuth */,
 			);
 			productName = AudioRecorder;
 			productReference = CE6D71C826F6042D005BDA30 /* AudioRecorder.app */;
@@ -266,6 +281,7 @@
 			packageReferences = (
 				CE66445B26F8D02A00A554FB /* XCRemoteSwiftPackageReference "AlertToast" */,
 				CE78EF9026FDE6F700547BD0 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
+				CE0286C9270F3A9300D81755 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = CE6D71C926F6042D005BDA30 /* Products */;
 			projectDirPath = "";
@@ -282,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE6D71D326F60430005BDA30 /* Preview Assets.xcassets in Resources */,
+				CE0286C8270F395A00D81755 /* GoogleService-Info.plist in Resources */,
 				CEBF0BEA26FA5D6000C9B906 /* Localizable.strings in Resources */,
 				CE6D71D026F60430005BDA30 /* Assets.xcassets in Resources */,
 			);
@@ -300,11 +317,14 @@
 				CE44AEB62707700B00EFA18B /* AudioRecorder.swift in Sources */,
 				CE9F908626FF32BF00F53B02 /* TimeIntervalPickerView.swift in Sources */,
 				CE773AAB26FB770600EA8284 /* DateExt.swift in Sources */,
+				CE0286C4270EE3A800D81755 /* LogInView.swift in Sources */,
 				CE704905270D8FE50045B498 /* UrlExt.swift in Sources */,
 				CE773AA726FB65FA00EA8284 /* User.swift in Sources */,
+				CE0286C6270EEC4200D81755 /* SignUpView.swift in Sources */,
 				CE773AB026FB7A4600EA8284 /* AppInfoView.swift in Sources */,
 				CECE0154270CA6FB003906ED /* TimeIntervalExt.swift in Sources */,
 				CE6D71DD26F60979005BDA30 /* MainMenuTab.swift in Sources */,
+				CEE10440270F3E6D0026492A /* AppAuth.swift in Sources */,
 				CE7525D626FF80A1003DA83E /* ViewExt.swift in Sources */,
 				CE6D71CE26F6042D005BDA30 /* ContentView.swift in Sources */,
 				CE78EF9426FE46A300547BD0 /* Store.swift in Sources */,
@@ -525,6 +545,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CE0286C9270F3A9300D81755 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 		CE66445B26F8D02A00A554FB /* XCRemoteSwiftPackageReference "AlertToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elai950/AlertToast.git";
@@ -544,6 +572,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CE0286CA270F3A9300D81755 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE0286C9270F3A9300D81755 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
 		CE66445C26F8D02A00A554FB /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CE66445B26F8D02A00A554FB /* XCRemoteSwiftPackageReference "AlertToast" */;
