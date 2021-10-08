@@ -6,94 +6,111 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct LogInView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var isEditing = false
+    @State private var errorMessage = ""
+    @State private var backgroundColor: Color = Color(UIColor.systemBackground)
     
     @EnvironmentObject private var appAuth: AppAuth
     
     
     var body: some View {
         NavigationView {
-            VStack {
-                Spacer()
+            ZStack {
+                backgroundColor
+                    .edgesIgnoringSafeArea(.all)
                 
-                Text("Добро пожаловать!")
-                    .font(.title)
-                    .bold()
-                    .padding()
-                
-                TextField(
-                        "Эл. почта",
-                         text: $email
-                    ) { isEditing in
-                        self.isEditing = isEditing
-                    } onCommit: {
-                        validateUsername(name: email)
-                    }
-                    .font(.title3)
-                    .padding()
-                    .background(Color(UIColor.systemGray5))
-                    .cornerRadius(5.0)
-                    .padding(.vertical, 8)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .textContentType(.emailAddress)
-                
-                SecureField(
-                        "Пароль",
-                        text: $password
-                    ) {
-                        handleLogin(username: email, password: password)
-                    }
-                    .font(.title3)
-                    .padding()
-                    .background(Color(UIColor.systemGray5))
-                    .cornerRadius(5.0)
-                    .padding(.vertical, 8)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .textContentType(.password)
-                
-                Button {
-                    //handleLogin(username: self.username, password: self.password)
-                    
-                    guard !email.isEmpty, !password.isEmpty else {
-                        return
-                    }
-                    print("LogInButton")
-                    appAuth.logIn(email: self.email, password: self.password)
-                } label: {
-                    Text("Войти")
-                        .bold()
-                        .font(.title3)
-                        .foregroundColor(.white)
+                VStack {
+                    Spacer()
                         .padding()
-                        .frame(width: 210, height: 55)
-                        .background(Color.green)
-                        .cornerRadius(15.0)
+                    
+                    Text("Добро пожаловать!")
+                        .font(.title)
+                        .bold()
+                        .padding()
+                    
+                    TextField("Эл. почта", text: $email, onCommit: {
+                        
+                            })
+                        .font(.title3)
+                        .padding()
+                        .background(Color(UIColor.systemGray5))
+                        .cornerRadius(5.0)
+                        .padding(.vertical, 8)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .textContentType(.emailAddress)
+                        .keyboardType(.emailAddress)
+                    
+                    SecureField(
+                            "Пароль",
+                            text: $password
+                        ) {
+                            
+                        }
+                        .font(.title3)
+                        .padding()
+                        .background(Color(UIColor.systemGray5))
+                        .cornerRadius(5.0)
+                        .padding(.top, 8)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .textContentType(.password)
+                        .keyboardType(UIKit.UIKeyboardType.default)
+                    
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding(.top, 3)
+                        .frame(height: 50, alignment: .top)
+                        .minimumScaleFactor(0.5)
+                    
+                    Button {
+                        appAuth.logIn(email: self.email, password: self.password) {error in
+                            errorMessage = AppAuth.localizeAuthError(error)
+                            
+                            alertBackground()
+                        }
+                    } label: {
+                        Text("Войти")
+                            .bold()
+                            .font(.title3)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(width: 210, height: 55)
+                            .background(Color.green)
+                            .cornerRadius(15.0)
+                    }
+                    .padding(.top, 12)
+                    
+                    Text("Нет аккаунта?")
+                        .padding(.top, 18)
+                    NavigationLink("Создать", destination: SignUpView())
+                        .padding(.top, 1)
+                    
+                    Spacer()
+                        .padding(.bottom, 50)
                 }
-                .padding(.top, 30)
-                
-                Text("Нет аккаунта?")
-                    .padding(.top, 18)
-                NavigationLink("Создать", destination: SignUpView())
-                    .padding(.top, 1)
-                
-                Spacer()
+                .padding()
+                .onTapGesture {
+                    UIApplication.shared.endEditing()
+                }
             }
-            .padding()
+            .navigationBarHidden(true)
         }
     }
     
-    
-    private func validateUsername(name: String) {
-        
-    }
-    private func handleLogin(username: String, password: String) {
-        
+    private func alertBackground() {
+        withAnimation(.easeInOut(duration: 0.5)) {
+            self.backgroundColor = Color.red
+            
+            withAnimation(.easeInOut(duration: 1)) {
+                self.backgroundColor = Color(UIColor.systemBackground)
+            }
+        }
     }
 }
 

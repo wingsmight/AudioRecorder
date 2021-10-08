@@ -67,6 +67,9 @@ struct SettingsTab: View {
     @State private var isAppInfoShowing = false
     @State private var isCloudStorageChoiceShowing = false
     @State private var isDoNotDisturbIntervalViewShowing = false
+    @State private var isSignOutConfirmationShowing = false
+    
+    @EnvironmentObject var appAuth: AppAuth
     
     @AppStorage("isFacebookHackingAlertOn") private var isFacebookHackingAlertOn = false
     @AppStorage("doNotDisturbStartTime") private var doNotDisturbStartTime = Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: Date())!
@@ -95,6 +98,21 @@ struct SettingsTab: View {
                 TextInfo(key: "Почта", value: user.email)
                 TextInfo(key: "Телефон", value: user.phoneNumber)
                 Link("Профиль Facebook", destination: URL(string: "https://facebook.com")!)
+                Button {
+                    isSignOutConfirmationShowing = true
+                } label: {
+                    Text("Выйти из аккаунта")
+                        .foregroundColor(.red)
+                }
+                .alert(isPresented: $isSignOutConfirmationShowing) {
+                    Alert(title: Text("Выйти из аккаунта"), message: Text("Вы уверены?"), primaryButton: .destructive(Text("Да"), action: {
+                        appAuth.signOut()
+                    }),
+                          secondaryButton: .default(Text("Нет"), action: {
+                        
+                    })
+                    )
+                }
             }
             Section(header: Text("Опции")) {
                 Toggle(isOn: $isFacebookHackingAlertOn) {

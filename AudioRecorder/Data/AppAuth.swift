@@ -18,22 +18,29 @@ class AppAuth: ObservableObject {
     }
     
     
-    func logIn(email: String, password: String) {
+    func logIn(email: String, password: String, handleError:  @escaping (AuthErrorCode) -> Void) {
         auth.signIn(withEmail: email, password: password) { [weak self] result, error in
-            guard result != nil, error == nil else {
-                return
-            }
+                guard result != nil, error == nil else {
+                    if let errorCode = AuthErrorCode(rawValue: error!._code) {
+                        handleError(errorCode)
+                    }
+                    
+                    return
+                }
             
             DispatchQueue.main.async {
                 // Success
                 self?.signedIn = true
-                print(self?.signedIn)
             }
         }
     }
-    func signUp(email: String, password: String) {
+    func signUp(email: String, password: String, handleError:  @escaping (AuthErrorCode) -> Void) {
         auth.createUser(withEmail: email, password: password) { [weak self] result, error in
             guard result != nil, error == nil else {
+                if let errorCode = AuthErrorCode(rawValue: error!._code) {
+                    handleError(errorCode)
+                }
+                
                 return
             }
             
@@ -42,5 +49,37 @@ class AppAuth: ObservableObject {
                 self?.signedIn = true
             }
         }
+    }
+    func signOut() {
+        if self.signedIn {
+            try? auth.signOut()
+            
+            self.signedIn = false
+        }
+    }
+    
+    public static func localizeAuthError(_ errorCode: AuthErrorCode) -> String {
+        var errorMessage: String {
+            switch errorCode {
+            case .emailAlreadyInUse:
+                return "Данная эл. почта уже занята под другой аккаунт!"
+            case .userNotFound:
+                return "Данный пользователь отстуствует. Проверьте поля и повторите!"
+            case .userDisabled:
+                return "Данный пользователь отключен. Свяжитесь с поддержкой!"
+            case .invalidEmail, .invalidSender, .invalidRecipientEmail:
+                return "Пожалуйста, введите корректную эл. почту!"
+            case .networkError:
+                return "Возникла ошибка в сети. Пожалуйста, попробуйте снова!"
+            case .weakPassword:
+                return "Слишком слабый пароль. Пароль должен содержать как минимум 6 символов!"
+            case .wrongPassword:
+                return "Некорректный пароль. Пожалуйста, повторите снова или нажмите на 'Сбросить пароль'"
+            default:
+                return "Произошла неизвестная ошибка. Свяжитесь с поддержкой. Код ошибки: \(errorCode.rawValue)"
+            }
+        }
+        
+        return errorMessage
     }
 }

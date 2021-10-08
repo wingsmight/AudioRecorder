@@ -22,6 +22,8 @@
 		CE6D71DB26F60943005BDA30 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DA26F60943005BDA30 /* SettingsTab.swift */; };
 		CE6D71DD26F60979005BDA30 /* MainMenuTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DC26F60979005BDA30 /* MainMenuTab.swift */; };
 		CE6D71DF26F60988005BDA30 /* RecordsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DE26F60988005BDA30 /* RecordsTab.swift */; };
+		CE6F963F270FE79000D3E18D /* UIApplicationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F963E270FE79000D3E18D /* UIApplicationExt.swift */; };
+		CE6F96432710086000D3E18D /* AuthGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F96422710086000D3E18D /* AuthGateView.swift */; };
 		CE704905270D8FE50045B498 /* UrlExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE704904270D8FE50045B498 /* UrlExt.swift */; };
 		CE704908270D9DD60045B498 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE704907270D9DD60045B498 /* Share.swift */; };
 		CE7525D626FF80A1003DA83E /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7525D526FF80A1003DA83E /* ViewExt.swift */; };
@@ -58,6 +60,8 @@
 		CE6D71DA26F60943005BDA30 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		CE6D71DC26F60979005BDA30 /* MainMenuTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTab.swift; sourceTree = "<group>"; };
 		CE6D71DE26F60988005BDA30 /* RecordsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsTab.swift; sourceTree = "<group>"; };
+		CE6F963E270FE79000D3E18D /* UIApplicationExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExt.swift; sourceTree = "<group>"; };
+		CE6F96422710086000D3E18D /* AuthGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGateView.swift; sourceTree = "<group>"; };
 		CE704904270D8FE50045B498 /* UrlExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlExt.swift; sourceTree = "<group>"; };
 		CE704907270D9DD60045B498 /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Share.swift; path = Handlers/Share.swift; sourceTree = "<group>"; };
 		CE7525D526FF80A1003DA83E /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 				CE8F83CE270085A700E9E45B /* DisabledAppOverlayView.swift */,
 				CE0286C3270EE3A800D81755 /* LogInView.swift */,
 				CE0286C5270EEC4200D81755 /* SignUpView.swift */,
+				CE6F96422710086000D3E18D /* AuthGateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -187,6 +192,7 @@
 				CE7525D526FF80A1003DA83E /* ViewExt.swift */,
 				CE6A03A9270453AC001C96E4 /* FileManager.swift */,
 				CECE0153270CA6FB003906ED /* TimeIntervalExt.swift */,
+				CE6F963E270FE79000D3E18D /* UIApplicationExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -322,6 +328,7 @@
 				CE773AA726FB65FA00EA8284 /* User.swift in Sources */,
 				CE0286C6270EEC4200D81755 /* SignUpView.swift in Sources */,
 				CE773AB026FB7A4600EA8284 /* AppInfoView.swift in Sources */,
+				CE6F96432710086000D3E18D /* AuthGateView.swift in Sources */,
 				CECE0154270CA6FB003906ED /* TimeIntervalExt.swift in Sources */,
 				CE6D71DD26F60979005BDA30 /* MainMenuTab.swift in Sources */,
 				CEE10440270F3E6D0026492A /* AppAuth.swift in Sources */,
@@ -335,6 +342,7 @@
 				CE8F83CF270085A700E9E45B /* DisabledAppOverlayView.swift in Sources */,
 				CE773AB226FB874400EA8284 /* CloudStorageChoiceView.swift in Sources */,
 				CE6A03AA270453AC001C96E4 /* FileManager.swift in Sources */,
+				CE6F963F270FE79000D3E18D /* UIApplicationExt.swift in Sources */,
 				CE6A03A8270451A1001C96E4 /* AudioRecord.swift in Sources */,
 				CE6D71CC26F6042D005BDA30 /* AudioRecorderApp.swift in Sources */,
 			);

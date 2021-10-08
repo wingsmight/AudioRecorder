@@ -13,49 +13,52 @@ struct SignUpView: View {
     @State private var userSurname: String = ""
     @State private var birthDate: Date = Date(timeIntervalSinceReferenceDate: 0)
     @State private var password: String = ""
+    @State private var repeatedPassword: String = ""
     @State private var isEditing = false
+    @State private var errorMessage = ""
+    @State private var backgroundColor: Color = Color(UIColor.systemBackground)
     
     @EnvironmentObject private var appAuth: AppAuth
     
     
     var body: some View {
-        VStack {
-            Spacer()
+        ZStack {
+            backgroundColor
+                .edgesIgnoringSafeArea(.all)
             
-            Text("Регистрация")
-                .font(.title)
-                .bold()
-                .padding()
-            
-            TextFieldView(label: "Эл. почта", text: $mail)
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-                .textContentType(.emailAddress)
-            
-            TextFieldView(label: "Имя", text: $userName)
-            
-            TextFieldView(label: "Фамилия", text: $userSurname)
-            
-            HStack {
-                Text("Дата рождения:")
-                    .font(.title3)
-                    .foregroundColor(Color(UIColor.tertiaryLabel))
-
+            ScrollView(showsIndicators: false) {
                 Spacer()
-
-                DatePicker("", selection: $birthDate, displayedComponents: .date)
-                    .labelsHidden()
-            }
-            .padding()
-            .background(Color(UIColor.systemGray5))
-            .cornerRadius(5.0)
-            .padding(.vertical, 8)
-            
-            SecureField(
+                
+                TextFieldView(label: "Эл. почта", text: $mail)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .textContentType(.emailAddress)
+                    .keyboardType(.emailAddress)
+                
+                TextFieldView(label: "Имя", text: $userName)
+                
+                TextFieldView(label: "Фамилия", text: $userSurname)
+                
+                HStack {
+                    Text("Дата рождения:")
+                        .font(.title3)
+                        .foregroundColor(Color(UIColor.tertiaryLabel))
+                    
+                    Spacer()
+                    
+                    DatePicker("", selection: $birthDate, displayedComponents: .date)
+                        .labelsHidden()
+                }
+                .padding()
+                .background(Color(UIColor.systemGray5))
+                .cornerRadius(5.0)
+                .padding(.vertical, 8)
+                
+                SecureField(
                     "Пароль",
                     text: $password
                 ) {
-                    handleLogin(mail: mail, password: password)
+                    
                 }
                 .font(.title3)
                 .padding()
@@ -65,12 +68,12 @@ struct SignUpView: View {
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
                 .textContentType(.newPassword)
-            
-            SecureField(
+                
+                SecureField(
                     "Подтвердите пароль",
-                    text: $password
+                    text: $repeatedPassword
                 ) {
-                    handleLogin(mail: mail, password: password)
+                    
                 }
                 .font(.title3)
                 .padding()
@@ -79,44 +82,67 @@ struct SignUpView: View {
                 .padding(.vertical, 8)
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
-            
-            Button {
-                //handleLogin(mail: self.mail, password: self.password)≤
-                guard !mail.isEmpty, !password.isEmpty else {
-                    return
+                
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .padding(.top, 3)
+                    .frame(height: 50, alignment: .top)
+                    .minimumScaleFactor(0.5)
+                
+                Button {
+                    if self.userName == "" {
+                        errorMessage = "Заполните поле 'Имя'!"
+                        alertBackground()
+                        
+                        return
+                    } else if userSurname == "" {
+                        errorMessage = "Заполните поле 'Фамилия'!"
+                        alertBackground()
+                        
+                        return
+                    } else if password != repeatedPassword {
+                        errorMessage = "Пароли не совпадают!"
+                        alertBackground()
+                        return
+                    }
+                    
+                    appAuth.signUp(email: self.mail, password: self.password) {error in
+                        errorMessage = AppAuth.localizeAuthError(error)
+                    }
+                } label: {
+                    Text("Войти")
+                        .bold()
+                        .font(.title3)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 210, height: 55)
+                        .background(Color.green)
+                        .cornerRadius(15.0)
                 }
-                print("SignUpButton")
-                appAuth.signUp(email: self.mail, password: self.password)
-            } label: {
-                Text("Войти")
-                    .bold()
-                    .font(.title3)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 210, height: 55)
-                    .background(Color.green)
-                    .cornerRadius(15.0)
+                .padding(.top, 12)
+                
+                Spacer()
             }
-            .padding(.top, 30)
-            
-            Spacer()
+            .padding()
+            .navigationTitle("Регистрация")
+            .navigationBarTitleDisplayMode(NavigationBarItem.TitleDisplayMode.inline)
         }
-        .padding()
     }
     
-    
-    private func validateMail(mail: String) {
-        
-    }
-    private func handleLogin(mail: String, password: String) {
-        
+    private func alertBackground() {
+        withAnimation(.easeInOut(duration: 0.5)) {
+            self.backgroundColor = Color.red
+            
+            withAnimation(.easeInOut(duration: 1)) {
+                self.backgroundColor = Color(UIColor.systemBackground)
+            }
+        }
     }
 }
 
 struct TextFieldView: View {
     public var label: String
     @Binding public var text: String
-    //@Binding public var isEditing = false
     
     
     var body: some View {
@@ -124,11 +150,11 @@ struct TextFieldView: View {
             label,
             text: $text
         )
-        .font(.title3)
-        .padding()
-        .background(Color(UIColor.systemGray5))
-        .cornerRadius(5.0)
-        .padding(.vertical, 8)
+            .font(.title3)
+            .padding()
+            .background(Color(UIColor.systemGray5))
+            .cornerRadius(5.0)
+            .padding(.vertical, 8)
     }
 }
 
