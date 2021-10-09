@@ -63,14 +63,16 @@ struct SettingsTab: View {
     
     @State private var isToggleOn : Bool = false
     @State private var selectedStrength = "Mild"
-    @State private var user = User(photoLocation: "", name: "name", surname: "surname", birthDate: Date(), email: "email", phoneNumber: "+79134807883", facebookProfileUrl: "")
     @State private var isAppInfoShowing = false
     @State private var isCloudStorageChoiceShowing = false
     @State private var isDoNotDisturbIntervalViewShowing = false
     @State private var isSignOutConfirmationShowing = false
     
+    @State private var user: User = User()
+    
     @EnvironmentObject var appAuth: AppAuth
     
+    @AppStorage("user") var userData: Data = Data()
     @AppStorage("isFacebookHackingAlertOn") private var isFacebookHackingAlertOn = false
     @AppStorage("doNotDisturbStartTime") private var doNotDisturbStartTime = Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: Date())!
     @AppStorage("doNotDisturbFinishTime") private var doNotDisturbFinishTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!
@@ -105,14 +107,22 @@ struct SettingsTab: View {
                         .foregroundColor(.red)
                 }
                 .alert(isPresented: $isSignOutConfirmationShowing) {
-                    Alert(title: Text("Выйти из аккаунта"), message: Text("Вы уверены?"), primaryButton: .destructive(Text("Да"), action: {
-                        appAuth.signOut()
-                    }),
-                          secondaryButton: .default(Text("Нет"), action: {
+                    Alert(title: Text("Выйти из аккаунта"), message: Text("Вы уверены?"),
+                          primaryButton: .default(Text("Нет"), action: {
                         
+                    }),
+                          secondaryButton: .destructive(Text("Да"), action: {
+                            appAuth.signOut()
                     })
                     )
                 }
+                
+                Button {
+                    user = User.load()
+                } label: {
+                    Text("Load user")
+                }
+
             }
             Section(header: Text("Опции")) {
                 Toggle(isOn: $isFacebookHackingAlertOn) {
@@ -184,6 +194,15 @@ struct SettingsTab: View {
                 }
             }
         }
+        .onAppear() {
+            user = User.load()
+        }
+        .onDisappear() {
+            User.save(self.user)
+        }
+        .onChange(of: userData, perform: { newUserData in
+            user = User.load()
+        })
         .sheet(isPresented: $isAppInfoShowing) {
             AppInfoView(isShowing: self.$isAppInfoShowing)
         }

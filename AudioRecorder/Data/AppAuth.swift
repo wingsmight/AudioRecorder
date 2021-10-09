@@ -18,7 +18,7 @@ class AppAuth: ObservableObject {
     }
     
     
-    func logIn(email: String, password: String, handleError:  @escaping (AuthErrorCode) -> Void) {
+    func logIn(email: String, password: String, handleError:  @escaping (AuthErrorCode) -> Void, handleSuccess:  @escaping () -> Void) {
         auth.signIn(withEmail: email, password: password) { [weak self] result, error in
                 guard result != nil, error == nil else {
                     if let errorCode = AuthErrorCode(rawValue: error!._code) {
@@ -31,10 +31,11 @@ class AppAuth: ObservableObject {
             DispatchQueue.main.async {
                 // Success
                 self?.signedIn = true
+                handleSuccess()
             }
         }
     }
-    func signUp(email: String, password: String, handleError:  @escaping (AuthErrorCode) -> Void) {
+    func signUp(email: String, password: String, handleError:  @escaping (AuthErrorCode) -> Void, handleSuccess:  @escaping () -> Void) {
         auth.createUser(withEmail: email, password: password) { [weak self] result, error in
             guard result != nil, error == nil else {
                 if let errorCode = AuthErrorCode(rawValue: error!._code) {
@@ -47,6 +48,7 @@ class AppAuth: ObservableObject {
             DispatchQueue.main.async {
                 // Success
                 self?.signedIn = true
+                handleSuccess()
             }
         }
     }

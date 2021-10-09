@@ -22,6 +22,8 @@
 		CE6D71DB26F60943005BDA30 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DA26F60943005BDA30 /* SettingsTab.swift */; };
 		CE6D71DD26F60979005BDA30 /* MainMenuTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DC26F60979005BDA30 /* MainMenuTab.swift */; };
 		CE6D71DF26F60988005BDA30 /* RecordsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DE26F60988005BDA30 /* RecordsTab.swift */; };
+		CE6F95F82711CF4000791A41 /* CloudDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F95F72711CF4000791A41 /* CloudDatabase.swift */; };
+		CE6F95FA2711D7AB00791A41 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CE6F95F92711D7AB00791A41 /* FirebaseFirestore */; };
 		CE6F963F270FE79000D3E18D /* UIApplicationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F963E270FE79000D3E18D /* UIApplicationExt.swift */; };
 		CE6F96432710086000D3E18D /* AuthGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F96422710086000D3E18D /* AuthGateView.swift */; };
 		CE704905270D8FE50045B498 /* UrlExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE704904270D8FE50045B498 /* UrlExt.swift */; };
@@ -60,6 +62,7 @@
 		CE6D71DA26F60943005BDA30 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		CE6D71DC26F60979005BDA30 /* MainMenuTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTab.swift; sourceTree = "<group>"; };
 		CE6D71DE26F60988005BDA30 /* RecordsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsTab.swift; sourceTree = "<group>"; };
+		CE6F95F72711CF4000791A41 /* CloudDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CloudDatabase.swift; path = Handlers/CloudDatabase.swift; sourceTree = "<group>"; };
 		CE6F963E270FE79000D3E18D /* UIApplicationExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExt.swift; sourceTree = "<group>"; };
 		CE6F96422710086000D3E18D /* AuthGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGateView.swift; sourceTree = "<group>"; };
 		CE704904270D8FE50045B498 /* UrlExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlExt.swift; sourceTree = "<group>"; };
@@ -89,6 +92,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE78EF9226FDE6F700547BD0 /* SwiftyStoreKit in Frameworks */,
+				CE6F95FA2711D7AB00791A41 /* FirebaseFirestore in Frameworks */,
 				CE0286CB270F3A9300D81755 /* FirebaseAuth in Frameworks */,
 				CE66445D26F8D02A00A554FB /* AlertToast in Frameworks */,
 			);
@@ -146,6 +150,7 @@
 				CE841E7826FC7AD500FE79BF /* Theme.swift */,
 				CE78EF8F26FDCF1800547BD0 /* Configuration.storekit */,
 				CE704907270D9DD60045B498 /* Share.swift */,
+				CE6F95F72711CF4000791A41 /* CloudDatabase.swift */,
 			);
 			path = AudioRecorder;
 			sourceTree = "<group>";
@@ -255,6 +260,7 @@
 				CE66445C26F8D02A00A554FB /* AlertToast */,
 				CE78EF9126FDE6F700547BD0 /* SwiftyStoreKit */,
 				CE0286CA270F3A9300D81755 /* FirebaseAuth */,
+				CE6F95F92711D7AB00791A41 /* FirebaseFirestore */,
 			);
 			productName = AudioRecorder;
 			productReference = CE6D71C826F6042D005BDA30 /* AudioRecorder.app */;
@@ -323,6 +329,7 @@
 				CE44AEB62707700B00EFA18B /* AudioRecorder.swift in Sources */,
 				CE9F908626FF32BF00F53B02 /* TimeIntervalPickerView.swift in Sources */,
 				CE773AAB26FB770600EA8284 /* DateExt.swift in Sources */,
+				CE6F95F82711CF4000791A41 /* CloudDatabase.swift in Sources */,
 				CE0286C4270EE3A800D81755 /* LogInView.swift in Sources */,
 				CE704905270D8FE50045B498 /* UrlExt.swift in Sources */,
 				CE773AA726FB65FA00EA8284 /* User.swift in Sources */,
@@ -589,6 +596,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE66445B26F8D02A00A554FB /* XCRemoteSwiftPackageReference "AlertToast" */;
 			productName = AlertToast;
+		};
+		CE6F95F92711D7AB00791A41 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE0286C9270F3A9300D81755 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 		CE78EF9126FDE6F700547BD0 /* SwiftyStoreKit */ = {
 			isa = XCSwiftPackageProductDependency;

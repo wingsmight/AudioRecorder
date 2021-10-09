@@ -15,6 +15,8 @@ struct LogInView: View {
     @State private var errorMessage = ""
     @State private var backgroundColor: Color = Color(UIColor.systemBackground)
     
+    @AppStorage("user") var userData: Data = Data()
+    
     @EnvironmentObject private var appAuth: AppAuth
     
     
@@ -69,11 +71,17 @@ struct LogInView: View {
                         .minimumScaleFactor(0.5)
                     
                     Button {
-                        appAuth.logIn(email: self.email, password: self.password) {error in
-                            errorMessage = AppAuth.localizeAuthError(error)
+                        appAuth.logIn(
+                            email: self.email,
+                            password: self.password,
+                            handleError: {error in
+                                errorMessage = AppAuth.localizeAuthError(error)
                             
-                            alertBackground()
-                        }
+                                alertBackground()
+                            },
+                            handleSuccess: {
+                                getData(email: self.email)
+                            })
                     } label: {
                         Text("Войти")
                             .bold()

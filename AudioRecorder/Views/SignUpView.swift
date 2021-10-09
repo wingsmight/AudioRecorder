@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct SignUpView: View {
-    @State private var mail: String = ""
+    @State private var email: String = ""
     @State private var userName: String = ""
     @State private var userSurname: String = ""
     @State private var birthDate: Date = Date(timeIntervalSinceReferenceDate: 0)
@@ -17,6 +18,8 @@ struct SignUpView: View {
     @State private var isEditing = false
     @State private var errorMessage = ""
     @State private var backgroundColor: Color = Color(UIColor.systemBackground)
+    
+    @AppStorage("user") var userData: Data = Data()
     
     @EnvironmentObject private var appAuth: AppAuth
     
@@ -29,7 +32,7 @@ struct SignUpView: View {
             ScrollView(showsIndicators: false) {
                 Spacer()
                 
-                TextFieldView(label: "Эл. почта", text: $mail)
+                TextFieldView(label: "Эл. почта", text: $email)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     .textContentType(.emailAddress)
@@ -106,9 +109,20 @@ struct SignUpView: View {
                         return
                     }
                     
-                    appAuth.signUp(email: self.mail, password: self.password) {error in
-                        errorMessage = AppAuth.localizeAuthError(error)
-                    }
+                    appAuth.signUp(
+                        email: self.email,
+                        password: self.password,
+                        handleError: {error in
+                            errorMessage = AppAuth.localizeAuthError(error)
+                        
+                            alertBackground()
+                        },
+                        handleSuccess: {
+                            let user = User(photoLocation: "", name: self.userName, surname: self.userSurname, birthDate: self.birthDate, email: self.email, phoneNumber: "", facebookProfileUrl: "")
+                            
+                            addData(user: user)
+                            User.save(user)
+                        })
                 } label: {
                     Text("Войти")
                         .bold()
