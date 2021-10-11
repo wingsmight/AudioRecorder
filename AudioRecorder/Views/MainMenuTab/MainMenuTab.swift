@@ -8,6 +8,7 @@
 import SwiftUI
 import AVKit
 import CoreHaptics
+import Speech
 
 
 struct MainMenuTab: View {
@@ -15,6 +16,11 @@ struct MainMenuTab: View {
     @StateObject var audioRecorder: AudioRecorder
     
     @State private var playTapEngine: CHHapticEngine?
+    @State private var transcript = ""
+    
+    private let speechRecognizer = SpeechRecognizer()
+    @State private var lastSpeechDate : Date = Date()
+    
     @AppStorage("recordCount") private var recordCount = 0;
     
     
@@ -45,9 +51,31 @@ struct MainMenuTab: View {
                     if IsRecording {
                         audioRecorder.stopRecording()
                         
+                        speechRecognizer.stopRecording()
+                        
                         self.recordCount += 1
                     } else {
-                        audioRecorder.startRecording()
+                        speechRecognizer.record(to: $transcript) { message in
+                            if (!audioRecorder.recording) {
+                                print("audioRecorder.startRecording()")
+                                audioRecorder.startRecording()
+                            }
+                            
+                            lastSpeechDate = Date()
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+                                let secondsSinceLastSpeech = Date().timeIntervalSince(lastSpeechDate)
+                                
+                                print("secondsSinceLastSpeech = \(secondsSinceLastSpeech)")
+                                
+                                if (secondsSinceLastSpeech >= 9.9) {
+                                    audioRecorder.stopRecording()
+                                    
+                                    print("audioRecorder.stopRecording()")
+                                }
+                            }
+                        }
+                        transcript = ""
                     }
                     
                     vibrate(intensity: 0.7, sharpness: 0.7)
