@@ -16,6 +16,9 @@ class AppAuth: ObservableObject {
     var isSignedIn: Bool {
         auth.currentUser != nil
     }
+    var currentUser: FirebaseAuth.User? {
+        auth.currentUser
+    }
     
     
     func logIn(email: String, password: String, handleError:  @escaping (AuthErrorCode) -> Void, handleSuccess:  @escaping () -> Void) {

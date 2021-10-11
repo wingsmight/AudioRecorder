@@ -138,6 +138,24 @@ struct RecordView: View {
                     Spacer()
                     
                     Button(action: {
+                        uploadRecord(currentUserId: AppAuth().currentUser!.uid, audio: audioRecord.fileURL) { (result) in
+                            switch result {
+                            case .success(_):
+                                break
+                            case .failure(_):
+                                break
+                            }
+                        }
+                    }) {
+                        Image(systemName: "arrow.up.doc")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 28, height: 28)
+                    }
+                    .foregroundColor(.blue)
+                    .buttonStyle(PlainButtonStyle())
+                    
+                    Button(action: {
                         share(items: [audioRecord.fileURL])
                     }) {
                         Image(systemName: "square.and.arrow.up")
