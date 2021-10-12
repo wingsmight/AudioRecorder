@@ -72,6 +72,13 @@ struct SpeechRecognizer {
                         audioEngine.stop()
                         inputNode.removeTap(onBus: 0)
                         self.assistant.recognitionRequest = nil
+                        
+                        stopRecording()
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            record(to: speech, onRelay: onRelay)
+                            print("recording has been restarted")
+                        }
                     }
                 }
             } catch {

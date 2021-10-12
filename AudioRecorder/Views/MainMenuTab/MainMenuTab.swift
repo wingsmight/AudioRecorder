@@ -22,13 +22,11 @@ struct MainMenuTab: View {
     var speechRecognizer = SpeechRecognizer()
     @State private var lastSpeechDate : Date = Date()
     
-    @AppStorage("recordCount") private var recordCount = 0;
-    
     
     var body: some View {
         VStack {
             ZStack {
-                if isRecording {
+                if isRecording && audioRecorder.recording {
                     Circle()
                         .fill(Color.green)
                         .shadow(radius: 3)
@@ -49,8 +47,6 @@ struct MainMenuTab: View {
                         audioRecorder.stopRecording()
                         
                         speechRecognizer.stopRecording()
-                        
-                        self.recordCount += 1
                     } else {
                         speechRecognizer.record(to: $transcript) { message in
                             if (!audioRecorder.recording) {
@@ -60,7 +56,7 @@ struct MainMenuTab: View {
                             
                             lastSpeechDate = Date()
                             
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 11.01) {
                                 let secondsSinceLastSpeech = Date().timeIntervalSince(lastSpeechDate)
                                 
                                 print("secondsSinceLastSpeech = \(secondsSinceLastSpeech)")

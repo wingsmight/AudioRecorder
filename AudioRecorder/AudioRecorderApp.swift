@@ -41,6 +41,8 @@ struct AudioRecorderApp: App {
                             }
                         }
                     }
+                    
+                    UIApplication.shared.isIdleTimerDisabled = true
                 }
         }
     }
