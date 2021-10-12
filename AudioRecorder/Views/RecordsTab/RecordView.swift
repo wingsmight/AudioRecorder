@@ -28,7 +28,7 @@ struct RecordView: View {
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: audioRecord.fileURL)
         } catch {
-            print(error)
+            print("RecordView.int(): \(error)")
         }
     }
     
@@ -171,7 +171,7 @@ struct RecordView: View {
         }
         .onAppear() {
             Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
-                if self.audioPlayer.isPlaying && !isSliderEditing {
+                if self.audioPlayer != nil && self.audioPlayer.isPlaying && !isSliderEditing {
                     updateSlider()
                 }
             }

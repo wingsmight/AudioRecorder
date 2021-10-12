@@ -78,7 +78,7 @@ struct ContentView: View {
                 }
                 .tag(0)
                 NavigationView {
-                    MainMenuTab(isRecordingToastShowing: self.$isRecordingToastShowing, audioRecorder: self.audioRecorder)
+                    MainMenuTab()
                 }
                 .tabItem {
                     Text("")

@@ -38,6 +38,7 @@
 		CE7773C526FB93F2000DBBC4 /* PaidCloudPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7773C426FB93F2000DBBC4 /* PaidCloudPlanView.swift */; };
 		CE78EF9226FDE6F700547BD0 /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE78EF9126FDE6F700547BD0 /* SwiftyStoreKit */; };
 		CE78EF9426FE46A300547BD0 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78EF9326FE46A300547BD0 /* Store.swift */; };
+		CE797173271522E10011C3C0 /* CDVSpeechRecognitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE797172271522E10011C3C0 /* CDVSpeechRecognitionViewController.swift */; };
 		CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE841E7826FC7AD500FE79BF /* Theme.swift */; };
 		CE8F83CF270085A700E9E45B /* DisabledAppOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F83CE270085A700E9E45B /* DisabledAppOverlayView.swift */; };
 		CE9D67EC2712C890003FB664 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE9D67EB2712C890003FB664 /* GoogleService-Info.plist */; };
@@ -78,6 +79,7 @@
 		CE7773C426FB93F2000DBBC4 /* PaidCloudPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidCloudPlanView.swift; sourceTree = "<group>"; };
 		CE78EF8F26FDCF1800547BD0 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		CE78EF9326FE46A300547BD0 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		CE797172271522E10011C3C0 /* CDVSpeechRecognitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CDVSpeechRecognitionViewController.swift; path = Handlers/CDVSpeechRecognitionViewController.swift; sourceTree = "<group>"; };
 		CE841E7826FC7AD500FE79BF /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		CE8F83CE270085A700E9E45B /* DisabledAppOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabledAppOverlayView.swift; sourceTree = "<group>"; };
 		CE9D67EB2712C890003FB664 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				CE704907270D9DD60045B498 /* Share.swift */,
 				CE6F95F72711CF4000791A41 /* CloudDatabase.swift */,
 				CE6337042713EFE1002CBA8C /* SpeechRecognizer.swift */,
+				CE797172271522E10011C3C0 /* CDVSpeechRecognitionViewController.swift */,
 			);
 			path = AudioRecorder;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				CE773AA726FB65FA00EA8284 /* User.swift in Sources */,
 				CE0286C6270EEC4200D81755 /* SignUpView.swift in Sources */,
 				CE773AB026FB7A4600EA8284 /* AppInfoView.swift in Sources */,
+				CE797173271522E10011C3C0 /* CDVSpeechRecognitionViewController.swift in Sources */,
 				CE6F96432710086000D3E18D /* AuthGateView.swift in Sources */,
 				CECE0154270CA6FB003906ED /* TimeIntervalExt.swift in Sources */,
 				CE6D71DD26F60979005BDA30 /* MainMenuTab.swift in Sources */,

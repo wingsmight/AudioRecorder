@@ -12,43 +12,40 @@ import Speech
 
 
 struct MainMenuTab: View {
-    @Binding var isRecordingToastShowing : Bool
-    @StateObject var audioRecorder: AudioRecorder
+    @State var isRecordingToastShowing = false
+    @StateObject var audioRecorder = AudioRecorder()
     
     @State private var playTapEngine: CHHapticEngine?
     @State private var transcript = ""
+    @State private var isRecording = false
     
-    private let speechRecognizer = SpeechRecognizer()
+    var speechRecognizer = SpeechRecognizer()
     @State private var lastSpeechDate : Date = Date()
     
     @AppStorage("recordCount") private var recordCount = 0;
     
     
-    var recordingButtonImage : String {
-        return self.IsRecording ? "stop.fill" : "play.fill"
-    }
-    
-    
     var body: some View {
         VStack {
             ZStack {
-                if IsRecording {
+                if isRecording {
                     Circle()
                         .fill(Color.green)
                         .shadow(radius: 3)
                         .opacity(0.333)
-                        .frame(width: 110 * CGFloat(1 + 0.95 * audioRecorder.soundSamples[2]), height: (100 + (IsRecording ? 10 : 0)) * CGFloat(1 + 0.95 * audioRecorder.soundSamples[2]))
+                        .frame(width: 110 * CGFloat(1 + 0.95 * audioRecorder.soundSamples[2]), height: (100 + (isRecording ? 10 : 0)) * CGFloat(1 + 0.95 * audioRecorder.soundSamples[2]))
                     Circle()
                         .fill(Color.green)
                         .shadow(radius: 3)
                         .opacity(0.333)
-                        .frame(width: 105 * CGFloat(1 + 0.6 * audioRecorder.soundSamples[0]), height: (100 + (IsRecording ? 5 : 0)) * CGFloat(1 + 0.6 * audioRecorder.soundSamples[0]))
+                        .frame(width: 105 * CGFloat(1 + 0.6 * audioRecorder.soundSamples[0]), height: (100 + (isRecording ? 5 : 0)) * CGFloat(1 + 0.6 * audioRecorder.soundSamples[0]))
                 }
                 
                 Button(action: {
-                    isRecordingToastShowing = IsRecording
+                    isRecording.toggle()
+                    isRecordingToastShowing = isRecording
                     
-                    if IsRecording {
+                    if !isRecording {
                         audioRecorder.stopRecording()
                         
                         speechRecognizer.stopRecording()
@@ -80,7 +77,7 @@ struct MainMenuTab: View {
                     
                     vibrate(intensity: 0.7, sharpness: 0.7)
                 }) {
-                    Image(systemName: recordingButtonImage)
+                    Image(systemName: self.isRecording ? "stop.fill" : "play.fill")
                         .frame(width: 100, height: 100)
                         .foregroundColor(Color.white)
                         .background(Color.green)
@@ -99,10 +96,6 @@ struct MainMenuTab: View {
             initHaptics()
         })
         .navigationTitle("Аудиорегистратор")
-    }
-    
-    var IsRecording: Bool {
-        audioRecorder.recording
     }
     
 
@@ -140,6 +133,6 @@ struct MainMenuTab: View {
 
 struct MainMenuTab_Previews: PreviewProvider {
     static var previews: some View {
-        MainMenuTab(isRecordingToastShowing: .constant(false), audioRecorder: AudioRecorder())
+        MainMenuTab()
     }
 }
