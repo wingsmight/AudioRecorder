@@ -21,6 +21,15 @@ struct SpeechRecognizer {
             recognitionRequest = nil
             recognitionTask = nil
         }
+        func stop() {
+            recognitionTask?.finish()
+            recognitionTask = nil
+            
+            // stop audio
+            recognitionRequest?.endAudio()
+            audioEngine?.stop()
+            audioEngine?.inputNode.removeTap(onBus: 0) // Remove tap on bus when stopping recording.
+        }
     }
 
     private let assistant = SpeechAssist()
@@ -48,7 +57,7 @@ struct SpeechRecognizer {
 
             do {
                 let audioSession = AVAudioSession.sharedInstance()
-                try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
+                try audioSession.setCategory(.record, mode: .measurement, options: .mixWithOthers)
                 try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
                 let inputNode = audioEngine.inputNode
 
@@ -69,13 +78,11 @@ struct SpeechRecognizer {
                     }
 
                     if error != nil || isFinal {
-                        audioEngine.stop()
-                        inputNode.removeTap(onBus: 0)
-                        self.assistant.recognitionRequest = nil
-                        
-                        stopRecording()
-
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.11) {
+                            stopRecording()
+                            print("recording has been stopped")
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.22) {
                             record(to: speech, onRelay: onRelay)
                             print("recording has been restarted")
                         }
@@ -88,7 +95,7 @@ struct SpeechRecognizer {
         }
     }
     func stopRecording() {
-        assistant.reset()
+        assistant.stop()
         
         self.isRecording = false
     }
