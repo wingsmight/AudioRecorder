@@ -19,7 +19,6 @@ struct MainMenuTab: View {
     @State private var transcript = ""
     @State private var isRecording = false
     
-    var speechRecognizer = SpeechRecognizer()
     @State private var lastSpeechDate : Date = Date()
     
     
@@ -45,30 +44,8 @@ struct MainMenuTab: View {
                     
                     if !isRecording {
                         audioRecorder.stopRecording()
-                        
-                        speechRecognizer.stopRecording()
                     } else {
-                        speechRecognizer.record(to: $transcript) { message in
-                            if (!audioRecorder.recording) {
-                                print("audioRecorder.startRecording()")
-                                audioRecorder.startRecording()
-                            }
-                            
-                            lastSpeechDate = Date()
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 11.01) {
-                                let secondsSinceLastSpeech = Date().timeIntervalSince(lastSpeechDate)
-                                
-                                print("secondsSinceLastSpeech = \(secondsSinceLastSpeech)")
-                                
-                                if (secondsSinceLastSpeech >= 9.9) {
-                                    audioRecorder.stopRecording()
-                                    
-                                    print("audioRecorder.stopRecording()")
-                                }
-                            }
-                        }
-                        transcript = ""
+                        audioRecorder.startRecording()
                     }
                     
                     vibrate(intensity: 0.7, sharpness: 0.7)
