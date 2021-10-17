@@ -25,7 +25,7 @@ struct MainMenuTab: View {
     var body: some View {
         VStack {
             ZStack {
-                if isRecording && audioRecorder.recording {
+                if audioRecorder.recording {
                     Circle()
                         .fill(Color.green)
                         .shadow(radius: 3)
@@ -82,7 +82,7 @@ struct MainMenuTab: View {
             self.playTapEngine = try CHHapticEngine()
             try playTapEngine?.start()
         } catch {
-            print("There was an error creating the engine: \(error.localizedDescription)")
+            print("There was an error creating the engine: \(error)")
         }
     }
     func vibrate(intensity intensityValue: Float, sharpness sharpnessValue: Float) {
@@ -102,7 +102,7 @@ struct MainMenuTab: View {
             let player = try playTapEngine?.makePlayer(with: pattern)
             try player?.start(atTime: 0)
         } catch {
-            print("Failed to play pattern: \(error.localizedDescription).")
+            print("Failed to play pattern: \(error).")
         }
     }
 }

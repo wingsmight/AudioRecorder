@@ -18,6 +18,9 @@ struct RecordsTab: View {
             }
             .onDelete(perform: delete)
         }
+        .onChange(of: audioRecorder.recordings, perform: { newValue in
+            print("new value = \(newValue.count)")
+        })
         .navigationTitle("Аудиозаписи")
         .padding(.top, 1)
     }

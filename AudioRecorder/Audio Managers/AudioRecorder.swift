@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import AVFoundation
 import Combine
+import Speech
 
 class AudioRecorder: ObservableObject {
     let STARTING_RECORD_DURATION_SECONDS: Double = 10 // 60 * 5 // 5 mins
@@ -13,8 +14,9 @@ class AudioRecorder: ObservableObject {
     private var timer: Timer?
     private var currentSample: Int = 0
     private var audioRecorder: AVAudioRecorder!
-        
-    @Published public var recordings = [AudioRecord]()
+    private var autoRestart: DispatchWorkItem?
+    
+    public var recordings = [AudioRecord]()
     @Published public var recording = false;
     @Published public var soundSamples: [Float] = []
     
@@ -36,8 +38,7 @@ class AudioRecorder: ObservableObject {
             print("Failed to set up recording session")
         }
         
-        let audiosDirectory = FileManager.getDocumentsDirectory()//.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("AudioRecords", isDirectory: true)
-        let audioFilename = audiosDirectory.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
+        let audioFilename = audioDirectory.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
         
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -53,15 +54,26 @@ class AudioRecorder: ObservableObject {
             
             startMonitoring()
             
-            recording = true
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + STARTING_RECORD_DURATION_SECONDS) {
+            autoRestart = DispatchWorkItem(block: {
                 self.audioRecorder.stop()
                 
-                self.fetchRecordings()
+                DispatchQueue.main.async {
+                    self.recognizeSpeech(audioURL: audioFilename) { recognizedText in
+                        if recognizedText.isEmpty {
+                            self.delete(audioUrl: audioFilename)
+                        }
+                        
+                        self.fetchRecordings()
+                    }
+                }
                 
                 self.startRecording()
+            })
+            if (autoRestart != nil) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + STARTING_RECORD_DURATION_SECONDS, execute: autoRestart!)
             }
+            
+            recording = true
         } catch {
             print("Could not start recording")
         }
@@ -71,6 +83,8 @@ class AudioRecorder: ObservableObject {
         if !recording {
             return
         }
+        
+        autoRestart?.cancel()
         
         audioRecorder.stop()
         
@@ -82,13 +96,21 @@ class AudioRecorder: ObservableObject {
         
         recording = false
     }
-    
     func fetchRecordings() {
         recordings.removeAll()
         
         let fileManager = FileManager.default
-        let audiosDirectory = FileManager.getDocumentsDirectory()//.appendingPathComponent("AudioRecords", isDirectory: true)
-        let directoryContents = try! fileManager.contentsOfDirectory(at: audiosDirectory, includingPropertiesForKeys: nil)
+        var isDir : ObjCBool = true
+        if !fileManager.fileExists(atPath: audioDirectory.path, isDirectory: &isDir) {
+            do {
+                try fileManager.createDirectory(atPath: audioDirectory.path, withIntermediateDirectories: true, attributes: nil)
+                
+                print(fileManager.fileExists(atPath: audioDirectory.path, isDirectory: &isDir))
+            } catch {
+                print("fetchRecordings(): \(error)")
+            }
+        }
+        let directoryContents = try! fileManager.contentsOfDirectory(at: audioDirectory, includingPropertiesForKeys: nil)
         for audio in directoryContents {
             let recording = AudioRecord(fileURL: audio, createdAt: FileManager.getCreationDate(for: audio))
             recordings.append(recording)
@@ -97,21 +119,17 @@ class AudioRecorder: ObservableObject {
         recordings.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedAscending})
         
         objectWillChange.send(self)
-        
-        print("fetching")
     }
     
     func deleteRecording(urlsToDelete: [URL]) {
         for url in urlsToDelete {
-            print(url)
             do {
                 try FileManager.default.removeItem(at: url)
+                print("deleted")
             } catch {
                 print("File could not be deleted!")
             }
         }
-        
-        fetchRecordings()
     }
     
     private func startMonitoring() {
@@ -126,5 +144,36 @@ class AudioRecorder: ObservableObject {
     }
     private func stopMonitoring() {
         timer?.invalidate()
+    }
+    private func recognizeSpeech(audioURL: URL, onCompleted: @escaping (String) -> Void) {
+        let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "ru-RU"))
+        let request = SFSpeechURLRecognitionRequest(url: audioURL)
+
+        request.shouldReportPartialResults = true
+
+        if (recognizer?.isAvailable)! {
+
+            recognizer?.recognitionTask(with: request) { result, error in
+                guard error == nil else { print("Error: \(error!)"); onCompleted(""); return }
+                guard let result = result else { print("No result!"); onCompleted(""); return }
+
+                print("Transcripted text: " + result.bestTranscription.formattedString)
+                onCompleted(result.bestTranscription.formattedString)
+            }
+        } else {
+            print("Device doesn't support speech recognition")
+        }
+    }
+    private func delete(audioUrl: URL) {
+        do {
+            try FileManager.default.removeItem(at: audioUrl)
+        } catch {
+            print("moveAudioToPersistentDir(): \(error)")
+        }
+    }
+    
+    
+    private var audioDirectory: URL {
+        FileManager.getDocumentsDirectory().appendingPathComponent("AudioRecords")
     }
 }

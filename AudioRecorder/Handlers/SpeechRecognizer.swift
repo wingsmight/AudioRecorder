@@ -89,7 +89,7 @@ struct SpeechRecognizer {
                     }
                 }
             } catch {
-                print("Error transcibing audio: " + error.localizedDescription)
+                print("Error transcibing audio: \(error)")
                 assistant.reset()
             }
         }
