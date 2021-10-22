@@ -10,7 +10,6 @@
 		CE0286C4270EE3A800D81755 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0286C3270EE3A800D81755 /* LogInView.swift */; };
 		CE0286C6270EEC4200D81755 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0286C5270EEC4200D81755 /* SignUpView.swift */; };
 		CE0286CB270F3A9300D81755 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CE0286CA270F3A9300D81755 /* FirebaseAuth */; };
-		CE6337052713EFE2002CBA8C /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6337042713EFE1002CBA8C /* SpeechRecognizer.swift */; };
 		CE66445D26F8D02A00A554FB /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = CE66445C26F8D02A00A554FB /* AlertToast */; };
 		CE6A03A8270451A1001C96E4 /* AudioRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A03A7270451A1001C96E4 /* AudioRecord.swift */; };
 		CE6A03AA270453AC001C96E4 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A03A9270453AC001C96E4 /* FileManager.swift */; };
@@ -38,6 +37,7 @@
 		CE78EF9226FDE6F700547BD0 /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE78EF9126FDE6F700547BD0 /* SwiftyStoreKit */; };
 		CE78EF9426FE46A300547BD0 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78EF9326FE46A300547BD0 /* Store.swift */; };
 		CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE841E7826FC7AD500FE79BF /* Theme.swift */; };
+		CE8D05A92723246E005FF9FB /* SpeechRecogniser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8D05A82723246E005FF9FB /* SpeechRecogniser.swift */; };
 		CE8F83CF270085A700E9E45B /* DisabledAppOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F83CE270085A700E9E45B /* DisabledAppOverlayView.swift */; };
 		CE9D67EC2712C890003FB664 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE9D67EB2712C890003FB664 /* GoogleService-Info.plist */; };
 		CE9F908626FF32BF00F53B02 /* TimeIntervalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F908526FF32BF00F53B02 /* TimeIntervalPickerView.swift */; };
@@ -51,7 +51,6 @@
 /* Begin PBXFileReference section */
 		CE0286C3270EE3A800D81755 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		CE0286C5270EEC4200D81755 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		CE6337042713EFE1002CBA8C /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SpeechRecognizer.swift; path = Handlers/SpeechRecognizer.swift; sourceTree = "<group>"; };
 		CE6A03A7270451A1001C96E4 /* AudioRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecord.swift; sourceTree = "<group>"; };
 		CE6A03A9270453AC001C96E4 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		CE6D71C826F6042D005BDA30 /* AudioRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +77,7 @@
 		CE78EF8F26FDCF1800547BD0 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		CE78EF9326FE46A300547BD0 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		CE841E7826FC7AD500FE79BF /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		CE8D05A82723246E005FF9FB /* SpeechRecogniser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SpeechRecogniser.swift; path = ../../SpeechRecogniser.swift; sourceTree = "<group>"; };
 		CE8F83CE270085A700E9E45B /* DisabledAppOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabledAppOverlayView.swift; sourceTree = "<group>"; };
 		CE9D67EB2712C890003FB664 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE9F908526FF32BF00F53B02 /* TimeIntervalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalPickerView.swift; sourceTree = "<group>"; };
@@ -116,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				CEF2F7BF2719DCBC00E4989D /* AudioRecorder.swift */,
+				CE8D05A82723246E005FF9FB /* SpeechRecogniser.swift */,
 			);
 			name = "Audio Managers";
 			path = "../../../../../.Trash/Audio Managers";
@@ -155,7 +156,6 @@
 				CE78EF8F26FDCF1800547BD0 /* Configuration.storekit */,
 				CE704907270D9DD60045B498 /* Share.swift */,
 				CE6F95F72711CF4000791A41 /* CloudDatabase.swift */,
-				CE6337042713EFE1002CBA8C /* SpeechRecognizer.swift */,
 			);
 			path = AudioRecorder;
 			sourceTree = "<group>";
@@ -333,8 +333,8 @@
 				CE6D71DF26F60988005BDA30 /* RecordsTab.swift in Sources */,
 				CE6D71DB26F60943005BDA30 /* SettingsTab.swift in Sources */,
 				CE9F908626FF32BF00F53B02 /* TimeIntervalPickerView.swift in Sources */,
-				CE6337052713EFE2002CBA8C /* SpeechRecognizer.swift in Sources */,
 				CE773AAB26FB770600EA8284 /* DateExt.swift in Sources */,
+				CE8D05A92723246E005FF9FB /* SpeechRecogniser.swift in Sources */,
 				CE6F95F82711CF4000791A41 /* CloudDatabase.swift in Sources */,
 				CE0286C4270EE3A800D81755 /* LogInView.swift in Sources */,
 				CE704905270D8FE50045B498 /* UrlExt.swift in Sources */,
