@@ -68,9 +68,6 @@ struct MainMenuTab: View {
         .onAppear(perform: {
             initHaptics()
         })
-        .onDisappear() {
-            audioRecorder.stopRecording()
-        }
         .navigationTitle("Аудиорегистратор")
     }
     

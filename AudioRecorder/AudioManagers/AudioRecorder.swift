@@ -5,7 +5,7 @@ import Combine
 import Speech
 
 class AudioRecorder: ObservableObject {
-    let STARTING_RECORD_DURATION_SECONDS: Double = 10 // 60 * 5 // 5 mins
+    let STARTING_RECORD_DURATION_SECONDS: Double = 4 // 60 * 5 // 5 mins
     
     let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
     
@@ -17,6 +17,7 @@ class AudioRecorder: ObservableObject {
     private var autoRestart: DispatchWorkItem?
     
     public var recordings = [AudioRecord]()
+    public static var rawRecordingUrls = [URL]()
     @Published public var recording = false;
     @Published public var soundSamples: [Float] = []
     
@@ -39,6 +40,7 @@ class AudioRecorder: ObservableObject {
         }
         
         let audioFilename = audioDirectory.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
+        AudioRecorder.rawRecordingUrls.append(audioFilename)
         
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -57,17 +59,20 @@ class AudioRecorder: ObservableObject {
             autoRestart = DispatchWorkItem(block: {
                 self.audioRecorder.stop()
                 
-                DispatchQueue.main.async {
-                    self.recognizeSpeech(audioURL: audioFilename) { recognizedText in
-                        if recognizedText.isEmpty {
-                            self.delete(audioUrl: audioFilename)
-                        }
-                        
-                        self.fetchRecordings()
-                    }
-                }
+//                DispatchQueue.main.async {
+//                    SpeechRecogniser.hasSpeech(audioURL: audioFilename) { isSpeechRecognized in
+//                        if !isSpeechRecognized {
+//                            self.deleteRecording(url: audioFilename)
+//                            rawRecordingUrls.removeFirst();
+//                        }
+//
+//                        self.fetchRecordings()
+//                    }
+//                }
                 
                 self.startRecording()
+                
+                print("Audio Recorder was restarted")
             })
             if (autoRestart != nil) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + STARTING_RECORD_DURATION_SECONDS, execute: autoRestart!)
@@ -83,6 +88,8 @@ class AudioRecorder: ObservableObject {
         if !recording {
             return
         }
+        
+        print("Audio Recorder was stopped")
         
         autoRestart?.cancel()
         
@@ -121,14 +128,17 @@ class AudioRecorder: ObservableObject {
         objectWillChange.send(self)
     }
     
-    func deleteRecording(urlsToDelete: [URL]) {
+    func deleteRecordings(urlsToDelete: [URL]) {
         for url in urlsToDelete {
-            do {
-                try FileManager.default.removeItem(at: url)
-                print("deleted")
-            } catch {
-                print("File could not be deleted!")
-            }
+            deleteRecording(url: url)
+        }
+    }
+    func deleteRecording(url: URL) {
+        do {
+            try FileManager.default.removeItem(at: url)
+            print("deleted")
+        } catch {
+            print("File could not be deleted!")
         }
     }
     
@@ -145,34 +155,6 @@ class AudioRecorder: ObservableObject {
     private func stopMonitoring() {
         timer?.invalidate()
     }
-    private func recognizeSpeech(audioURL: URL, onCompleted: @escaping (String) -> Void) {
-        let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "ru-RU"))
-        let request = SFSpeechURLRecognitionRequest(url: audioURL)
-
-        request.shouldReportPartialResults = true
-
-        if (recognizer?.isAvailable)! {
-
-            recognizer?.recognitionTask(with: request) { result, error in
-                guard error == nil else { print("Error: \(error!)"); onCompleted(""); return }
-                guard let result = result else { print("No result!"); onCompleted(""); return }
-
-                print("Transcripted text: " + result.bestTranscription.formattedString)
-                onCompleted(result.bestTranscription.formattedString)
-            }
-        } else {
-            print("Device doesn't support speech recognition")
-        }
-    }
-    private func delete(audioUrl: URL) {
-        do {
-            try FileManager.default.removeItem(at: audioUrl)
-        } catch {
-            print("moveAudioToPersistentDir(): \(error)")
-        }
-    }
-    
-    
     private var audioDirectory: URL {
         FileManager.getDocumentsDirectory().appendingPathComponent("AudioRecords")
     }
