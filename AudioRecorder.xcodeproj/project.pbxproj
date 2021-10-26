@@ -40,7 +40,6 @@
 		CE86461827251A84005068B4 /* SpeechRecogniser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86461727251A84005068B4 /* SpeechRecogniser.swift */; };
 		CE86461A27251AA2005068B4 /* RecordAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86461927251AA2005068B4 /* RecordAssembly.swift */; };
 		CE86461C27251AB4005068B4 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86461B27251AB4005068B4 /* AudioRecorder.swift */; };
-		CE86462127251BB6005068B4 /* EnumDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86462027251BB6005068B4 /* EnumDataConverter.swift */; };
 		CE8F83CF270085A700E9E45B /* DisabledAppOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F83CE270085A700E9E45B /* DisabledAppOverlayView.swift */; };
 		CE9D67EC2712C890003FB664 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE9D67EB2712C890003FB664 /* GoogleService-Info.plist */; };
 		CE9F908626FF32BF00F53B02 /* TimeIntervalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F908526FF32BF00F53B02 /* TimeIntervalPickerView.swift */; };
@@ -82,7 +81,6 @@
 		CE86461727251A84005068B4 /* SpeechRecogniser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecogniser.swift; sourceTree = "<group>"; };
 		CE86461927251AA2005068B4 /* RecordAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAssembly.swift; sourceTree = "<group>"; };
 		CE86461B27251AB4005068B4 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
-		CE86462027251BB6005068B4 /* EnumDataConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumDataConverter.swift; sourceTree = "<group>"; };
 		CE8F83CE270085A700E9E45B /* DisabledAppOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabledAppOverlayView.swift; sourceTree = "<group>"; };
 		CE9D67EB2712C890003FB664 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE9F908526FF32BF00F53B02 /* TimeIntervalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalPickerView.swift; sourceTree = "<group>"; };
@@ -251,7 +249,6 @@
 			isa = PBXGroup;
 			children = (
 				CE841E7826FC7AD500FE79BF /* Theme.swift */,
-				CE86462027251BB6005068B4 /* EnumDataConverter.swift */,
 				CE704907270D9DD60045B498 /* Share.swift */,
 				CE6F95F72711CF4000791A41 /* CloudDatabase.swift */,
 			);
@@ -367,7 +364,6 @@
 				CE7773C526FB93F2000DBBC4 /* PaidCloudPlanView.swift in Sources */,
 				CE7773C326FB93CD000DBBC4 /* FreeCloudPlanView.swift in Sources */,
 				CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */,
-				CE86462127251BB6005068B4 /* EnumDataConverter.swift in Sources */,
 				CE8F83CF270085A700E9E45B /* DisabledAppOverlayView.swift in Sources */,
 				CE773AB226FB874400EA8284 /* CloudStorageChoiceView.swift in Sources */,
 				CE6A03AA270453AC001C96E4 /* FileManager.swift in Sources */,
