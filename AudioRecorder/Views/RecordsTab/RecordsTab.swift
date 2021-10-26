@@ -17,7 +17,9 @@ struct RecordsTab: View {
                 delete(at: IndexSet(0...(audioRecorder.recordings.count - 1)))
             } label: {
                 Label("Delete", systemImage: "trash")
+                    .foregroundColor(Color(UIColor.red))
             }
+            .disabled(audioRecorder.recordings.count <= 0)
             
             ForEach(audioRecorder.recordings.reversed(), id: \.createdAt) { recording in
                 RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: recording.createdAt))
@@ -29,14 +31,6 @@ struct RecordsTab: View {
         })
         .navigationTitle("Аудиозаписи")
         .padding(.top, 1)
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            print("UIApplication.willEnterForegroundNotification")
-                
-            RecordAssembly.Process(audioRecorder: audioRecorder)
-        }
-        .onAppear() {
-            RecordAssembly.Process(audioRecorder: audioRecorder)
-        }
     }
     
     private func delete(at offsets: IndexSet) {

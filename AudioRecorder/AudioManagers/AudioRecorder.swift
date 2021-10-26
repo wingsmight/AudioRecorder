@@ -17,7 +17,7 @@ class AudioRecorder: ObservableObject {
     private var autoRestart: DispatchWorkItem?
     
     public var recordings = [AudioRecord]()
-    public static var rawRecordingUrls = [URL]()
+    @AppStorage("rawRecordingUrls") public static var rawRecordingUrls = [URL]()
     @Published public var recording = false;
     @Published public var soundSamples: [Float] = []
     
@@ -58,17 +58,6 @@ class AudioRecorder: ObservableObject {
             
             autoRestart = DispatchWorkItem(block: {
                 self.audioRecorder.stop()
-                
-//                DispatchQueue.main.async {
-//                    SpeechRecogniser.hasSpeech(audioURL: audioFilename) { isSpeechRecognized in
-//                        if !isSpeechRecognized {
-//                            self.deleteRecording(url: audioFilename)
-//                            rawRecordingUrls.removeFirst();
-//                        }
-//
-//                        self.fetchRecordings()
-//                    }
-//                }
                 
                 self.startRecording()
                 

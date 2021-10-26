@@ -28,9 +28,6 @@ class SpeechRecogniser {
                 
                 guard error == nil else {
                     print("SpeechRecogniser.Error: \(error!)");
-                    //onFound(false);
-                    //recognitionTask.cancel();
-                    //recognitionTask.finish();
 
                     return
                 }

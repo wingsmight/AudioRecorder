@@ -126,6 +126,13 @@ struct ContentView: View {
         }
         .onAppear() {
             makeNavigationBarStretchable(shadowColor: .clear)
+            
+            RecordAssembly.Process(audioRecorder: audioRecorder)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            print("UIApplication.willEnterForegroundNotification")
+                
+            RecordAssembly.Process(audioRecorder: audioRecorder)
         }
 //        .alert(isPresented: $isMicPermissionDenyAlertShowing) {
 //            Alert(

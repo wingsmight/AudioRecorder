@@ -46,6 +46,7 @@
 		CEBF0BEA26FA5D6000C9B906 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBF0BEC26FA5D6000C9B906 /* Localizable.strings */; };
 		CECE0154270CA6FB003906ED /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE0153270CA6FB003906ED /* TimeIntervalExt.swift */; };
 		CED26E12270BEE43007674B8 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED26E11270BEE43007674B8 /* RecordView.swift */; };
+		CED91A2C27287C3B000D21C4 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED91A2B27287C3B000D21C4 /* ArrayExt.swift */; };
 		CEE10440270F3E6D0026492A /* AppAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1043F270F3E6D0026492A /* AppAuth.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		CEBF0BEF26FA5E2E00C9B906 /* ru */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 4; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CECE0153270CA6FB003906ED /* TimeIntervalExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExt.swift; sourceTree = "<group>"; };
 		CED26E11270BEE43007674B8 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		CED91A2B27287C3B000D21C4 /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		CEE1043F270F3E6D0026492A /* AppAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAuth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,6 +195,7 @@
 				CE6A03A9270453AC001C96E4 /* FileManager.swift */,
 				CECE0153270CA6FB003906ED /* TimeIntervalExt.swift */,
 				CE6F963E270FE79000D3E18D /* UIApplicationExt.swift */,
+				CED91A2B27287C3B000D21C4 /* ArrayExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				CE7773C526FB93F2000DBBC4 /* PaidCloudPlanView.swift in Sources */,
 				CE7773C326FB93CD000DBBC4 /* FreeCloudPlanView.swift in Sources */,
 				CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */,
+				CED91A2C27287C3B000D21C4 /* ArrayExt.swift in Sources */,
 				CE8F83CF270085A700E9E45B /* DisabledAppOverlayView.swift in Sources */,
 				CE773AB226FB874400EA8284 /* CloudStorageChoiceView.swift in Sources */,
 				CE6A03AA270453AC001C96E4 /* FileManager.swift in Sources */,
