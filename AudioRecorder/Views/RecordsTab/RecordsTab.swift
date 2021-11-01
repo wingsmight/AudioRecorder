@@ -22,7 +22,9 @@ struct RecordsTab: View {
             .disabled(audioRecorder.recordings.count <= 0)
             
             ForEach(audioRecorder.recordings.reversed(), id: \.createdAt) { recording in
-                RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: recording.createdAt))
+                RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: recording.createdAt)) {
+                    delete(withURL: recording.fileURL)
+                }
             }
             .onDelete(perform: delete)
         }
@@ -33,6 +35,11 @@ struct RecordsTab: View {
         .padding(.top, 1)
     }
     
+    private func delete(withURL url: URL) {
+        var urlsToDelete = [URL]()
+        urlsToDelete.append(url)
+        audioRecorder.deleteRecordings(urlsToDelete: urlsToDelete)
+    }
     private func delete(at offsets: IndexSet) {
         var urlsToDelete = [URL]()
         for index in offsets {

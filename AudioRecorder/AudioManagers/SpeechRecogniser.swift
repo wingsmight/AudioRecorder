@@ -5,17 +5,28 @@ import Combine
 import Speech
 
 class SpeechRecogniser {
+    static var isFound = false
+    
     public static func hasSpeech(audioURL: URL, onFound: @escaping (Bool) -> Void) {
+        isFound = false
+        
         let recogniser = SFSpeechRecognizer(locale: Locale(identifier: "ru-RU"))
         let request = SFSpeechURLRecognitionRequest(url: audioURL)
-
+        
         request.shouldReportPartialResults = false
-
+        
         print("SpeechRecogniser.isAvailable = \(recogniser?.isAvailable)")
         if (recogniser?.isAvailable)! {
-
+            
             var recognitionTask: SFSpeechRecognitionTask!
             recognitionTask = recogniser?.recognitionTask(with: request) { result, error in
+                if isFound {
+                    //recognitionTask.cancel();
+                    //recognitionTask.finish();
+                    
+                    print("RETURN form here mafaka")
+                    return
+                }
                 guard let result = result else {
                     print("SpeechRecogniser.No result!");
                     onFound(false);
@@ -28,7 +39,7 @@ class SpeechRecogniser {
                 
                 guard error == nil else {
                     print("SpeechRecogniser.Error: \(error!)");
-
+                    
                     return
                 }
                 
@@ -39,10 +50,13 @@ class SpeechRecogniser {
                 
                 print("SpeechRecogniser.HasFound \(hasFound)")
                 
-                onFound(hasFound)
-                
                 recognitionTask.cancel()
                 recognitionTask.finish()
+                
+                isFound = true
+
+                onFound(hasFound)
+                print("found")
                 
                 return
             }

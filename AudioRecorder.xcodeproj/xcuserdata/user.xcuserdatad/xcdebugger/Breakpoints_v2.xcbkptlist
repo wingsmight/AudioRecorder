@@ -48,7 +48,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
             endingLineNumber = "29"
-            landmarkName = "init(audioRecord:)"
+            landmarkName = "init(audioRecord:onError:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -62,9 +62,9 @@
             filePath = "AudioRecorder/Views/RecordsTab/RecordView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "init(audioRecord:)"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "init(audioRecord:onError:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -22,13 +22,19 @@ struct RecordView: View {
     private var audioPlayer: AVAudioPlayer!
     
     
-    public init(audioRecord: AudioRecord) {
+    public init(audioRecord: AudioRecord, onError: @escaping () -> ()) {
         self.audioRecord = audioRecord
         
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: audioRecord.fileURL)
         } catch {
+            //Hide
+            onError()
             print("RecordView.int(): \(error)")
+        }
+        
+        if !AudioRecorder.rawRecordingUrls.contains(audioRecord.fileURL) {
+            //onError()
         }
     }
     
@@ -66,9 +72,9 @@ struct RecordView: View {
                 .accentColor(.secondary)
                 
                 HStack {
-                    Text(self.audioPlayer.currentTime.toShortMinitesSecondsFormat() ?? "0:00")
+                    Text(self.audioPlayer?.currentTime.toShortMinitesSecondsFormat() ?? "0:00")
                     Spacer()
-                    Text(self.audioPlayer.duration.toShortMinitesSecondsFormat() ?? "0:00")
+                    Text(self.audioPlayer?.duration.toShortMinitesSecondsFormat() ?? "0:00")
                 }
                 
                 Button {
@@ -90,13 +96,15 @@ struct RecordView: View {
                         }
                         
                         Button {
-                            if self.audioPlayer.isPlaying {
-                                audioPlayer.pause()
-                            } else {
-                                audioPlayer.play()
+                            if (self.audioPlayer != nil) {
+                                if self.audioPlayer.isPlaying {
+                                    audioPlayer.pause()
+                                } else {
+                                    audioPlayer.play()
+                                }
+                                
+                                self.isPlaying = self.audioPlayer.isPlaying
                             }
-                            
-                            self.isPlaying = self.audioPlayer.isPlaying
                         } label: {
                             Image(systemName: self.isPlaying ? "pause.fill" : "play.fill")
                                 .resizable()
@@ -183,7 +191,7 @@ struct RecordView: View {
     }
     func reset() {
         self.sliderValue = 0.0
-        self.audioPlayer.stop()
+        self.audioPlayer?.stop()
         self.isPlaying = false
     }
 }
@@ -192,7 +200,9 @@ struct RecorderView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             List(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                RecordView(audioRecord: AudioRecord(fileURL: URL(fileURLWithPath: "file:///private/var/mobile/Containers/Data/Application/DA11F2D2-0ADC-4F26-9ADD-1A93665807FE/Documents/03-10-21_at_4:54:22%20AM.m4a"), createdAt: Date()))
+                RecordView(audioRecord: AudioRecord(fileURL: URL(fileURLWithPath: "file:///private/var/mobile/Containers/Data/Application/DA11F2D2-0ADC-4F26-9ADD-1A93665807FE/Documents/03-10-21_at_4:54:22%20AM.m4a"), createdAt: Date())) {
+                    
+                }
             }
         }
     }

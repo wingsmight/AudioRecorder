@@ -21,6 +21,7 @@
 		CE6D71DB26F60943005BDA30 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DA26F60943005BDA30 /* SettingsTab.swift */; };
 		CE6D71DD26F60979005BDA30 /* MainMenuTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DC26F60979005BDA30 /* MainMenuTab.swift */; };
 		CE6D71DF26F60988005BDA30 /* RecordsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D71DE26F60988005BDA30 /* RecordsTab.swift */; };
+		CE6DF9B22728F731003F50B2 /* AudioHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DF9B12728F731003F50B2 /* AudioHandler.swift */; };
 		CE6F95F82711CF4000791A41 /* CloudDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F95F72711CF4000791A41 /* CloudDatabase.swift */; };
 		CE6F95FA2711D7AB00791A41 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CE6F95F92711D7AB00791A41 /* FirebaseFirestore */; };
 		CE6F963F270FE79000D3E18D /* UIApplicationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F963E270FE79000D3E18D /* UIApplicationExt.swift */; };
@@ -46,7 +47,9 @@
 		CEBF0BEA26FA5D6000C9B906 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBF0BEC26FA5D6000C9B906 /* Localizable.strings */; };
 		CECE0154270CA6FB003906ED /* TimeIntervalExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE0153270CA6FB003906ED /* TimeIntervalExt.swift */; };
 		CED26E12270BEE43007674B8 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED26E11270BEE43007674B8 /* RecordView.swift */; };
+		CED8D98A27295E3C00D2B8FD /* AudioMerge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED8D98927295E3C00D2B8FD /* AudioMerge.swift */; };
 		CED91A2C27287C3B000D21C4 /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED91A2B27287C3B000D21C4 /* ArrayExt.swift */; };
+		CED91A2E2728891A000D21C4 /* AudioTrim.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED91A2D2728891A000D21C4 /* AudioTrim.swift */; };
 		CEE10440270F3E6D0026492A /* AppAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1043F270F3E6D0026492A /* AppAuth.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +67,7 @@
 		CE6D71DA26F60943005BDA30 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		CE6D71DC26F60979005BDA30 /* MainMenuTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTab.swift; sourceTree = "<group>"; };
 		CE6D71DE26F60988005BDA30 /* RecordsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsTab.swift; sourceTree = "<group>"; };
+		CE6DF9B12728F731003F50B2 /* AudioHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioHandler.swift; path = AudioRecorder/Handlers/AudioHandler.swift; sourceTree = SOURCE_ROOT; };
 		CE6F95F72711CF4000791A41 /* CloudDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudDatabase.swift; sourceTree = "<group>"; };
 		CE6F963E270FE79000D3E18D /* UIApplicationExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExt.swift; sourceTree = "<group>"; };
 		CE6F96422710086000D3E18D /* AuthGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGateView.swift; sourceTree = "<group>"; };
@@ -89,7 +93,9 @@
 		CEBF0BEF26FA5E2E00C9B906 /* ru */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 4; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CECE0153270CA6FB003906ED /* TimeIntervalExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExt.swift; sourceTree = "<group>"; };
 		CED26E11270BEE43007674B8 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		CED8D98927295E3C00D2B8FD /* AudioMerge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMerge.swift; sourceTree = "<group>"; };
 		CED91A2B27287C3B000D21C4 /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
+		CED91A2D2728891A000D21C4 /* AudioTrim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTrim.swift; sourceTree = "<group>"; };
 		CEE1043F270F3E6D0026492A /* AppAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAuth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -244,6 +250,9 @@
 				CE86461727251A84005068B4 /* SpeechRecogniser.swift */,
 				CE86461927251AA2005068B4 /* RecordAssembly.swift */,
 				CE86461B27251AB4005068B4 /* AudioRecorder.swift */,
+				CED91A2D2728891A000D21C4 /* AudioTrim.swift */,
+				CE6DF9B12728F731003F50B2 /* AudioHandler.swift */,
+				CED8D98927295E3C00D2B8FD /* AudioMerge.swift */,
 			);
 			path = AudioManagers;
 			sourceTree = "<group>";
@@ -351,16 +360,19 @@
 				CE6F95F82711CF4000791A41 /* CloudDatabase.swift in Sources */,
 				CE0286C4270EE3A800D81755 /* LogInView.swift in Sources */,
 				CE704905270D8FE50045B498 /* UrlExt.swift in Sources */,
+				CE6DF9B22728F731003F50B2 /* AudioHandler.swift in Sources */,
 				CE773AA726FB65FA00EA8284 /* User.swift in Sources */,
 				CE86461A27251AA2005068B4 /* RecordAssembly.swift in Sources */,
 				CE0286C6270EEC4200D81755 /* SignUpView.swift in Sources */,
 				CE86461C27251AB4005068B4 /* AudioRecorder.swift in Sources */,
+				CED8D98A27295E3C00D2B8FD /* AudioMerge.swift in Sources */,
 				CE773AB026FB7A4600EA8284 /* AppInfoView.swift in Sources */,
 				CE6F96432710086000D3E18D /* AuthGateView.swift in Sources */,
 				CECE0154270CA6FB003906ED /* TimeIntervalExt.swift in Sources */,
 				CE6D71DD26F60979005BDA30 /* MainMenuTab.swift in Sources */,
 				CEE10440270F3E6D0026492A /* AppAuth.swift in Sources */,
 				CE7525D626FF80A1003DA83E /* ViewExt.swift in Sources */,
+				CED91A2E2728891A000D21C4 /* AudioTrim.swift in Sources */,
 				CE6D71CE26F6042D005BDA30 /* ContentView.swift in Sources */,
 				CE78EF9426FE46A300547BD0 /* Store.swift in Sources */,
 				CED26E12270BEE43007674B8 /* RecordView.swift in Sources */,

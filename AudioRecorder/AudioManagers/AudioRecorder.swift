@@ -5,7 +5,7 @@ import Combine
 import Speech
 
 class AudioRecorder: ObservableObject {
-    let STARTING_RECORD_DURATION_SECONDS: Double = 4 // 60 * 5 // 5 mins
+    let STARTING_RECORD_DURATION_SECONDS: Double = 11 // 60 * 5 // 5 mins
     
     let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
     
@@ -17,12 +17,20 @@ class AudioRecorder: ObservableObject {
     private var autoRestart: DispatchWorkItem?
     
     public var recordings = [AudioRecord]()
-    @AppStorage("rawRecordingUrls") public static var rawRecordingUrls = [URL]()
+    let directoryContents = try! FileManager.default.contentsOfDirectory(at: FileManager.getDocumentsDirectory().appendingPathComponent("AudioRecords"), includingPropertiesForKeys: nil)
+    /*@AppStorage("rawRecordingUrls") */public static var rawRecordingUrls = [URL]()
     @Published public var recording = false;
     @Published public var soundSamples: [Float] = []
     
     
     public init(numberOfSamples: Int = 3) {
+        AudioRecorder.rawRecordingUrls = [
+            directoryContents[0],
+            directoryContents[1],
+            directoryContents[2],
+            directoryContents[3]
+        ]
+        
         self.numberOfSamples = numberOfSamples
         self.soundSamples = [Float](repeating: .zero, count: self.numberOfSamples)
         
@@ -124,10 +132,10 @@ class AudioRecorder: ObservableObject {
     }
     func deleteRecording(url: URL) {
         do {
-            try FileManager.default.removeItem(at: url)
-            print("deleted")
+            //try FileManager.default.removeItem(at: url)
+            print("\(url) was deleted")
         } catch {
-            print("File could not be deleted!")
+            print("\(url) File could not be deleted!")
         }
     }
     
