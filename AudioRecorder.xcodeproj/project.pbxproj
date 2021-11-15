@@ -38,9 +38,15 @@
 		CE78EF9226FDE6F700547BD0 /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE78EF9126FDE6F700547BD0 /* SwiftyStoreKit */; };
 		CE78EF9426FE46A300547BD0 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78EF9326FE46A300547BD0 /* Store.swift */; };
 		CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE841E7826FC7AD500FE79BF /* Theme.swift */; };
-		CE86461827251A84005068B4 /* SpeechRecogniser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86461727251A84005068B4 /* SpeechRecogniser.swift */; };
-		CE86461A27251AA2005068B4 /* RecordAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86461927251AA2005068B4 /* RecordAssembly.swift */; };
 		CE86461C27251AB4005068B4 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86461B27251AB4005068B4 /* AudioRecorder.swift */; };
+		CE8F4A8227429B90002ADDFA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F4A8127429B8F002ADDFA /* Accelerate.framework */; };
+		CE8F4A8827429D39002ADDFA /* SpeechDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F4A8327429D39002ADDFA /* SpeechDetection.swift */; };
+		CE8F4A8A27429D39002ADDFA /* Vosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F4A8627429D39002ADDFA /* Vosk.swift */; };
+		CE8F4A8B27429D39002ADDFA /* VoskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F4A8727429D39002ADDFA /* VoskModel.swift */; };
+		CE8F4AB727429D5B002ADDFA /* libkaldiwrap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F4A9627429D5A002ADDFA /* libkaldiwrap.a */; };
+		CE8F4AFF2742D1BE002ADDFA /* vosk-model-small-en-us-0.15 in Resources */ = {isa = PBXBuildFile; fileRef = CE8F4AFE2742D1BE002ADDFA /* vosk-model-small-en-us-0.15 */; };
+		CE8F4B012742D1E1002ADDFA /* vosk-model-spk-0.4 in Resources */ = {isa = PBXBuildFile; fileRef = CE8F4B002742D1E1002ADDFA /* vosk-model-spk-0.4 */; };
+		CE8F4B032742F3AF002ADDFA /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F4B022742F3AF002ADDFA /* StringExt.swift */; };
 		CE8F83CF270085A700E9E45B /* DisabledAppOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F83CE270085A700E9E45B /* DisabledAppOverlayView.swift */; };
 		CE9D67EC2712C890003FB664 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE9D67EB2712C890003FB664 /* GoogleService-Info.plist */; };
 		CE9F908626FF32BF00F53B02 /* TimeIntervalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F908526FF32BF00F53B02 /* TimeIntervalPickerView.swift */; };
@@ -83,9 +89,17 @@
 		CE78EF8F26FDCF1800547BD0 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		CE78EF9326FE46A300547BD0 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		CE841E7826FC7AD500FE79BF /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		CE86461727251A84005068B4 /* SpeechRecogniser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecogniser.swift; sourceTree = "<group>"; };
-		CE86461927251AA2005068B4 /* RecordAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAssembly.swift; sourceTree = "<group>"; };
 		CE86461B27251AB4005068B4 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		CE8F4A8127429B8F002ADDFA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		CE8F4A8327429D39002ADDFA /* SpeechDetection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechDetection.swift; sourceTree = "<group>"; };
+		CE8F4A8527429D39002ADDFA /* bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bridging.h; sourceTree = "<group>"; };
+		CE8F4A8627429D39002ADDFA /* Vosk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vosk.swift; sourceTree = "<group>"; };
+		CE8F4A8727429D39002ADDFA /* VoskModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoskModel.swift; sourceTree = "<group>"; };
+		CE8F4A9527429D5A002ADDFA /* vosk_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vosk_api.h; sourceTree = "<group>"; };
+		CE8F4A9627429D5A002ADDFA /* libkaldiwrap.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libkaldiwrap.a; sourceTree = "<group>"; };
+		CE8F4AFE2742D1BE002ADDFA /* vosk-model-small-en-us-0.15 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "vosk-model-small-en-us-0.15"; sourceTree = "<group>"; };
+		CE8F4B002742D1E1002ADDFA /* vosk-model-spk-0.4 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "vosk-model-spk-0.4"; sourceTree = "<group>"; };
+		CE8F4B022742F3AF002ADDFA /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		CE8F83CE270085A700E9E45B /* DisabledAppOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabledAppOverlayView.swift; sourceTree = "<group>"; };
 		CE9D67EB2712C890003FB664 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE9F908526FF32BF00F53B02 /* TimeIntervalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalPickerView.swift; sourceTree = "<group>"; };
@@ -105,8 +119,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE78EF9226FDE6F700547BD0 /* SwiftyStoreKit in Frameworks */,
+				CE8F4AB727429D5B002ADDFA /* libkaldiwrap.a in Frameworks */,
 				CE6F95FA2711D7AB00791A41 /* FirebaseFirestore in Frameworks */,
 				CE0286CB270F3A9300D81755 /* FirebaseAuth in Frameworks */,
+				CE8F4A8227429B90002ADDFA /* Accelerate.framework in Frameworks */,
 				CE6A0AA52713D54800F39B36 /* FirebaseStorage in Frameworks */,
 				CE66445D26F8D02A00A554FB /* AlertToast in Frameworks */,
 			);
@@ -118,6 +134,7 @@
 		CE12A22126FCE8770042AEE8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE8F4A8127429B8F002ADDFA /* Accelerate.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -142,6 +159,8 @@
 		CE6D71CA26F6042D005BDA30 /* AudioRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				CE8F4A8C27429D5A002ADDFA /* Vosk */,
+				CE8F4A8527429D39002ADDFA /* bridging.h */,
 				CE86461627251A5E005068B4 /* AudioManagers */,
 				CE9D67EB2712C890003FB664 /* GoogleService-Info.plist */,
 				CE773AA926FB76EA00EA8284 /* Extensions */,
@@ -202,6 +221,7 @@
 				CECE0153270CA6FB003906ED /* TimeIntervalExt.swift */,
 				CE6F963E270FE79000D3E18D /* UIApplicationExt.swift */,
 				CED91A2B27287C3B000D21C4 /* ArrayExt.swift */,
+				CE8F4B022742F3AF002ADDFA /* StringExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -247,8 +267,7 @@
 		CE86461627251A5E005068B4 /* AudioManagers */ = {
 			isa = PBXGroup;
 			children = (
-				CE86461727251A84005068B4 /* SpeechRecogniser.swift */,
-				CE86461927251AA2005068B4 /* RecordAssembly.swift */,
+				CE8F4A8327429D39002ADDFA /* SpeechDetection.swift */,
 				CE86461B27251AB4005068B4 /* AudioRecorder.swift */,
 				CED91A2D2728891A000D21C4 /* AudioTrim.swift */,
 				CE6DF9B12728F731003F50B2 /* AudioHandler.swift */,
@@ -265,6 +284,19 @@
 				CE6F95F72711CF4000791A41 /* CloudDatabase.swift */,
 			);
 			path = Handlers;
+			sourceTree = "<group>";
+		};
+		CE8F4A8C27429D5A002ADDFA /* Vosk */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F4B002742D1E1002ADDFA /* vosk-model-spk-0.4 */,
+				CE8F4AFE2742D1BE002ADDFA /* vosk-model-small-en-us-0.15 */,
+				CE8F4A9527429D5A002ADDFA /* vosk_api.h */,
+				CE8F4A9627429D5A002ADDFA /* libkaldiwrap.a */,
+				CE8F4A8627429D39002ADDFA /* Vosk.swift */,
+				CE8F4A8727429D39002ADDFA /* VoskModel.swift */,
+			);
+			path = Vosk;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,6 +371,8 @@
 			files = (
 				CE6D71D326F60430005BDA30 /* Preview Assets.xcassets in Resources */,
 				CE9D67EC2712C890003FB664 /* GoogleService-Info.plist in Resources */,
+				CE8F4AFF2742D1BE002ADDFA /* vosk-model-small-en-us-0.15 in Resources */,
+				CE8F4B012742D1E1002ADDFA /* vosk-model-spk-0.4 in Resources */,
 				CEBF0BEA26FA5D6000C9B906 /* Localizable.strings in Resources */,
 				CE6D71D026F60430005BDA30 /* Assets.xcassets in Resources */,
 			);
@@ -352,7 +386,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE704908270D9DD60045B498 /* Share.swift in Sources */,
-				CE86461827251A84005068B4 /* SpeechRecogniser.swift in Sources */,
 				CE6D71DF26F60988005BDA30 /* RecordsTab.swift in Sources */,
 				CE6D71DB26F60943005BDA30 /* SettingsTab.swift in Sources */,
 				CE9F908626FF32BF00F53B02 /* TimeIntervalPickerView.swift in Sources */,
@@ -362,8 +395,9 @@
 				CE704905270D8FE50045B498 /* UrlExt.swift in Sources */,
 				CE6DF9B22728F731003F50B2 /* AudioHandler.swift in Sources */,
 				CE773AA726FB65FA00EA8284 /* User.swift in Sources */,
-				CE86461A27251AA2005068B4 /* RecordAssembly.swift in Sources */,
 				CE0286C6270EEC4200D81755 /* SignUpView.swift in Sources */,
+				CE8F4A8A27429D39002ADDFA /* Vosk.swift in Sources */,
+				CE8F4A8B27429D39002ADDFA /* VoskModel.swift in Sources */,
 				CE86461C27251AB4005068B4 /* AudioRecorder.swift in Sources */,
 				CED8D98A27295E3C00D2B8FD /* AudioMerge.swift in Sources */,
 				CE773AB026FB7A4600EA8284 /* AppInfoView.swift in Sources */,
@@ -380,7 +414,9 @@
 				CE7773C326FB93CD000DBBC4 /* FreeCloudPlanView.swift in Sources */,
 				CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */,
 				CED91A2C27287C3B000D21C4 /* ArrayExt.swift in Sources */,
+				CE8F4B032742F3AF002ADDFA /* StringExt.swift in Sources */,
 				CE8F83CF270085A700E9E45B /* DisabledAppOverlayView.swift in Sources */,
+				CE8F4A8827429D39002ADDFA /* SpeechDetection.swift in Sources */,
 				CE773AB226FB874400EA8284 /* CloudStorageChoiceView.swift in Sources */,
 				CE6A03AA270453AC001C96E4 /* FileManager.swift in Sources */,
 				CE6F963F270FE79000D3E18D /* UIApplicationExt.swift in Sources */,
@@ -527,20 +563,32 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"AudioRecorder/Preview Content\"";
 				DEVELOPMENT_TEAM = D86YAFJU4P;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)/AudioRecorder/Vosk/**",
+				);
 				INFOPLIST_FILE = AudioRecorder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AudioRecorder/Vosk/**",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wingsmight.AudioRecorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/AudioRecorder/bridging.h";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -551,20 +599,32 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"AudioRecorder/Preview Content\"";
 				DEVELOPMENT_TEAM = D86YAFJU4P;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)/AudioRecorder/Vosk/**",
+				);
 				INFOPLIST_FILE = AudioRecorder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AudioRecorder/Vosk/**",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wingsmight.AudioRecorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/AudioRecorder/bridging.h";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

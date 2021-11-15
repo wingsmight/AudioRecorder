@@ -13,36 +13,23 @@ import AVKit
 struct RecordView: View {
     var audioRecord: AudioRecord
     
+    @Binding var audioPlayer: AVAudioPlayer!
+    
     
     @State private var sliderValue: Float = 0.0
     @State private var isExpanded: Bool = false
     @State private var isSliderEditing: Bool = false
     @State private var isPlaying: Bool = false
-    
-    private var audioPlayer: AVAudioPlayer!
-    
-    
-    public init(audioRecord: AudioRecord, onError: @escaping () -> ()) {
-        self.audioRecord = audioRecord
-        
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: audioRecord.fileURL)
-        } catch {
-            //Hide
-            onError()
-            print("RecordView.int(): \(error)")
-        }
-        
-        if !AudioRecorder.rawRecordingUrls.contains(audioRecord.fileURL) {
-            //onError()
-        }
-    }
-    
+
     
     var body: some View {
         VStack {
             Button {
                 self.isExpanded.toggle()
+                
+                if isExpanded {
+                    audioPlayer = try! AVAudioPlayer(contentsOf: audioRecord.fileURL)
+                }
                 
                 reset()
             } label: {
@@ -197,12 +184,12 @@ struct RecordView: View {
 }
 
 struct RecorderView_Previews: PreviewProvider {
+    private static let testFilePath = "file:///private/var/mobile/Containers/Data/Application/DA11F2D2-0ADC-4F26-9ADD-1A93665807FE/Documents/03-10-21_at_4:54:22%20AM.m4a"
+    
     static var previews: some View {
         VStack {
             List(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                RecordView(audioRecord: AudioRecord(fileURL: URL(fileURLWithPath: "file:///private/var/mobile/Containers/Data/Application/DA11F2D2-0ADC-4F26-9ADD-1A93665807FE/Documents/03-10-21_at_4:54:22%20AM.m4a"), createdAt: Date())) {
-                    
-                }
+                RecordView(audioRecord: AudioRecord(fileURL: URL(fileURLWithPath: testFilePath), createdAt: Date()), audioPlayer: .constant(try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: testFilePath))))
             }
         }
     }

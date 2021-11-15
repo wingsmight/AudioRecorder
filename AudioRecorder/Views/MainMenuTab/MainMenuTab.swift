@@ -21,6 +21,8 @@ struct MainMenuTab: View {
     
     @State private var lastSpeechDate : Date = Date()
     
+    private var speechDetection = SpeechDetection()
+    
     
     var body: some View {
         VStack {
@@ -44,8 +46,16 @@ struct MainMenuTab: View {
                     
                     if !isRecording {
                         audioRecorder.stopRecording()
+                        
+                        speechDetection.stopAudioEngine()
                     } else {
-                        audioRecorder.startRecording()
+                        speechDetection.startAudioEngine { recognizedText in
+                            if !audioRecorder.recording {
+                                audioRecorder.startRecording()
+                            } else {
+                                audioRecorder.resetAutoStop()
+                            }
+                        }
                     }
                     
                     vibrate(intensity: 0.7, sharpness: 0.7)

@@ -14,23 +14,15 @@ class AudioRecorder: ObservableObject {
     private var timer: Timer?
     private var currentSample: Int = 0
     private var audioRecorder: AVAudioRecorder!
-    private var autoRestart: DispatchWorkItem?
+    private var autoStop: DispatchWorkItem?
     
     public var recordings = [AudioRecord]()
     let directoryContents = try! FileManager.default.contentsOfDirectory(at: FileManager.getDocumentsDirectory().appendingPathComponent("AudioRecords"), includingPropertiesForKeys: nil)
-    /*@AppStorage("rawRecordingUrls") */public static var rawRecordingUrls = [URL]()
     @Published public var recording = false;
     @Published public var soundSamples: [Float] = []
     
     
     public init(numberOfSamples: Int = 3) {
-        AudioRecorder.rawRecordingUrls = [
-            directoryContents[0],
-            directoryContents[1],
-            directoryContents[2],
-            directoryContents[3]
-        ]
-        
         self.numberOfSamples = numberOfSamples
         self.soundSamples = [Float](repeating: .zero, count: self.numberOfSamples)
         
@@ -48,7 +40,6 @@ class AudioRecorder: ObservableObject {
         }
         
         let audioFilename = audioDirectory.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
-        AudioRecorder.rawRecordingUrls.append(audioFilename)
         
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -64,16 +55,7 @@ class AudioRecorder: ObservableObject {
             
             startMonitoring()
             
-            autoRestart = DispatchWorkItem(block: {
-                self.audioRecorder.stop()
-                
-                self.startRecording()
-                
-                print("Audio Recorder was restarted")
-            })
-            if (autoRestart != nil) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + STARTING_RECORD_DURATION_SECONDS, execute: autoRestart!)
-            }
+            resetAutoStop()
             
             recording = true
         } catch {
@@ -81,14 +63,24 @@ class AudioRecorder: ObservableObject {
         }
     }
     
+    func resetAutoStop() {
+        autoStop?.cancel()
+        autoStop = DispatchWorkItem(block: {
+            self.audioRecorder.stop()
+            
+            print("Audio Recorder was auto stoped")
+        })
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + STARTING_RECORD_DURATION_SECONDS, execute: autoStop!)
+    }
     func stopRecording() {
         if !recording {
             return
         }
         
-        print("Audio Recorder was stopped")
+        print("Audio Recorder was manually stopped")
         
-        autoRestart?.cancel()
+        autoStop?.cancel()
         
         audioRecorder.stop()
         
@@ -108,8 +100,6 @@ class AudioRecorder: ObservableObject {
         if !fileManager.fileExists(atPath: audioDirectory.path, isDirectory: &isDir) {
             do {
                 try fileManager.createDirectory(atPath: audioDirectory.path, withIntermediateDirectories: true, attributes: nil)
-                
-                print(fileManager.fileExists(atPath: audioDirectory.path, isDirectory: &isDir))
             } catch {
                 print("fetchRecordings(): \(error)")
             }
@@ -120,7 +110,7 @@ class AudioRecorder: ObservableObject {
             recordings.append(recording)
         }
         
-        recordings.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedAscending})
+        recordings.sort(by: { $1.createdAt.compare($0.createdAt) == .orderedAscending})
         
         objectWillChange.send(self)
     }
@@ -132,7 +122,7 @@ class AudioRecorder: ObservableObject {
     }
     func deleteRecording(url: URL) {
         do {
-            //try FileManager.default.removeItem(at: url)
+            try FileManager.default.removeItem(at: url)
             print("\(url) was deleted")
         } catch {
             print("\(url) File could not be deleted!")

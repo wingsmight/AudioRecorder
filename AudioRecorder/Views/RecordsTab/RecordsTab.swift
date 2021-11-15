@@ -11,6 +11,8 @@ import AVKit
 struct RecordsTab: View {
     @ObservedObject var audioRecorder: AudioRecorder
     
+    @State private var audioPlayer: AVAudioPlayer! // = try AVAudioPlayer(contentsOf: audioRecord.fileURL)
+    
     var body: some View {
         List {
             Button {
@@ -21,10 +23,8 @@ struct RecordsTab: View {
             }
             .disabled(audioRecorder.recordings.count <= 0)
             
-            ForEach(audioRecorder.recordings.reversed(), id: \.createdAt) { recording in
-                RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: recording.createdAt)) {
-                    delete(withURL: recording.fileURL)
-                }
+            ForEach(audioRecorder.recordings, id: \.createdAt) { recording in
+                RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: recording.createdAt), audioPlayer: self.$audioPlayer)
             }
             .onDelete(perform: delete)
         }
