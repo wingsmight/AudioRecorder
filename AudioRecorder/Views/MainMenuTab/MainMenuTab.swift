@@ -12,17 +12,19 @@ import Speech
 
 
 struct MainMenuTab: View {
-    @State var isRecordingToastShowing = false
-    @StateObject var audioRecorder = AudioRecorder()
+    @Binding public var audioRecorder: AudioRecorder
     
+    @State private var isRecordingToastShowing = false
     @State private var playTapEngine: CHHapticEngine?
     @State private var transcript = ""
     @State private var isRecording = false
     
-    @State private var lastSpeechDate : Date = Date()
-    
     private var speechDetection = SpeechDetection()
     
+    
+    init(audioRecorder: Binding<AudioRecorder>) {
+        self._audioRecorder = audioRecorder
+    }
     
     var body: some View {
         VStack {
@@ -116,6 +118,6 @@ struct MainMenuTab: View {
 
 struct MainMenuTab_Previews: PreviewProvider {
     static var previews: some View {
-        MainMenuTab()
+        MainMenuTab(audioRecorder: .constant(AudioRecorder()))
     }
 }

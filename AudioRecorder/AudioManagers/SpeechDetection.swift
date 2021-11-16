@@ -55,7 +55,7 @@ class SpeechDetection {
     }
     
     func stopAudioEngine() {
-        audioEngine.stop()
+        audioEngine?.stop()
     }
     
     func runRecognizeFile(fileURL: URL) {

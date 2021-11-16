@@ -11,7 +11,7 @@ import AVFoundation
 import AVKit
 
 struct RecordView: View {
-    var audioRecord: AudioRecord
+    @ObservedObject var audioRecord: AudioRecord
     
     @Binding var audioPlayer: AVAudioPlayer!
     
@@ -189,7 +189,7 @@ struct RecorderView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             List(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                RecordView(audioRecord: AudioRecord(fileURL: URL(fileURLWithPath: testFilePath), createdAt: Date()), audioPlayer: .constant(try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: testFilePath))))
+                RecordView(audioRecord: AudioRecord(id: item, fileURL: URL(fileURLWithPath: testFilePath), createdAt: Date()), audioPlayer: .constant(try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: testFilePath))))
             }
         }
     }

@@ -5,9 +5,9 @@ import Combine
 import Speech
 
 class AudioRecorder: ObservableObject {
-    let STARTING_RECORD_DURATION_SECONDS: Double = 11 // 60 * 5 // 5 mins
+    let STARTING_RECORD_DURATION_SECONDS: Double = 11 // 60 * 3 // 3 mins
     
-    let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
+    //let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
     
     private let audioSession = AVAudioSession.sharedInstance()
     private var numberOfSamples: Int
@@ -16,7 +16,7 @@ class AudioRecorder: ObservableObject {
     private var audioRecorder: AVAudioRecorder!
     private var autoStop: DispatchWorkItem?
     
-    public var recordings = [AudioRecord]()
+    @Published public var recordings: [AudioRecord]
     let directoryContents = try! FileManager.default.contentsOfDirectory(at: FileManager.getDocumentsDirectory().appendingPathComponent("AudioRecords"), includingPropertiesForKeys: nil)
     @Published public var recording = false;
     @Published public var soundSamples: [Float] = []
@@ -25,6 +25,7 @@ class AudioRecorder: ObservableObject {
     public init(numberOfSamples: Int = 3) {
         self.numberOfSamples = numberOfSamples
         self.soundSamples = [Float](repeating: .zero, count: self.numberOfSamples)
+        self.recordings = []
         
         fetchRecordings()
     }
@@ -105,14 +106,17 @@ class AudioRecorder: ObservableObject {
             }
         }
         let directoryContents = try! fileManager.contentsOfDirectory(at: audioDirectory, includingPropertiesForKeys: nil)
+        var id = 0
         for audio in directoryContents {
-            let recording = AudioRecord(fileURL: audio, createdAt: FileManager.getCreationDate(for: audio))
+            let recording = AudioRecord(id: id, fileURL: audio, createdAt: FileManager.getCreationDate(for: audio))
             recordings.append(recording)
+            
+            id += 1
         }
         
         recordings.sort(by: { $1.createdAt.compare($0.createdAt) == .orderedAscending})
         
-        objectWillChange.send(self)
+        objectWillChange.send()
     }
     
     func deleteRecordings(urlsToDelete: [URL]) {
@@ -136,7 +140,7 @@ class AudioRecorder: ObservableObject {
             self.soundSamples[self.currentSample] = Float(max(0.2, CGFloat(level) + 50) / 50.0)
             self.currentSample = (self.currentSample + 1) % self.numberOfSamples
             
-            self.objectWillChange.send(self)
+            self.objectWillChange.send()
         })
     }
     private func stopMonitoring() {

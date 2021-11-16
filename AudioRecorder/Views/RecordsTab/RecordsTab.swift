@@ -9,26 +9,40 @@ import SwiftUI
 import AVKit
 
 struct RecordsTab: View {
-    @ObservedObject var audioRecorder: AudioRecorder
+    @Binding var audioRecorder: AudioRecorder
+    @Binding public var recordings: [AudioRecord]
     
-    @State private var audioPlayer: AVAudioPlayer! // = try AVAudioPlayer(contentsOf: audioRecord.fileURL)
+    @State private var audioPlayer: AVAudioPlayer!
+    
+    
+    init(audioRecorder: Binding<AudioRecorder>, recordings: Binding<[AudioRecord]>) {
+        self._audioRecorder = audioRecorder
+        self._recordings = recordings
+    }
     
     var body: some View {
         List {
             Button {
-                delete(at: IndexSet(0...(audioRecorder.recordings.count - 1)))
+                audioRecorder.objectWillChange.send()
+            } label: {
+                Label("Update", systemImage: "heart.fill")
+                    .foregroundColor(Color(UIColor.blue))
+            }
+            
+            Button {
+                delete(at: IndexSet(0...(recordings.count - 1)))
             } label: {
                 Label("Delete", systemImage: "trash")
                     .foregroundColor(Color(UIColor.red))
             }
-            .disabled(audioRecorder.recordings.count <= 0)
+            .disabled(recordings.count <= 0)
             
-            ForEach(audioRecorder.recordings, id: \.createdAt) { recording in
-                RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: recording.createdAt), audioPlayer: self.$audioPlayer)
+            ForEach(recordings, id: \.createdAt) { recording in
+                RecordView(audioRecord: AudioRecord(id: recording.id, fileURL: recording.fileURL, createdAt: recording.createdAt), audioPlayer: self.$audioPlayer)
             }
             .onDelete(perform: delete)
         }
-        .onChange(of: audioRecorder.recordings, perform: { newValue in
+        .onChange(of: recordings, perform: { newValue in
             print("new value = \(newValue.count)")
         })
         .navigationTitle("Аудиозаписи")
@@ -43,7 +57,7 @@ struct RecordsTab: View {
     private func delete(at offsets: IndexSet) {
         var urlsToDelete = [URL]()
         for index in offsets {
-            urlsToDelete.append(audioRecorder.recordings[index].fileURL)
+            urlsToDelete.append(recordings[index].fileURL)
         }
         audioRecorder.deleteRecordings(urlsToDelete: urlsToDelete)
     }
@@ -52,6 +66,6 @@ struct RecordsTab: View {
 
 struct RecordsTab_Previews: PreviewProvider {
     static var previews: some View {
-        RecordsTab(audioRecorder: AudioRecorder())
+        RecordsTab(audioRecorder: .constant(AudioRecorder()), recordings: .constant([AudioRecord]()))
     }
 }
