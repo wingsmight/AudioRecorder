@@ -35,7 +35,7 @@ class AudioRecorder: ObservableObject {
     func startRecording() {
         do {
             try audioSession.setAllowHapticsAndSystemSoundsDuringRecording(true)
-            try audioSession.setCategory(.record, mode: .default, options: .mixWithOthers)
+            try audioSession.setCategory(.playAndRecord, mode: .default, options: .mixWithOthers)
             try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
             print("Failed to set up recording session")
