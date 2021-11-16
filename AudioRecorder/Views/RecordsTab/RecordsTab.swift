@@ -35,6 +35,10 @@ struct RecordsTab: View {
         for index in offsets {
             urlsToDelete.append(recordings[index].fileURL)
         }
+        let indexToDelete = offsets.last!
+        for _ in 1...offsets.count {
+            recordings.remove(at: indexToDelete)
+        }
         AudioRecorder.deleteRecordings(urlsToDelete: urlsToDelete)
     }
 }
