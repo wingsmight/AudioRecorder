@@ -5,9 +5,8 @@ import Combine
 import Speech
 
 class AudioRecorder: ObservableObject {
-    let STARTING_RECORD_DURATION_SECONDS: Double = 11 // 60 * 3 // 3 mins
-    
-    //let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
+    let MAX_SILENCE_DURATION_SECONDS: Double = 11
+    let LIMIT_RECORD_DURATION_SECONDS: Double = 60 * 3 // 3 mins
     
     private let audioSession = AVAudioSession.sharedInstance()
     private var numberOfSamples: Int
@@ -56,6 +55,13 @@ class AudioRecorder: ObservableObject {
             
             startMonitoring()
             
+            let stopAtLimit = DispatchWorkItem(block: {
+                self.audioRecorder.stop()
+                
+                print("Audio Recorder was stoped at limit")
+            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + LIMIT_RECORD_DURATION_SECONDS, execute: stopAtLimit)
+            
             resetAutoStop()
             
             recording = true
@@ -72,7 +78,7 @@ class AudioRecorder: ObservableObject {
             print("Audio Recorder was auto stoped")
         })
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + STARTING_RECORD_DURATION_SECONDS, execute: autoStop!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + MAX_SILENCE_DURATION_SECONDS, execute: autoStop!)
     }
     func stopRecording() {
         if !recording {
