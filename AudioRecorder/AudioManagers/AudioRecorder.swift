@@ -106,12 +106,9 @@ class AudioRecorder: ObservableObject {
             }
         }
         let directoryContents = try! fileManager.contentsOfDirectory(at: audioDirectory, includingPropertiesForKeys: nil)
-        var id = 0
         for audio in directoryContents {
-            let recording = AudioRecord(id: id, fileURL: audio, createdAt: FileManager.getCreationDate(for: audio))
+            let recording = AudioRecord(fileURL: audio, createdAt: FileManager.getCreationDate(for: audio))
             recordings.append(recording)
-            
-            id += 1
         }
         
         recordings.sort(by: { $1.createdAt.compare($0.createdAt) == .orderedAscending})

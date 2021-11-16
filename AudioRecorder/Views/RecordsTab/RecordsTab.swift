@@ -38,13 +38,10 @@ struct RecordsTab: View {
             .disabled(recordings.count <= 0)
             
             ForEach(recordings, id: \.createdAt) { recording in
-                RecordView(audioRecord: AudioRecord(id: recording.id, fileURL: recording.fileURL, createdAt: recording.createdAt), audioPlayer: self.$audioPlayer)
+                RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: recording.createdAt), audioPlayer: self.$audioPlayer)
             }
             .onDelete(perform: delete)
         }
-        .onChange(of: recordings, perform: { newValue in
-            print("new value = \(newValue.count)")
-        })
         .navigationTitle("Аудиозаписи")
         .padding(.top, 1)
     }

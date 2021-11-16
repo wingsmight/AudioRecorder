@@ -7,18 +7,12 @@
 
 import Foundation
 
-class AudioRecord: ObservableObject, Equatable, Identifiable {
-    var id: Int
+class AudioRecord: ObservableObject {
     var fileURL: URL
     var createdAt: Date
     
-    init(id: Int, fileURL: URL, createdAt: Date){
-        self.id = id
+    init(fileURL: URL, createdAt: Date){
         self.fileURL = fileURL
         self.createdAt = createdAt
-    }
-    
-    static func == (lhs: AudioRecord, rhs: AudioRecord) -> Bool {
-        lhs.id == rhs.id
     }
 }
