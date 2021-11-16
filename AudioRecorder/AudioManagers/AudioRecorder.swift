@@ -133,12 +133,12 @@ class AudioRecorder: ObservableObject {
         recordings.sort(by: { $1.createdAt.compare($0.createdAt) == .orderedAscending})
     }
     
-    func deleteRecordings(urlsToDelete: [URL]) {
+    public static func deleteRecordings(urlsToDelete: [URL]) {
         for url in urlsToDelete {
             deleteRecording(url: url)
         }
     }
-    func deleteRecording(url: URL) {
+    public static func deleteRecording(url: URL) {
         do {
             try FileManager.default.removeItem(at: url)
             print("\(url) was deleted")

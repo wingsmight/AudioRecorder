@@ -16,14 +16,6 @@ struct RecordsTab: View {
 
     var body: some View {
         List {
-            Button {
-                delete(at: IndexSet(0...(recordings.count - 1)))
-            } label: {
-                Label("Delete", systemImage: "trash")
-                    .foregroundColor(Color(UIColor.red))
-            }
-            .disabled(recordings.count <= 0)
-            
             ForEach(recordings, id: \.createdAt) { recording in
                 RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: recording.createdAt), audioPlayer: self.$audioPlayer)
             }
@@ -36,14 +28,14 @@ struct RecordsTab: View {
     private func delete(withURL url: URL) {
         var urlsToDelete = [URL]()
         urlsToDelete.append(url)
-        //audioRecorder.deleteRecordings(urlsToDelete: urlsToDelete)
+        AudioRecorder.deleteRecording(url: url)
     }
     private func delete(at offsets: IndexSet) {
         var urlsToDelete = [URL]()
         for index in offsets {
             urlsToDelete.append(recordings[index].fileURL)
         }
-        //audioRecorder.deleteRecordings(urlsToDelete: urlsToDelete)
+        AudioRecorder.deleteRecordings(urlsToDelete: urlsToDelete)
     }
 }
 
