@@ -59,7 +59,9 @@ func uploadRecord(currentUserId: String, audio: URL, completion: @escaping (Resu
     let metadata = StorageMetadata()
     metadata.contentType = "audio/m4a"
     
-    ref.putData(audio.dataRepresentation , metadata: metadata) { (metadata, error) in
+    guard let audioData = try? Data(contentsOf: audio) else { return }
+    
+    ref.putData(audioData , metadata: metadata) { (metadata, error) in
         guard let _ = metadata else {
             completion(.failure(error!))
             return
