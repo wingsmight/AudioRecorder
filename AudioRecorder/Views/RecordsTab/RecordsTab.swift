@@ -9,17 +9,11 @@ import SwiftUI
 import AVKit
 
 struct RecordsTab: View {
-    var audioRecorder: AudioRecorder
-    @Binding public var recordings: [AudioRecord]
+    @AppStorage("recordings") private var recordings: [AudioRecord] = []
     
     @State private var audioPlayer: AVAudioPlayer!
     
-    
-    init(audioRecorder: AudioRecorder, recordings: Binding<[AudioRecord]>) {
-        self.audioRecorder = audioRecorder
-        self._recordings = recordings
-    }
-    
+
     var body: some View {
         List {
             Button {
@@ -42,20 +36,20 @@ struct RecordsTab: View {
     private func delete(withURL url: URL) {
         var urlsToDelete = [URL]()
         urlsToDelete.append(url)
-        audioRecorder.deleteRecordings(urlsToDelete: urlsToDelete)
+        //audioRecorder.deleteRecordings(urlsToDelete: urlsToDelete)
     }
     private func delete(at offsets: IndexSet) {
         var urlsToDelete = [URL]()
         for index in offsets {
             urlsToDelete.append(recordings[index].fileURL)
         }
-        audioRecorder.deleteRecordings(urlsToDelete: urlsToDelete)
+        //audioRecorder.deleteRecordings(urlsToDelete: urlsToDelete)
     }
 }
 
 
 struct RecordsTab_Previews: PreviewProvider {
     static var previews: some View {
-        RecordsTab(audioRecorder: AudioRecorder(), recordings: .constant([AudioRecord]()))
+        RecordsTab()
     }
 }

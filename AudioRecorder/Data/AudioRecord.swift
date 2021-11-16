@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AudioRecord: ObservableObject {
+struct AudioRecord: Codable {
     var fileURL: URL
     var createdAt: Date
     

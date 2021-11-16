@@ -11,7 +11,7 @@ import AVFoundation
 import AVKit
 
 struct RecordView: View {
-    @ObservedObject var audioRecord: AudioRecord
+    var audioRecord: AudioRecord
     
     @Binding var audioPlayer: AVAudioPlayer!
     

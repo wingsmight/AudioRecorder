@@ -12,9 +12,7 @@ import Speech
 
 
 struct MainMenuTab: View {
-    public var audioRecorder: AudioRecorder
-    @Binding public var soundSamples: [Float]
-    
+    @StateObject private var audioRecorder = AudioRecorder()
     @State private var isRecordingToastShowing = false
     @State private var playTapEngine: CHHapticEngine?
     @State private var transcript = ""
@@ -22,11 +20,6 @@ struct MainMenuTab: View {
     
     private var speechDetection = SpeechDetection()
     
-    
-    init(audioRecorder: AudioRecorder, soundSamples: Binding<[Float]>) {
-        self.audioRecorder = audioRecorder
-        self._soundSamples = soundSamples
-    }
     
     var body: some View {
         VStack {
@@ -36,12 +29,12 @@ struct MainMenuTab: View {
                         .fill(Color.green)
                         .shadow(radius: 3)
                         .opacity(0.333)
-                        .frame(width: 110 * CGFloat(1 + 0.95 * soundSamples[2]), height: (100 + (isRecording ? 10 : 0)) * CGFloat(1 + 0.95 * soundSamples[2]))
+                        .frame(width: 110 * CGFloat(1 + 0.95 * audioRecorder.soundSamples[2]), height: (100 + (isRecording ? 10 : 0)) * CGFloat(1 + 0.95 * audioRecorder.soundSamples[2]))
                     Circle()
                         .fill(Color.green)
                         .shadow(radius: 3)
                         .opacity(0.333)
-                        .frame(width: 105 * CGFloat(1 + 0.6 * soundSamples[0]), height: (100 + (isRecording ? 5 : 0)) * CGFloat(1 + 0.6 * soundSamples[0]))
+                        .frame(width: 105 * CGFloat(1 + 0.6 * audioRecorder.soundSamples[0]), height: (100 + (isRecording ? 5 : 0)) * CGFloat(1 + 0.6 * audioRecorder.soundSamples[0]))
                 }
                 
                 Button(action: {
@@ -120,6 +113,6 @@ struct MainMenuTab: View {
 
 struct MainMenuTab_Previews: PreviewProvider {
     static var previews: some View {
-        MainMenuTab(audioRecorder: AudioRecorder(), soundSamples: .constant([0, 0, 0]))
+        MainMenuTab()
     }
 }

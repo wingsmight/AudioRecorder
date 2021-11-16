@@ -16,8 +16,9 @@ class AudioRecorder: ObservableObject {
     private var autoStop: DispatchWorkItem?
     private var stopAtLimit: DispatchWorkItem?
     
-    @Published public var recordings: [AudioRecord]
-    let directoryContents = try! FileManager.default.contentsOfDirectory(at: FileManager.getDocumentsDirectory().appendingPathComponent("AudioRecords"), includingPropertiesForKeys: nil)
+    @AppStorage("recordings") private var recordings: [AudioRecord] = []
+    private let directoryContents = try! FileManager.default.contentsOfDirectory(at: FileManager.getDocumentsDirectory().appendingPathComponent("AudioRecords"), includingPropertiesForKeys: nil)
+    
     @Published public var recording = false;
     @Published public var soundSamples: [Float] = []
     
@@ -93,13 +94,11 @@ class AudioRecorder: ObservableObject {
         
         audioRecorder.stop()
         
-        stopMonitoring()
-        
-        try! audioSession.setCategory(.playback, mode: .default, options: AVAudioSession.CategoryOptions.mixWithOthers)
-        
         fetchRecordings()
         
         recording = false
+        
+        stopMonitoring()
         
         let lastAudioRecord: AudioRecord! = recordings.first
         uploadRecord(currentUserId: AppAuth().currentUser!.uid, audio: lastAudioRecord.fileURL) { (result) in
@@ -132,8 +131,6 @@ class AudioRecorder: ObservableObject {
         }
         
         recordings.sort(by: { $1.createdAt.compare($0.createdAt) == .orderedAscending})
-        
-        objectWillChange.send()
     }
     
     func deleteRecordings(urlsToDelete: [URL]) {

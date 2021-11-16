@@ -57,7 +57,6 @@ struct ContentView: View {
     @State private var isRecordingToastShowing : Bool = false
     @State private var isRecording : Bool = false
     @State private var isMicPermissionDenyAlertShowing = false
-    @StateObject private var audioRecorder = AudioRecorder(numberOfSamples: 3)
     
     
     private var tabs = [
@@ -78,14 +77,14 @@ struct ContentView: View {
                 }
                 .tag(0)
                 NavigationView {
-                    MainMenuTab(audioRecorder: self.audioRecorder, soundSamples: self.$audioRecorder.soundSamples)
+                    MainMenuTab()
                 }
                 .tabItem {
                     Text("")
                 }
                 .tag(1)
                 NavigationView {
-                    RecordsTab(audioRecorder: self.audioRecorder, recordings: self.$audioRecorder.recordings)
+                    RecordsTab()
                 }
                 .tabItem {
                     Text("")
