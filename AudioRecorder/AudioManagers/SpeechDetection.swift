@@ -40,6 +40,7 @@ class SpeechDetection {
                                         DispatchQueue.main.async {
                                             let result = self.getText(fromResult: res)
                                             if !result.isEmpty {
+                                                print("speech was detected: \(result)")
                                                 onDetected(result)
                                             }
                                         }

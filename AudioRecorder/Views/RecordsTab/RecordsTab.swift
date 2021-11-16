@@ -9,26 +9,19 @@ import SwiftUI
 import AVKit
 
 struct RecordsTab: View {
-    @Binding var audioRecorder: AudioRecorder
+    var audioRecorder: AudioRecorder
     @Binding public var recordings: [AudioRecord]
     
     @State private var audioPlayer: AVAudioPlayer!
     
     
-    init(audioRecorder: Binding<AudioRecorder>, recordings: Binding<[AudioRecord]>) {
-        self._audioRecorder = audioRecorder
+    init(audioRecorder: AudioRecorder, recordings: Binding<[AudioRecord]>) {
+        self.audioRecorder = audioRecorder
         self._recordings = recordings
     }
     
     var body: some View {
         List {
-            Button {
-                audioRecorder.objectWillChange.send()
-            } label: {
-                Label("Update", systemImage: "heart.fill")
-                    .foregroundColor(Color(UIColor.blue))
-            }
-            
             Button {
                 delete(at: IndexSet(0...(recordings.count - 1)))
             } label: {
@@ -63,6 +56,6 @@ struct RecordsTab: View {
 
 struct RecordsTab_Previews: PreviewProvider {
     static var previews: some View {
-        RecordsTab(audioRecorder: .constant(AudioRecorder()), recordings: .constant([AudioRecord]()))
+        RecordsTab(audioRecorder: AudioRecorder(), recordings: .constant([AudioRecord]()))
     }
 }

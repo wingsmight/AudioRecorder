@@ -5,7 +5,7 @@ import Combine
 import Speech
 
 class AudioRecorder: ObservableObject {
-    let MAX_SILENCE_DURATION_SECONDS: Double = 11
+    let MAX_SILENCE_DURATION_SECONDS: Double = 10
     let LIMIT_RECORD_DURATION_SECONDS: Double = 60 * 3 // 3 mins
     
     private let audioSession = AVAudioSession.sharedInstance()
@@ -14,6 +14,7 @@ class AudioRecorder: ObservableObject {
     private var currentSample: Int = 0
     private var audioRecorder: AVAudioRecorder!
     private var autoStop: DispatchWorkItem?
+    private var stopAtLimit: DispatchWorkItem?
     
     @Published public var recordings: [AudioRecord]
     let directoryContents = try! FileManager.default.contentsOfDirectory(at: FileManager.getDocumentsDirectory().appendingPathComponent("AudioRecords"), includingPropertiesForKeys: nil)
@@ -55,12 +56,12 @@ class AudioRecorder: ObservableObject {
             
             startMonitoring()
             
-            let stopAtLimit = DispatchWorkItem(block: {
-                self.audioRecorder.stop()
-                
+            stopAtLimit = DispatchWorkItem(block: {
                 print("Audio Recorder was stoped at limit")
+                
+                self.stopRecording()
             })
-            DispatchQueue.main.asyncAfter(deadline: .now() + LIMIT_RECORD_DURATION_SECONDS, execute: stopAtLimit)
+            DispatchQueue.main.asyncAfter(deadline: .now() + LIMIT_RECORD_DURATION_SECONDS, execute: stopAtLimit!)
             
             resetAutoStop()
             
@@ -73,9 +74,9 @@ class AudioRecorder: ObservableObject {
     func resetAutoStop() {
         autoStop?.cancel()
         autoStop = DispatchWorkItem(block: {
-            self.audioRecorder.stop()
-            
             print("Audio Recorder was auto stoped")
+            
+            self.stopRecording()
         })
         
         DispatchQueue.main.asyncAfter(deadline: .now() + MAX_SILENCE_DURATION_SECONDS, execute: autoStop!)
@@ -88,6 +89,7 @@ class AudioRecorder: ObservableObject {
         print("Audio Recorder was manually stopped")
         
         autoStop?.cancel()
+        stopAtLimit?.cancel()
         
         audioRecorder.stop()
         
@@ -98,6 +100,18 @@ class AudioRecorder: ObservableObject {
         fetchRecordings()
         
         recording = false
+        
+        let lastAudioRecord: AudioRecord! = recordings.first
+        uploadRecord(currentUserId: AppAuth().currentUser!.uid, audio: lastAudioRecord.fileURL) { (result) in
+            switch result {
+            case .success(_):
+                print("Audio Record was uploaded successfully")
+                break
+            case .failure(_):
+                print("Audio Record was not uploaded")
+                break
+            }
+        }
     }
     func fetchRecordings() {
         recordings.removeAll()
@@ -142,8 +156,6 @@ class AudioRecorder: ObservableObject {
             let level = self.audioRecorder.averagePower(forChannel: 0)
             self.soundSamples[self.currentSample] = Float(max(0.2, CGFloat(level) + 50) / 50.0)
             self.currentSample = (self.currentSample + 1) % self.numberOfSamples
-            
-            self.objectWillChange.send()
         })
     }
     private func stopMonitoring() {

@@ -12,7 +12,8 @@ import Speech
 
 
 struct MainMenuTab: View {
-    @Binding public var audioRecorder: AudioRecorder
+    public var audioRecorder: AudioRecorder
+    @Binding public var soundSamples: [Float]
     
     @State private var isRecordingToastShowing = false
     @State private var playTapEngine: CHHapticEngine?
@@ -22,8 +23,9 @@ struct MainMenuTab: View {
     private var speechDetection = SpeechDetection()
     
     
-    init(audioRecorder: Binding<AudioRecorder>) {
-        self._audioRecorder = audioRecorder
+    init(audioRecorder: AudioRecorder, soundSamples: Binding<[Float]>) {
+        self.audioRecorder = audioRecorder
+        self._soundSamples = soundSamples
     }
     
     var body: some View {
@@ -34,12 +36,12 @@ struct MainMenuTab: View {
                         .fill(Color.green)
                         .shadow(radius: 3)
                         .opacity(0.333)
-                        .frame(width: 110 * CGFloat(1 + 0.95 * audioRecorder.soundSamples[2]), height: (100 + (isRecording ? 10 : 0)) * CGFloat(1 + 0.95 * audioRecorder.soundSamples[2]))
+                        .frame(width: 110 * CGFloat(1 + 0.95 * soundSamples[2]), height: (100 + (isRecording ? 10 : 0)) * CGFloat(1 + 0.95 * soundSamples[2]))
                     Circle()
                         .fill(Color.green)
                         .shadow(radius: 3)
                         .opacity(0.333)
-                        .frame(width: 105 * CGFloat(1 + 0.6 * audioRecorder.soundSamples[0]), height: (100 + (isRecording ? 5 : 0)) * CGFloat(1 + 0.6 * audioRecorder.soundSamples[0]))
+                        .frame(width: 105 * CGFloat(1 + 0.6 * soundSamples[0]), height: (100 + (isRecording ? 5 : 0)) * CGFloat(1 + 0.6 * soundSamples[0]))
                 }
                 
                 Button(action: {
@@ -118,6 +120,6 @@ struct MainMenuTab: View {
 
 struct MainMenuTab_Previews: PreviewProvider {
     static var previews: some View {
-        MainMenuTab(audioRecorder: .constant(AudioRecorder()))
+        MainMenuTab(audioRecorder: AudioRecorder(), soundSamples: .constant([0, 0, 0]))
     }
 }
