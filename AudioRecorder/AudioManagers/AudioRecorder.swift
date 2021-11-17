@@ -6,7 +6,7 @@ import Speech
 
 class AudioRecorder: ObservableObject {
     let MAX_SILENCE_DURATION_SECONDS: Double = 10
-    let LIMIT_RECORD_DURATION_SECONDS: Double = 60 * 3 // 3 mins
+    let LIMIT_RECORD_DURATION_SECONDS: Double = 10 * 3 // 3 mins
     
     private let audioSession = AVAudioSession.sharedInstance()
     private var numberOfSamples: Int
@@ -17,8 +17,6 @@ class AudioRecorder: ObservableObject {
     private var stopAtLimit: DispatchWorkItem?
     
     @AppStorage("recordings") private var recordings: [AudioRecord] = []
-    private let directoryContents = try! FileManager.default.contentsOfDirectory(at: FileManager.getDocumentsDirectory().appendingPathComponent("AudioRecords"), includingPropertiesForKeys: nil)
-    
     @Published public var recording = false;
     @Published public var soundSamples: [Float] = []
     

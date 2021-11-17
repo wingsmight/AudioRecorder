@@ -57,6 +57,7 @@ struct ContentView: View {
     @State private var isRecordingToastShowing : Bool = false
     @State private var isRecording : Bool = false
     @State private var isMicPermissionDenyAlertShowing = false
+    @State private var isMicGranted = false
     
     
     private var tabs = [
@@ -91,7 +92,7 @@ struct ContentView: View {
                 }
                 .tag(2)
             }
-            //.blur(radius: AVCaptureDevice.authorizationStatus(for: .audio) == AVAuthorizationStatus.authorized ? 0 : 10)
+            .blur(radius: (AVCaptureDevice.authorizationStatus(for: .audio) == AVAuthorizationStatus.authorized || self.isMicGranted) ? 0 : 10)
             .toast(isPresenting: $isRecordingToastShowing, duration: 1.25, tapToDismiss: false, offsetY: -40, alert: {
                 AlertToast(displayMode: .banner(.slide), type: .regular, title: "Приложение запущено")
             })
@@ -117,28 +118,44 @@ struct ContentView: View {
                     }
                 }
             }
-            //.blur(radius: AVCaptureDevice.authorizationStatus(for: .audio) == AVAuthorizationStatus.authorized ? 0 : 10)
-//            if AVCaptureDevice.authorizationStatus(for: .audio) != AVAuthorizationStatus.authorized {
-//                DisabledAppOverlayView()
-//                    .ignoresSafeArea(.all)
-//            }
+            .blur(radius: (AVCaptureDevice.authorizationStatus(for: .audio) == AVAuthorizationStatus.authorized || self.isMicGranted) ? 0 : 10)
+            if AVCaptureDevice.authorizationStatus(for: .audio) != AVAuthorizationStatus.authorized {
+                DisabledAppOverlayView()
+                    .ignoresSafeArea(.all)
+            }
         }
         .onAppear() {
             makeNavigationBarStretchable(shadowColor: .clear)
+            
+            if AVCaptureDevice.authorizationStatus(for: .audio) != AVAuthorizationStatus.authorized {
+                AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                    if granted {
+                        self.isMicGranted = true
+                        // The user granted access. Present recording interface.
+                    } else {
+                        self.isMicGranted = false
+                        // Present message to user indicating that recording
+                        // can't be performed until they change their preference
+                        // under Settings -> Privacy -> Microphone
+                    }
+                }
+            } else {
+                self.isMicGranted = true
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             print("UIApplication.willEnterForegroundNotification")
         }
-//        .alert(isPresented: $isMicPermissionDenyAlertShowing) {
-//            Alert(
-//                title: Text("Предоставьте доступ"),
-//                message: Text("Приложение не может работать без доступа к микрофону!"),
-//                dismissButton: .default(Text("OK"), action: {
-//                    if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
-//                        UIApplication.shared.open(settingsUrl)
-//                    }
-//            }))
-//        }
+        .alert(isPresented: $isMicPermissionDenyAlertShowing) {
+            Alert(
+                title: Text("Предоставьте доступ"),
+                message: Text("Приложение не может работать без доступа к микрофону!"),
+                dismissButton: .default(Text("OK"), action: {
+                    if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(settingsUrl)
+                    }
+            }))
+        }
     }
 }
 
