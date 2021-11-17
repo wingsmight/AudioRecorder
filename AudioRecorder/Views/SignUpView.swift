@@ -85,6 +85,7 @@ struct SignUpView: View {
                 .padding(.vertical, 8)
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
+                .textContentType(.newPassword)
                 
                 Text(errorMessage)
                     .foregroundColor(.red)

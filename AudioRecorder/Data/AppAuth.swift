@@ -56,11 +56,9 @@ class AppAuth: ObservableObject {
         }
     }
     func signOut() {
-        if self.signedIn {
-            try? auth.signOut()
+        try? auth.signOut()
             
-            self.signedIn = false
-        }
+        self.signedIn = false
     }
     
     public static func localizeAuthError(_ errorCode: AuthErrorCode) -> String {

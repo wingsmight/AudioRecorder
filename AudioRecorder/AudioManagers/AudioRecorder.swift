@@ -6,7 +6,7 @@ import Speech
 
 class AudioRecorder: ObservableObject {
     let MAX_SILENCE_DURATION_SECONDS: Double = 10
-    let LIMIT_RECORD_DURATION_SECONDS: Double = 10 * 3 // 3 mins
+    let LIMIT_RECORD_DURATION_SECONDS: Double = 60 * 3 // 3 mins
     
     private let audioSession = AVAudioSession.sharedInstance()
     private var numberOfSamples: Int

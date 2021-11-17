@@ -101,7 +101,7 @@ func addData(user: User) {
                                                  "facebookProfileUrl": user.facebookProfileUrl,
                                                  "phoneNumber": user.phoneNumber]) { error in
         if error != nil {
-            
+            print(#function, error)
         } else {
             
         }
