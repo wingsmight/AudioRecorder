@@ -12,12 +12,13 @@ struct RecordsTab: View {
     @AppStorage("recordings") private var recordings: [AudioRecord] = []
     
     @State private var audioPlayer: AVAudioPlayer!
+    @State private var expandedChildName: String = ""
     
 
     var body: some View {
         List {
             ForEach(recordings, id: \.createdAt) { recording in
-                RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: recording.createdAt), audioPlayer: self.$audioPlayer)
+                RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: recording.createdAt), expandedRecord: $expandedChildName, audioPlayer: self.$audioPlayer)
             }
             .onDelete(perform: delete)
         }

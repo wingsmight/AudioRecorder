@@ -11,24 +11,46 @@ import AVFoundation
 import AVKit
 
 struct RecordView: View {
-    var audioRecord: AudioRecord
-    
-    @Binding var audioPlayer: AVAudioPlayer!
-    
+    public var audioRecord: AudioRecord
+    @Binding public var expandedRecord: String
+    @Binding public var audioPlayer: AVAudioPlayer!
     
     @State private var sliderValue: Float = 0.0
-    @State private var isExpanded: Bool = false
     @State private var isSliderEditing: Bool = false
     @State private var isPlaying: Bool = false
+    
+    @State var scrubState: PlayerScrubState = .reset {
+            didSet {
+                switch scrubState {
+                case .reset:
+                    return
+                case .scrubStarted:
+                    return
+                case .scrubEnded(let seekTime):
+                    self.audioPlayer.currentTime = TimeInterval((Double(sliderValue) / 100.0) * self.audioPlayer.duration)
+                    if !self.audioPlayer.isPlaying {
+                        audioPlayer.play()
+                    }
+                    self.isPlaying = self.audioPlayer.isPlaying
+                    
+                    return
+                }
+            }
+        }
 
+    private var isExpanded: Bool {
+        set { expandedRecord = newValue ? audioRecord.fileURL.path : "" }
+        get { return expandedRecord == audioRecord.fileURL.path }
+    }
     
     var body: some View {
         VStack {
             Button {
-                self.isExpanded.toggle()
+                expandedRecord = isExpanded ? "" : audioRecord.fileURL.path
                 
                 if isExpanded {
-                    audioPlayer = try! AVAudioPlayer(contentsOf: audioRecord.fileURL)
+                    // TODO: process ERROR!
+                    self.audioPlayer = try! AVAudioPlayer(contentsOf: audioRecord.fileURL)
                 }
                 
                 reset()
@@ -49,19 +71,21 @@ struct RecordView: View {
             .foregroundColor(.primary)
             
             if isExpanded {
-                Slider(value: $sliderValue, in: 0.0...100.0) { isEditing in
-                    if isEditing {
-                        self.audioPlayer.currentTime = TimeInterval((Double(sliderValue) / 100.0) * self.audioPlayer.duration)
-                    }
+                Slider(value: $sliderValue, in: 0.0...100.0) { isScrubStarted in
+                    if isScrubStarted {
+                         self.scrubState = .scrubStarted
+                      } else {
+                         self.scrubState = .scrubEnded(self.audioPlayer.currentTime)
+                      }
                     
-                    isSliderEditing = isEditing
+                    isSliderEditing = isScrubStarted
                 }
                 .accentColor(.secondary)
                 
                 HStack {
-                    Text(self.audioPlayer?.currentTime.toShortMinitesSecondsFormat() ?? "0:00")
+                    Text(self.audioPlayer.currentTime.toShortMinitesSecondsFormat() ?? "0:00")
                     Spacer()
-                    Text(self.audioPlayer?.duration.toShortMinitesSecondsFormat() ?? "0:00")
+                    Text(self.audioPlayer.duration.toShortMinitesSecondsFormat() ?? "0:00")
                 }
                 
                 Button {
@@ -70,6 +94,7 @@ struct RecordView: View {
                     HStack {
                         Spacer()
                         
+                        // backward button
                         Button {
                             audioPlayer.currentTime -= 15
                             
@@ -82,6 +107,7 @@ struct RecordView: View {
                                 .frame(width: 28, height: 28)
                         }
                         
+                        // play/pause button
                         Button {
                             if (self.audioPlayer != nil) {
                                 if self.audioPlayer.isPlaying {
@@ -100,6 +126,7 @@ struct RecordView: View {
                                 .padding()
                         }
                         
+                        // forward button
                         Button {
                             let newTime = audioPlayer.currentTime + 15
                             if newTime >= audioPlayer.duration {
@@ -132,6 +159,7 @@ struct RecordView: View {
                     
                     Spacer()
                     
+                    // share button
                     Button(action: {
                         share(items: [audioRecord.fileURL])
                     }) {
@@ -148,7 +176,7 @@ struct RecordView: View {
         }
         .onAppear() {
             Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
-                if self.audioPlayer != nil && self.audioPlayer.isPlaying && !isSliderEditing {
+                if self.audioPlayer != nil && !isSliderEditing {
                     updateSlider()
                 }
             }
@@ -157,6 +185,12 @@ struct RecordView: View {
     
     func updateSlider() {
         self.sliderValue = Float(self.audioPlayer.currentTime / self.audioPlayer.duration) * 100.0
+
+        if !audioPlayer.isPlaying && 100.0 - self.sliderValue < 1.0 {
+            self.sliderValue = 0.0
+        }
+
+        self.isPlaying = self.audioPlayer.isPlaying
     }
     func reset() {
         self.sliderValue = 0.0
@@ -171,7 +205,7 @@ struct RecorderView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             List(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                RecordView(audioRecord: AudioRecord(fileURL: URL(fileURLWithPath: testFilePath), createdAt: Date()), audioPlayer: .constant(try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: testFilePath))))
+                RecordView(audioRecord: AudioRecord(fileURL: URL(fileURLWithPath: testFilePath), createdAt: Date()), expandedRecord: .constant(""), audioPlayer: .constant(try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: testFilePath))))
             }
         }
     }

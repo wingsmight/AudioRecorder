@@ -22,6 +22,8 @@ class AudioRecorder: ObservableObject {
     @Published public var recording = false;
     @Published public var soundSamples: [Float] = []
     
+    public static var isRecording: Bool = false
+    
     
     public init(numberOfSamples: Int = 3) {
         self.numberOfSamples = numberOfSamples
@@ -34,9 +36,9 @@ class AudioRecorder: ObservableObject {
     
     func startRecording() {
         do {
-            try audioSession.setAllowHapticsAndSystemSoundsDuringRecording(true)
-            try audioSession.setCategory(.playAndRecord, mode: .default, options: .mixWithOthers)
-            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+            try! AVAudioSession.sharedInstance().setAllowHapticsAndSystemSoundsDuringRecording(true)
+            try! AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: [.defaultToSpeaker, .mixWithOthers])
+            try! AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
             print("Failed to set up recording session")
         }
@@ -67,6 +69,7 @@ class AudioRecorder: ObservableObject {
             resetAutoStop()
             
             recording = true
+            AudioRecorder.isRecording = recording
         } catch {
             print("Could not start recording")
         }
@@ -97,6 +100,7 @@ class AudioRecorder: ObservableObject {
         fetchRecordings()
         
         recording = false
+        AudioRecorder.isRecording = recording
         
         stopMonitoring()
         

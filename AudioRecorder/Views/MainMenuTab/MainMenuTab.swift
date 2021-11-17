@@ -43,7 +43,6 @@ struct MainMenuTab: View {
                     
                     if !isRecording {
                         audioRecorder.stopRecording()
-                        
                         speechDetection.stopAudioEngine()
                     } else {
                         speechDetection.startAudioEngine { recognizedText in
