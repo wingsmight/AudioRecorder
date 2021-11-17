@@ -76,6 +76,7 @@
 		CE6D71DC26F60979005BDA30 /* MainMenuTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTab.swift; sourceTree = "<group>"; };
 		CE6D71DE26F60988005BDA30 /* RecordsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsTab.swift; sourceTree = "<group>"; };
 		CE6DDB3D274530200096EEBE /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		CE6DDB412745AD0F0096EEBE /* AudioRecorder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AudioRecorder.entitlements; sourceTree = "<group>"; };
 		CE6DF9B12728F731003F50B2 /* AudioHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioHandler.swift; path = AudioRecorder/Handlers/AudioHandler.swift; sourceTree = SOURCE_ROOT; };
 		CE6F95F72711CF4000791A41 /* CloudDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudDatabase.swift; sourceTree = "<group>"; };
 		CE6F963E270FE79000D3E18D /* UIApplicationExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExt.swift; sourceTree = "<group>"; };
@@ -161,6 +162,7 @@
 		CE6D71CA26F6042D005BDA30 /* AudioRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				CE6DDB412745AD0F0096EEBE /* AudioRecorder.entitlements */,
 				CE8F4A8C27429D5A002ADDFA /* Vosk */,
 				CE8F4A8527429D39002ADDFA /* bridging.h */,
 				CE86461627251A5E005068B4 /* AudioManagers */,
@@ -568,10 +570,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_ENTITLEMENTS = AudioRecorder/AudioRecorder.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"AudioRecorder/Preview Content\"";
-				DEVELOPMENT_TEAM = D86YAFJU4P;
+				DEVELOPMENT_TEAM = C9M7M3PL3X;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				HEADER_SEARCH_PATHS = (
@@ -588,7 +592,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/AudioRecorder/Vosk/**",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wingsmight.AudioRecorder;
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wingsmight.AudioRecorderApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/AudioRecorder/bridging.h";
@@ -604,10 +609,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_ENTITLEMENTS = AudioRecorder/AudioRecorder.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"AudioRecorder/Preview Content\"";
-				DEVELOPMENT_TEAM = D86YAFJU4P;
+				DEVELOPMENT_TEAM = C9M7M3PL3X;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				HEADER_SEARCH_PATHS = (
@@ -624,7 +631,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/AudioRecorder/Vosk/**",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wingsmight.AudioRecorder;
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wingsmight.AudioRecorderApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/AudioRecorder/bridging.h";
