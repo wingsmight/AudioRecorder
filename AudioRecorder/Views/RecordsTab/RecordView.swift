@@ -50,7 +50,11 @@ struct RecordView: View {
                 
                 if isExpanded {
                     // TODO: process ERROR!
-                    self.audioPlayer = try! AVAudioPlayer(contentsOf: audioRecord.fileURL)
+                    do {
+                        self.audioPlayer = try AVAudioPlayer(contentsOf: audioRecord.fileURL)
+                    } catch {
+                        
+                    }
                 }
                 
                 reset()
@@ -172,6 +176,13 @@ struct RecordView: View {
                     .buttonStyle(PlainButtonStyle())
                 }
                 .padding(.vertical, 4)
+            }
+        }
+        .onChange(of: expandedRecord) { newValue in
+            // if new record is playing
+            if newValue != audioRecord.fileURL.path {
+                self.audioPlayer.stop()
+                self.isPlaying = false
             }
         }
         .onAppear() {

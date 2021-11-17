@@ -31,10 +31,7 @@ class AudioRecorder: ObservableObject {
         self.recordings = []
         
         fetchRecordings()
-    }
-    
-    
-    func startRecording() {
+        
         do {
             try! AVAudioSession.sharedInstance().setAllowHapticsAndSystemSoundsDuringRecording(true)
             try! AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: [.defaultToSpeaker, .mixWithOthers])
@@ -42,7 +39,10 @@ class AudioRecorder: ObservableObject {
         } catch {
             print("Failed to set up recording session")
         }
-        
+    }
+    
+    
+    func startRecording() {
         let audioFilename = audioDirectory.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
         
         let settings = [
