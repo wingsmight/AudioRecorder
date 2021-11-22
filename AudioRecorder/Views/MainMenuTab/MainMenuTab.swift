@@ -17,12 +17,15 @@ struct MainMenuTab: View {
     @State private var playTapEngine: CHHapticEngine?
     @State private var transcript = ""
     @State private var isRecording = false
+    @StateObject private var stopwatch = Stopwatch()
     
     private var speechDetection = SpeechDetection()
     
     
     var body: some View {
         VStack {
+            Spacer()
+            Spacer()
             ZStack {
                 if audioRecorder.recording {
                     Circle()
@@ -54,6 +57,8 @@ struct MainMenuTab: View {
                         }
                     }
                     
+                    stopwatch.startOrStop()
+                    
                     vibrate(intensity: 0.7, sharpness: 0.7)
                 }) {
                     Image(systemName: self.isRecording ? "stop.fill" : "play.fill")
@@ -69,7 +74,18 @@ struct MainMenuTab: View {
                         vibrate(intensity: 0.7, sharpness: 0.1)
                     }
                 }, perform: { })
+                
+                VStack {
+                    Spacer()
+                    Spacer()
+                    if audioRecorder.recording {
+                        TimeView(time: stopwatch.elapsedTime, textColor: .secondary, fontSize: 60, fontWeight: .thin)
+                            .frame(height: 80)
+                    }
+                    Spacer()
+                }
             }
+            Spacer()
         }
         .onAppear(perform: {
             initHaptics()

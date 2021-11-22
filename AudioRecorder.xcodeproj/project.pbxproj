@@ -11,6 +11,11 @@
 		CE0286C6270EEC4200D81755 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0286C5270EEC4200D81755 /* SignUpView.swift */; };
 		CE0286CB270F3A9300D81755 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CE0286CA270F3A9300D81755 /* FirebaseAuth */; };
 		CE30ED9727443AA30073C243 /* vosk-model-small-ru-0.22 in Resources */ = {isa = PBXBuildFile; fileRef = CE30ED9627443AA30073C243 /* vosk-model-small-ru-0.22 */; };
+		CE62BEB4274B6923007D0CA8 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE62BEB3274B6923007D0CA8 /* Stopwatch.swift */; };
+		CE62BEB6274B6947007D0CA8 /* LapTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE62BEB5274B6947007D0CA8 /* LapTime.swift */; };
+		CE62BEB8274B6A10007D0CA8 /* TimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE62BEB7274B6A10007D0CA8 /* TimeController.swift */; };
+		CE62BEBA274B6B4C007D0CA8 /* TimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE62BEB9274B6B4C007D0CA8 /* TimeView.swift */; };
+		CE62BEBC274BC918007D0CA8 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE62BEBB274BC918007D0CA8 /* TimeInterval.swift */; };
 		CE66445D26F8D02A00A554FB /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = CE66445C26F8D02A00A554FB /* AlertToast */; };
 		CE6A03A8270451A1001C96E4 /* AudioRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A03A7270451A1001C96E4 /* AudioRecord.swift */; };
 		CE6A03AA270453AC001C96E4 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A03A9270453AC001C96E4 /* FileManager.swift */; };
@@ -64,6 +69,11 @@
 		CE0286C3270EE3A800D81755 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		CE0286C5270EEC4200D81755 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		CE30ED9627443AA30073C243 /* vosk-model-small-ru-0.22 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "vosk-model-small-ru-0.22"; sourceTree = "<group>"; };
+		CE62BEB3274B6923007D0CA8 /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
+		CE62BEB5274B6947007D0CA8 /* LapTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LapTime.swift; sourceTree = "<group>"; };
+		CE62BEB7274B6A10007D0CA8 /* TimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeController.swift; sourceTree = "<group>"; };
+		CE62BEB9274B6B4C007D0CA8 /* TimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeView.swift; sourceTree = "<group>"; };
+		CE62BEBB274BC918007D0CA8 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		CE6A03A7270451A1001C96E4 /* AudioRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecord.swift; sourceTree = "<group>"; };
 		CE6A03A9270453AC001C96E4 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		CE6D71C826F6042D005BDA30 /* AudioRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +152,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE62BEB2274B6911007D0CA8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE62BEB3274B6923007D0CA8 /* Stopwatch.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CE6D71BF26F6042D005BDA30 = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +180,7 @@
 		CE6D71CA26F6042D005BDA30 /* AudioRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				CE62BEB2274B6911007D0CA8 /* Models */,
 				CE6DDB412745AD0F0096EEBE /* AudioRecorder.entitlements */,
 				CE8F4A8C27429D5A002ADDFA /* Vosk */,
 				CE8F4A8527429D39002ADDFA /* bridging.h */,
@@ -211,6 +230,7 @@
 				CE78EF9326FE46A300547BD0 /* Store.swift */,
 				CE6A03A7270451A1001C96E4 /* AudioRecord.swift */,
 				CEE1043F270F3E6D0026492A /* AppAuth.swift */,
+				CE62BEB5274B6947007D0CA8 /* LapTime.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -226,6 +246,7 @@
 				CE6F963E270FE79000D3E18D /* UIApplicationExt.swift */,
 				CED91A2B27287C3B000D21C4 /* ArrayExt.swift */,
 				CE8F4B022742F3AF002ADDFA /* StringExt.swift */,
+				CE62BEBB274BC918007D0CA8 /* TimeInterval.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -245,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				CE6D71DC26F60979005BDA30 /* MainMenuTab.swift */,
+				CE62BEB9274B6B4C007D0CA8 /* TimeView.swift */,
 			);
 			path = MainMenuTab;
 			sourceTree = "<group>";
@@ -287,6 +309,7 @@
 				CE841E7826FC7AD500FE79BF /* Theme.swift */,
 				CE704907270D9DD60045B498 /* Share.swift */,
 				CE6F95F72711CF4000791A41 /* CloudDatabase.swift */,
+				CE62BEB7274B6A10007D0CA8 /* TimeController.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -391,6 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE704908270D9DD60045B498 /* Share.swift in Sources */,
+				CE62BEB4274B6923007D0CA8 /* Stopwatch.swift in Sources */,
 				CE6D71DF26F60988005BDA30 /* RecordsTab.swift in Sources */,
 				CE6D71DB26F60943005BDA30 /* SettingsTab.swift in Sources */,
 				CE9F908626FF32BF00F53B02 /* TimeIntervalPickerView.swift in Sources */,
@@ -401,11 +425,13 @@
 				CE6DF9B22728F731003F50B2 /* AudioHandler.swift in Sources */,
 				CE773AA726FB65FA00EA8284 /* User.swift in Sources */,
 				CE0286C6270EEC4200D81755 /* SignUpView.swift in Sources */,
+				CE62BEB6274B6947007D0CA8 /* LapTime.swift in Sources */,
 				CE8F4A8A27429D39002ADDFA /* Vosk.swift in Sources */,
 				CE8F4A8B27429D39002ADDFA /* VoskModel.swift in Sources */,
 				CE86461C27251AB4005068B4 /* AudioRecorder.swift in Sources */,
 				CED8D98A27295E3C00D2B8FD /* AudioMerge.swift in Sources */,
 				CE773AB026FB7A4600EA8284 /* AppInfoView.swift in Sources */,
+				CE62BEBC274BC918007D0CA8 /* TimeInterval.swift in Sources */,
 				CE6F96432710086000D3E18D /* AuthGateView.swift in Sources */,
 				CECE0154270CA6FB003906ED /* TimeIntervalExt.swift in Sources */,
 				CE6D71DD26F60979005BDA30 /* MainMenuTab.swift in Sources */,
@@ -417,6 +443,7 @@
 				CED26E12270BEE43007674B8 /* RecordView.swift in Sources */,
 				CE7773C526FB93F2000DBBC4 /* PaidCloudPlanView.swift in Sources */,
 				CE7773C326FB93CD000DBBC4 /* FreeCloudPlanView.swift in Sources */,
+				CE62BEBA274B6B4C007D0CA8 /* TimeView.swift in Sources */,
 				CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */,
 				CED91A2C27287C3B000D21C4 /* ArrayExt.swift in Sources */,
 				CE8F4B032742F3AF002ADDFA /* StringExt.swift in Sources */,
@@ -428,6 +455,7 @@
 				CE6F963F270FE79000D3E18D /* UIApplicationExt.swift in Sources */,
 				CE6A03A8270451A1001C96E4 /* AudioRecord.swift in Sources */,
 				CE6D71CC26F6042D005BDA30 /* AudioRecorderApp.swift in Sources */,
+				CE62BEB8274B6A10007D0CA8 /* TimeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
