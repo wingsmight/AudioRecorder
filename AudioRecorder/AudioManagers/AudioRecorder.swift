@@ -7,6 +7,7 @@ import Speech
 class AudioRecorder: ObservableObject {
     let MAX_SILENCE_DURATION_SECONDS: Double = 10
     let LIMIT_RECORD_DURATION_SECONDS: Double = 60 * 3 // 3 mins
+    let MAX_RECORD_COUNT = 50
     
     private let audioSession = AVAudioSession.sharedInstance()
     private var numberOfSamples: Int
@@ -31,9 +32,9 @@ class AudioRecorder: ObservableObject {
         fetchRecordings()
         
         do {
-            try! AVAudioSession.sharedInstance().setAllowHapticsAndSystemSoundsDuringRecording(true)
-            try! AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: [.defaultToSpeaker, .mixWithOthers])
-            try! AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+            try AVAudioSession.sharedInstance().setAllowHapticsAndSystemSoundsDuringRecording(true)
+            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: [.defaultToSpeaker, .mixWithOthers])
+            try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
             print("Failed to set up recording session")
         }
@@ -126,13 +127,25 @@ class AudioRecorder: ObservableObject {
                 print("fetchRecordings(): \(error)")
             }
         }
+        
+        var recordCount = 0
         let directoryContents = try! fileManager.contentsOfDirectory(at: audioDirectory, includingPropertiesForKeys: nil)
         for audio in directoryContents {
             let recording = AudioRecord(fileURL: audio, createdAt: FileManager.getCreationDate(for: audio))
             recordings.append(recording)
+            
+            recordCount += 1
+            if (recordCount == MAX_RECORD_COUNT)
+            {
+                break
+            }
         }
         
         recordings.sort(by: { $1.createdAt.compare($0.createdAt) == .orderedAscending})
+        while recordings.count > MAX_RECORD_COUNT {
+            let lastRecord = recordings.removeLast()
+            _ = try? fileManager.removeItem(at: lastRecord.fileURL)
+        }
     }
     
     public static func deleteRecordings(urlsToDelete: [URL]) {
