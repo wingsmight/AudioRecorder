@@ -3,6 +3,7 @@ import SwiftUI
 import AVFoundation
 import Combine
 import Speech
+import CoreLocation
 
 class AudioRecorder: ObservableObject {
     let MAX_SILENCE_DURATION_SECONDS: Double = 10
@@ -16,6 +17,9 @@ class AudioRecorder: ObservableObject {
     private var audioRecorder: AVAudioRecorder!
     private var autoStop: DispatchWorkItem?
     private var stopAtLimit: DispatchWorkItem?
+    private var lastLocation: CLLocation?
+    private var locationManager = LocationManager()
+    private var lastRecordUrl: URL!
     
     @AppStorage("recordings") private var recordings: [AudioRecord] = []
     @Published public var recording = false;
@@ -27,9 +31,6 @@ class AudioRecorder: ObservableObject {
     public init(numberOfSamples: Int = 3) {
         self.numberOfSamples = numberOfSamples
         self.soundSamples = [Float](repeating: .zero, count: self.numberOfSamples)
-        self.recordings = []
-        
-        fetchRecordings()
         
         do {
             try AVAudioSession.sharedInstance().setAllowHapticsAndSystemSoundsDuringRecording(true)
@@ -38,11 +39,21 @@ class AudioRecorder: ObservableObject {
         } catch {
             print("Failed to set up recording session")
         }
+        
+        let fileManager = FileManager.default
+        var isDir : ObjCBool = true
+        if !fileManager.fileExists(atPath: audioDirectory.path, isDirectory: &isDir) {
+            do {
+                try fileManager.createDirectory(atPath: audioDirectory.path, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print("init(): \(error)")
+            }
+        }
     }
     
     
     func startRecording() {
-        let audioFilename = audioDirectory.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
+        lastRecordUrl = audioDirectory.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
         
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -52,7 +63,7 @@ class AudioRecorder: ObservableObject {
         ]
         
         do {
-            audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
+            audioRecorder = try AVAudioRecorder(url: lastRecordUrl, settings: settings)
             audioRecorder.isMeteringEnabled = true
             audioRecorder.record()
             
@@ -69,6 +80,8 @@ class AudioRecorder: ObservableObject {
             
             recording = true
             AudioRecorder.isRecording = recording
+            
+            locationManager.requestLocation()
         } catch {
             print("Could not start recording")
         }
@@ -96,14 +109,17 @@ class AudioRecorder: ObservableObject {
         
         audioRecorder.stop()
         
-        fetchRecordings()
+        lastLocation = locationManager.lastRequestedLocation
+        let lastAudioRecord = AudioRecord(fileURL: lastRecordUrl, createdAt: FileManager.getCreationDate(for: lastRecordUrl), location: lastLocation)
+        recordings.append(lastAudioRecord)
+        sortRecords()
+        checkForRecordLimit()
         
         recording = false
         AudioRecorder.isRecording = recording
         
         stopMonitoring()
         
-        let lastAudioRecord: AudioRecord! = recordings.first
         uploadRecord(currentUserId: AppAuth().currentUser!.uid, audio: lastAudioRecord.fileURL) { (result) in
             switch result {
             case .success(_):
@@ -115,36 +131,13 @@ class AudioRecorder: ObservableObject {
             }
         }
     }
-    func fetchRecordings() {
-        recordings.removeAll()
-        
-        let fileManager = FileManager.default
-        var isDir : ObjCBool = true
-        if !fileManager.fileExists(atPath: audioDirectory.path, isDirectory: &isDir) {
-            do {
-                try fileManager.createDirectory(atPath: audioDirectory.path, withIntermediateDirectories: true, attributes: nil)
-            } catch {
-                print("fetchRecordings(): \(error)")
-            }
-        }
-        
-        var recordCount = 0
-        let directoryContents = try! fileManager.contentsOfDirectory(at: audioDirectory, includingPropertiesForKeys: nil)
-        for audio in directoryContents {
-            let recording = AudioRecord(fileURL: audio, createdAt: FileManager.getCreationDate(for: audio))
-            recordings.append(recording)
-            
-            recordCount += 1
-            if (recordCount == MAX_RECORD_COUNT)
-            {
-                break
-            }
-        }
-        
+    func sortRecords() {
         recordings.sort(by: { $1.createdAt.compare($0.createdAt) == .orderedAscending})
+    }
+    func checkForRecordLimit() {
         while recordings.count > MAX_RECORD_COUNT {
             let lastRecord = recordings.removeLast()
-            _ = try? fileManager.removeItem(at: lastRecord.fileURL)
+            _ = try? FileManager.default.removeItem(at: lastRecord.fileURL)
         }
     }
     

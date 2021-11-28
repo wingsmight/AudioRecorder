@@ -8,6 +8,7 @@
 import SwiftUI
 import AlertToast
 import AVKit
+import CoreLocation
 
 struct Tab {
     private let DEFAULT_ICON_SIZE : Float = 25
@@ -142,6 +143,9 @@ struct ContentView: View {
             } else {
                 self.isMicGranted = true
             }
+            
+            let locationManager = CLLocationManager()
+            locationManager.requestAlwaysAuthorization()
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             print("UIApplication.willEnterForegroundNotification")

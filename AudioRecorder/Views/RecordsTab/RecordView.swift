@@ -9,6 +9,7 @@ import SwiftUI
 import AVFAudio
 import AVFoundation
 import AVKit
+import CoreLocation
 
 struct RecordView: View {
     public var audioRecord: AudioRecord
@@ -18,6 +19,7 @@ struct RecordView: View {
     @State private var sliderValue: Float = 0.0
     @State private var isSliderEditing: Bool = false
     @State private var isPlaying: Bool = false
+    @State private var location: CLPlacemark?
     
     @State var scrubState: PlayerScrubState = .reset {
             didSet {
@@ -53,7 +55,14 @@ struct RecordView: View {
                     do {
                         self.audioPlayer = try AVAudioPlayer(contentsOf: audioRecord.fileURL)
                     } catch {
-                        
+                        print(audioRecord.fileURL.path)
+                        print("RecordView error = \(error)")
+                    }
+                    
+                    if location == nil {
+                        audioRecord.lookUpCurrentLocation { placemark in
+                            location = placemark
+                        }
                     }
                 }
                 
@@ -175,6 +184,22 @@ struct RecordView: View {
                     .foregroundColor(.blue)
                     .buttonStyle(PlainButtonStyle())
                 }
+                .padding(.top, 4)
+                
+                HStack {
+                    Text("Геопозиция: ")
+                    
+                    Spacer()
+                    
+                    if let certainLocation = location {
+                        Text(certainLocation.name ?? "не определено")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    } else {
+                        Text("не определено")
+                            .foregroundColor(.secondary)
+                    }
+                }
                 .padding(.vertical, 4)
             }
         }
@@ -216,7 +241,7 @@ struct RecorderView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             List(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                RecordView(audioRecord: AudioRecord(fileURL: URL(fileURLWithPath: testFilePath), createdAt: Date()), expandedRecord: .constant(""), audioPlayer: .constant(try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: testFilePath))))
+                RecordView(audioRecord: AudioRecord(fileURL: URL(fileURLWithPath: testFilePath), createdAt: Date(), location: CLLocation(latitude: 0, longitude: 0)), expandedRecord: .constant(""), audioPlayer: .constant(try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: testFilePath))))
             }
         }
     }

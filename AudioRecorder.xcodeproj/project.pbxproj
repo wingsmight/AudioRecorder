@@ -44,6 +44,7 @@
 		CE7773C526FB93F2000DBBC4 /* PaidCloudPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7773C426FB93F2000DBBC4 /* PaidCloudPlanView.swift */; };
 		CE78EF9226FDE6F700547BD0 /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE78EF9126FDE6F700547BD0 /* SwiftyStoreKit */; };
 		CE78EF9426FE46A300547BD0 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78EF9326FE46A300547BD0 /* Store.swift */; };
+		CE7F7C6527527F3400DD5412 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F7C6427527F3400DD5412 /* LocationManager.swift */; };
 		CE841E7926FC7AD500FE79BF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE841E7826FC7AD500FE79BF /* Theme.swift */; };
 		CE86461C27251AB4005068B4 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86461B27251AB4005068B4 /* AudioRecorder.swift */; };
 		CE8F4A8227429B90002ADDFA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F4A8127429B8F002ADDFA /* Accelerate.framework */; };
@@ -102,6 +103,7 @@
 		CE7773C426FB93F2000DBBC4 /* PaidCloudPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidCloudPlanView.swift; sourceTree = "<group>"; };
 		CE78EF8F26FDCF1800547BD0 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		CE78EF9326FE46A300547BD0 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		CE7F7C6427527F3400DD5412 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		CE841E7826FC7AD500FE79BF /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		CE86461B27251AB4005068B4 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		CE8F4A8127429B8F002ADDFA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -310,6 +312,7 @@
 				CE704907270D9DD60045B498 /* Share.swift */,
 				CE6F95F72711CF4000791A41 /* CloudDatabase.swift */,
 				CE62BEB7274B6A10007D0CA8 /* TimeController.swift */,
+				CE7F7C6427527F3400DD5412 /* LocationManager.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				CE8F4B032742F3AF002ADDFA /* StringExt.swift in Sources */,
 				CE8F83CF270085A700E9E45B /* DisabledAppOverlayView.swift in Sources */,
 				CE6DDB3E274530210096EEBE /* AudioPlayer.swift in Sources */,
+				CE7F7C6527527F3400DD5412 /* LocationManager.swift in Sources */,
 				CE8F4A8827429D39002ADDFA /* SpeechDetection.swift in Sources */,
 				CE773AB226FB874400EA8284 /* CloudStorageChoiceView.swift in Sources */,
 				CE6A03AA270453AC001C96E4 /* FileManager.swift in Sources */,

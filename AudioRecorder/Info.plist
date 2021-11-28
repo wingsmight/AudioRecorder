@@ -26,6 +26,12 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location can be used to determine where the audio record was made</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Location can be used to determine where the audio record was made</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location can be used to determine where the audio record was made</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Microphone is necessary due to app starts to record when there is human voice nearby</string>
 	<key>UIApplicationSceneManifest</key>

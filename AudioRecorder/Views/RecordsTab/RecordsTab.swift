@@ -9,6 +9,7 @@ import SwiftUI
 import AVKit
 
 struct RecordsTab: View {
+    let location = LocationManager()
     @AppStorage("recordings") private var recordings: [AudioRecord] = []
     
     @State private var audioPlayer: AVAudioPlayer!
@@ -17,8 +18,14 @@ struct RecordsTab: View {
 
     var body: some View {
         List {
+            Button {
+                location.requestLocation()
+            } label: {
+                Text("get location")
+            }
+
             ForEach(recordings, id: \.createdAt) { recording in
-                RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: recording.createdAt), expandedRecord: $expandedChildName, audioPlayer: self.$audioPlayer)
+                RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: recording.createdAt, location: recording.location), expandedRecord: $expandedChildName, audioPlayer: self.$audioPlayer)
             }
             .onDelete(perform: delete)
         }
