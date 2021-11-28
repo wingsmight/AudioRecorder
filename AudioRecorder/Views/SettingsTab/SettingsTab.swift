@@ -116,13 +116,6 @@ struct SettingsTab: View {
                     })
                     )
                 }
-                
-                Button {
-                    user = User.load()
-                } label: {
-                    Text("Load user")
-                }
-
             }
             Section(header: Text("Опции")) {
                 Toggle(isOn: $isFacebookHackingAlertOn) {
