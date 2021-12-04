@@ -38,3 +38,16 @@ extension Date: RawRepresentable {
         self = Date(timeIntervalSinceReferenceDate: Double(rawValue) ?? 0.0)
     }
 }
+
+extension Date {
+    var time: Time {
+        return Time(self)
+    }
+}
+
+extension Date {
+    func isTimeBetweenInterval(intervalStart: Date, intervalFinish: Date) -> Bool {
+        return self.time >= intervalStart.time && self.time <= intervalFinish.time;
+    }
+}
+

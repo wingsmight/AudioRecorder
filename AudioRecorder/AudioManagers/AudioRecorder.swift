@@ -24,6 +24,8 @@ class AudioRecorder: ObservableObject {
     @AppStorage("recordings") private var recordings: [AudioRecord] = []
     @Published public var recording = false;
     @Published public var soundSamples: [Float] = []
+    @AppStorage("doNotDisturbStartTime") private var doNotDisturbStartTime = Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: Date())!
+    @AppStorage("doNotDisturbFinishTime") private var doNotDisturbFinishTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!
     
     public static var isRecording: Bool = false
     
@@ -53,6 +55,11 @@ class AudioRecorder: ObservableObject {
     
     
     func startRecording() {
+        print("isRecordingAvailable = \(isRecordingAvailable())")
+        if !isRecordingAvailable() {
+            return;
+        }
+        
         lastRecordUrl = audioDirectory.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
         
         let settings = [
@@ -168,5 +175,14 @@ class AudioRecorder: ObservableObject {
     }
     private var audioDirectory: URL {
         FileManager.getDocumentsDirectory().appendingPathComponent("AudioRecords")
+    }
+    func isRecordingAvailable() -> Bool {
+        let now = Date();
+        
+        if doNotDisturbStartTime.time <= doNotDisturbFinishTime.time {
+            return !now.isTimeBetweenInterval(intervalStart: doNotDisturbStartTime, intervalFinish: doNotDisturbFinishTime)
+        } else {
+            return now.isTimeBetweenInterval(intervalStart: doNotDisturbFinishTime, intervalFinish: doNotDisturbStartTime)
+        }
     }
 }
