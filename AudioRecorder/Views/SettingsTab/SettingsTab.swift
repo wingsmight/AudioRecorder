@@ -76,7 +76,7 @@ struct SettingsTab: View {
     @AppStorage("isFacebookHackingAlertOn") private var isFacebookHackingAlertOn = false
     @AppStorage("doNotDisturbStartTime") private var doNotDisturbStartTime = Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: Date())!
     @AppStorage("doNotDisturbFinishTime") private var doNotDisturbFinishTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!
-    @AppStorage("isTurnOnByVoice") private var isTurnOnByVoice = false
+    @AppStorage("isTurnOnByVoice") private var isTurnOnByVoice = true
     
     
     var body: some View {

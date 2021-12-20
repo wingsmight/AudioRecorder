@@ -27,7 +27,7 @@ struct MainMenuTab: View {
             Spacer()
             Spacer()
             ZStack {
-                if audioRecorder.recording {
+                if isRecording {
                     Circle()
                         .fill(Color.green)
                         .shadow(radius: 3)
@@ -78,7 +78,7 @@ struct MainMenuTab: View {
                 VStack {
                     Spacer()
                     Spacer()
-                    if audioRecorder.recording {
+                    if isRecording {
                         TimeView(time: stopwatch.elapsedTime, textColor: .secondary, fontSize: 60, fontWeight: .thin)
                             .frame(height: 80)
                     }

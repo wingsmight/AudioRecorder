@@ -39,7 +39,7 @@ class SpeechDetection {
                                         let res = recognizer.recognizeData(buffer: buffer)
                                         DispatchQueue.main.async {
                                             let result = self.getText(fromResult: res)
-                                            if !result.isEmpty {
+                                            if !result.isEmpty || !UserDefaults.standard.bool(forKey: "isTurnOnByVoice") {
                                                 print("speech was detected: \(result)")
                                                 onDetected(result)
                                             }

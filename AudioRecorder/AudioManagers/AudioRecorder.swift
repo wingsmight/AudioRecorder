@@ -27,8 +27,6 @@ class AudioRecorder: ObservableObject {
     @AppStorage("doNotDisturbStartTime") private var doNotDisturbStartTime = Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: Date())!
     @AppStorage("doNotDisturbFinishTime") private var doNotDisturbFinishTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!
     
-    public static var isRecording: Bool = false
-    
     
     public init(numberOfSamples: Int = 3) {
         self.numberOfSamples = numberOfSamples
@@ -86,7 +84,6 @@ class AudioRecorder: ObservableObject {
             resetAutoStop()
             
             recording = true
-            AudioRecorder.isRecording = recording
             
             locationManager.requestLocation()
         } catch {
@@ -123,7 +120,6 @@ class AudioRecorder: ObservableObject {
         checkForRecordLimit()
         
         recording = false
-        AudioRecorder.isRecording = recording
         
         stopMonitoring()
         
