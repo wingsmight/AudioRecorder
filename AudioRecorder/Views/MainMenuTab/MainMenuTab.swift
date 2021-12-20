@@ -47,14 +47,17 @@ struct MainMenuTab: View {
                     if !isRecording {
                         audioRecorder.stopRecording()
                         speechDetection.stopAudioEngine()
+                        stopwatch.pause()
                     } else {
                         speechDetection.startAudioEngine { recognizedText in
                             if !audioRecorder.isRecording {
                                 audioRecorder.startRecording()
-                                stopwatch.start()
+                                stopwatch.reset()
                             } else {
                                 audioRecorder.resetAutoStop()
-                                stopwatch.reset()
+                                if stopwatch.mode != .running {
+                                    stopwatch.start()
+                                }
                             }
                         }
                     }
