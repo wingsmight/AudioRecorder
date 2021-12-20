@@ -14,7 +14,7 @@ public final class VoskModel {
     var spkModel : OpaquePointer!
     
     init() {
-        vosk_set_log_level(0); // Set to -1 to disable logs
+        vosk_set_log_level(-1); // Set to -1 to disable logs
         
         if let resourcePath = Bundle.main.resourcePath {
             let modelPath = resourcePath + "/vosk-model-small-ru-0.22"

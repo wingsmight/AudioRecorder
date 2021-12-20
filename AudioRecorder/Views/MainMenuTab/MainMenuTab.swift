@@ -27,7 +27,7 @@ struct MainMenuTab: View {
             Spacer()
             Spacer()
             ZStack {
-                if isRecording {
+                if audioRecorder.isRecording {
                     Circle()
                         .fill(Color.green)
                         .shadow(radius: 3)
@@ -49,7 +49,7 @@ struct MainMenuTab: View {
                         speechDetection.stopAudioEngine()
                     } else {
                         speechDetection.startAudioEngine { recognizedText in
-                            if !audioRecorder.recording {
+                            if !audioRecorder.isRecording {
                                 audioRecorder.startRecording()
                             } else {
                                 audioRecorder.resetAutoStop()
@@ -78,7 +78,7 @@ struct MainMenuTab: View {
                 VStack {
                     Spacer()
                     Spacer()
-                    if isRecording {
+                    if audioRecorder.isRecording {
                         TimeView(time: stopwatch.elapsedTime, textColor: .secondary, fontSize: 60, fontWeight: .thin)
                             .frame(height: 80)
                     }

@@ -22,7 +22,7 @@ class AudioRecorder: ObservableObject {
     private var lastRecordUrl: URL!
     
     @AppStorage("recordings") private var recordings: [AudioRecord] = []
-    @Published public var recording = false;
+    @Published public var isRecording = false;
     @Published public var soundSamples: [Float] = []
     @AppStorage("doNotDisturbStartTime") private var doNotDisturbStartTime = Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: Date())!
     @AppStorage("doNotDisturbFinishTime") private var doNotDisturbFinishTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!
@@ -83,7 +83,7 @@ class AudioRecorder: ObservableObject {
             
             resetAutoStop()
             
-            recording = true
+            isRecording = true
             
             locationManager.requestLocation()
         } catch {
@@ -102,7 +102,7 @@ class AudioRecorder: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + MAX_SILENCE_DURATION_SECONDS, execute: autoStop!)
     }
     func stopRecording() {
-        if !recording {
+        if !isRecording {
             return
         }
         
@@ -119,7 +119,7 @@ class AudioRecorder: ObservableObject {
         sortRecords()
         checkForRecordLimit()
         
-        recording = false
+        isRecording = false
         
         stopMonitoring()
         
