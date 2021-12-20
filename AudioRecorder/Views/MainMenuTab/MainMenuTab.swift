@@ -144,8 +144,19 @@ struct MainMenuTab: View {
             // it's possible, so go ahead and use it
             let reason = "Face ID требуется для определения, что именно вы хотите остановить запись, иначе на ваш аккаунт Facebook будет отправлено защищенное сообщение о взломе."
 
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
-                onPerform(success)
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
+                if let authenticationError = authenticationError {
+                    let laError = authenticationError as! LAError
+                    if laError.code == LAError.Code.userFallback {
+                        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
+                            onPerform(success)
+                        }
+                    } else {
+                        onPerform(success)
+                    }
+                } else {
+                    onPerform(success)
+                }
             }
         } else {
             // no biometrics
