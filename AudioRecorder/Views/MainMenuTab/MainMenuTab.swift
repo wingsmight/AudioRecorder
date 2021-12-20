@@ -51,13 +51,13 @@ struct MainMenuTab: View {
                         speechDetection.startAudioEngine { recognizedText in
                             if !audioRecorder.isRecording {
                                 audioRecorder.startRecording()
+                                stopwatch.start()
                             } else {
                                 audioRecorder.resetAutoStop()
+                                stopwatch.reset()
                             }
                         }
                     }
-                    
-                    stopwatch.startOrStop()
                     
                     vibrate(intensity: 0.7, sharpness: 0.7)
                 }) {

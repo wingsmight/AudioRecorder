@@ -10,6 +10,7 @@
 		CE0286C4270EE3A800D81755 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0286C3270EE3A800D81755 /* LogInView.swift */; };
 		CE0286C6270EEC4200D81755 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0286C5270EEC4200D81755 /* SignUpView.swift */; };
 		CE0286CB270F3A9300D81755 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CE0286CA270F3A9300D81755 /* FirebaseAuth */; };
+		CE2924082770F4D600E0DF4C /* DoNotDisturbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2924072770F4D600E0DF4C /* DoNotDisturbMode.swift */; };
 		CE30ED9727443AA30073C243 /* vosk-model-small-ru-0.22 in Resources */ = {isa = PBXBuildFile; fileRef = CE30ED9627443AA30073C243 /* vosk-model-small-ru-0.22 */; };
 		CE59FF35275AEC2A004BDF8D /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE59FF34275AEC2A004BDF8D /* Time.swift */; };
 		CE62BEB4274B6923007D0CA8 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE62BEB3274B6923007D0CA8 /* Stopwatch.swift */; };
@@ -70,6 +71,7 @@
 /* Begin PBXFileReference section */
 		CE0286C3270EE3A800D81755 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		CE0286C5270EEC4200D81755 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		CE2924072770F4D600E0DF4C /* DoNotDisturbMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoNotDisturbMode.swift; sourceTree = "<group>"; };
 		CE30ED9627443AA30073C243 /* vosk-model-small-ru-0.22 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "vosk-model-small-ru-0.22"; sourceTree = "<group>"; };
 		CE59FF34275AEC2A004BDF8D /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		CE62BEB3274B6923007D0CA8 /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				CE62BEB7274B6A10007D0CA8 /* TimeController.swift */,
 				CE7F7C6427527F3400DD5412 /* LocationManager.swift */,
 				CE59FF34275AEC2A004BDF8D /* Time.swift */,
+				CE2924072770F4D600E0DF4C /* DoNotDisturbMode.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				CE59FF35275AEC2A004BDF8D /* Time.swift in Sources */,
 				CE6D71CC26F6042D005BDA30 /* AudioRecorderApp.swift in Sources */,
 				CE62BEB8274B6A10007D0CA8 /* TimeController.swift in Sources */,
+				CE2924082770F4D600E0DF4C /* DoNotDisturbMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,8 +24,6 @@ class AudioRecorder: ObservableObject {
     @AppStorage("recordings") private var recordings: [AudioRecord] = []
     @Published public var isRecording = false;
     @Published public var soundSamples: [Float] = []
-    @AppStorage("doNotDisturbStartTime") private var doNotDisturbStartTime = Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: Date())!
-    @AppStorage("doNotDisturbFinishTime") private var doNotDisturbFinishTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!
     
     
     public init(numberOfSamples: Int = 3) {
@@ -53,8 +51,7 @@ class AudioRecorder: ObservableObject {
     
     
     func startRecording() {
-        print("isRecordingAvailable = \(isRecordingAvailable())")
-        if !isRecordingAvailable() {
+        if !DoNotDisturbMode.isEnable {
             return;
         }
         
@@ -86,6 +83,11 @@ class AudioRecorder: ObservableObject {
             isRecording = true
             
             locationManager.requestLocation()
+            
+            if !DoNotDisturbMode.isEnable {
+                stopRecording()
+                return
+            }
         } catch {
             print("Could not start recording")
         }
@@ -98,6 +100,11 @@ class AudioRecorder: ObservableObject {
             
             self.stopRecording()
         })
+        
+        if !DoNotDisturbMode.isEnable {
+            stopRecording()
+            return
+        }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + MAX_SILENCE_DURATION_SECONDS, execute: autoStop!)
     }
@@ -166,14 +173,5 @@ class AudioRecorder: ObservableObject {
     }
     private var audioDirectory: URL {
         FileManager.getDocumentsDirectory().appendingPathComponent("AudioRecords")
-    }
-    func isRecordingAvailable() -> Bool {
-        let now = Date();
-        
-        if doNotDisturbStartTime.time <= doNotDisturbFinishTime.time {
-            return !now.isTimeBetweenInterval(intervalStart: doNotDisturbStartTime, intervalFinish: doNotDisturbFinishTime)
-        } else {
-            return now.isTimeBetweenInterval(intervalStart: doNotDisturbFinishTime, intervalFinish: doNotDisturbStartTime)
-        }
     }
 }

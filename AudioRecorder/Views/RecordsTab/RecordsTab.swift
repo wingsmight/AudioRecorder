@@ -18,12 +18,6 @@ struct RecordsTab: View {
 
     var body: some View {
         List {
-            Button {
-                location.requestLocation()
-            } label: {
-                Text("get location")
-            }
-
             ForEach(recordings, id: \.createdAt) { recording in
                 RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: recording.createdAt, location: recording.location), expandedRecord: $expandedChildName, audioPlayer: self.$audioPlayer)
             }

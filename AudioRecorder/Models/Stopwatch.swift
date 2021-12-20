@@ -68,27 +68,21 @@ extension Stopwatch {
         }
     }
     
-}
-
-
-// MARK: - User interactions
-extension Stopwatch {
- 
-    private func start() {
+    func start() {
         mode = .running
         timer.start()
         startNewLapTimeIfNeeded()
         notify()
     }
     
-    private func pause() {
+    func pause() {
         mode = .paused
         timer.pause()
         lapTimer.pause()
         notify()
     }
     
-    private func reset() {
+    func reset() {
         mode = .inactive
         timer.reset()
         lapTimer.reset()
@@ -96,7 +90,7 @@ extension Stopwatch {
         notify()
     }
     
-    private func recordLapTime() {
+    func recordLapTime() {
         startNewLapTime()
         notify()
     }
