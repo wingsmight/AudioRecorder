@@ -32,7 +32,7 @@ class AudioRecorder: ObservableObject {
         
         do {
             try AVAudioSession.sharedInstance().setAllowHapticsAndSystemSoundsDuringRecording(true)
-            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: [.defaultToSpeaker, .mixWithOthers])
+            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: [.defaultToSpeaker, .mixWithOthers, .allowBluetooth, .allowBluetoothA2DP])
             try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
             print("Failed to set up recording session")
