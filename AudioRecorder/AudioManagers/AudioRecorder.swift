@@ -144,11 +144,6 @@ class AudioRecorder: ObservableObject {
         }
     }
     
-    public static func deleteRecordings(urlsToDelete: [URL]) {
-        for url in urlsToDelete {
-            deleteRecording(url: url)
-        }
-    }
     public static func deleteRecording(url: URL) {
         do {
             try FileManager.default.removeItem(at: url)

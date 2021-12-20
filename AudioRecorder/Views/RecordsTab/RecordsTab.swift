@@ -34,8 +34,9 @@ struct RecordsTab: View {
     }
     
     private func delete(withURL url: URL) {
-        var urlsToDelete = [URL]()
-        urlsToDelete.append(url)
+        if audioPlayer.url == url {
+            audioPlayer.stop()
+        }
         AudioRecorder.deleteRecording(url: url)
     }
     private func delete(at offsets: IndexSet) {
@@ -47,7 +48,9 @@ struct RecordsTab: View {
         for _ in 1...offsets.count {
             recordings.remove(at: indexToDelete)
         }
-        AudioRecorder.deleteRecordings(urlsToDelete: urlsToDelete)
+        for urlToDelete in urlsToDelete {
+            delete(withURL: urlToDelete)
+        }
     }
 }
 
