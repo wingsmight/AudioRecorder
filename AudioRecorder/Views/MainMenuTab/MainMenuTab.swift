@@ -45,18 +45,15 @@ struct MainMenuTab: View {
                     if isRecording {
                         isStopAvailable {isSucceed in
                             if isSucceed {
-                                isRecording = false
-                                isRecordingToastShowing = isRecording
-                                
                                 audioRecorder.stopRecording()
                                 speechDetection.stopAudioEngine()
                                 stopwatch.pause()
+                                
+                                isRecording = false
+                                isRecordingToastShowing = isRecording
                             }
                         }
                     } else {
-                        isRecording = true
-                        isRecordingToastShowing = isRecording
-                        
                         speechDetection.startAudioEngine { recognizedText in
                             if !audioRecorder.isRecording {
                                 audioRecorder.startRecording()
@@ -68,6 +65,9 @@ struct MainMenuTab: View {
                                 }
                             }
                         }
+                        
+                        isRecording = true
+                        isRecordingToastShowing = isRecording
                     }
                     
                     vibrate(intensity: 0.7, sharpness: 0.7)
