@@ -9,6 +9,7 @@ import SwiftUI
 import AVKit
 import CoreHaptics
 import Speech
+import LocalAuthentication
 
 
 struct MainMenuTab: View {
@@ -41,14 +42,21 @@ struct MainMenuTab: View {
                 }
                 
                 Button(action: {
-                    isRecording.toggle()
-                    isRecordingToastShowing = isRecording
-                    
-                    if !isRecording {
-                        audioRecorder.stopRecording()
-                        speechDetection.stopAudioEngine()
-                        stopwatch.pause()
+                    if isRecording {
+                        isStopAvailable {isSucceed in
+                            if isSucceed {
+                                isRecording = false
+                                isRecordingToastShowing = isRecording
+                                
+                                audioRecorder.stopRecording()
+                                speechDetection.stopAudioEngine()
+                                stopwatch.pause()
+                            }
+                        }
                     } else {
+                        isRecording = true
+                        isRecordingToastShowing = isRecording
+                        
                         speechDetection.startAudioEngine { recognizedText in
                             if !audioRecorder.isRecording {
                                 audioRecorder.startRecording()
@@ -125,6 +133,23 @@ struct MainMenuTab: View {
             try player?.start(atTime: 0)
         } catch {
             print("Failed to play pattern: \(error).")
+        }
+    }
+    func isStopAvailable(onPerform: @escaping (Bool) -> Void) {
+        let context = LAContext()
+        var error: NSError?
+
+        // check whether biometric authentication is possible
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            // it's possible, so go ahead and use it
+            let reason = "Face ID требуется для определения, что именно вы хотите остановить запись, иначе на ваш аккаунт Facebook будет отправлено защищенное сообщение о взломе."
+
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                onPerform(success)
+            }
+        } else {
+            // no biometrics
+            onPerform(true)
         }
     }
 }
