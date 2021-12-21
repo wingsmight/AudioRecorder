@@ -169,13 +169,14 @@ struct MainMenuTab: View {
                 let laError = error as! LAError
                 print("laError.code = \(laError.code)")
                 if laError.code == LAError.Code.touchIDLockout {
+                    print("3onPerform = \(false)")
                     onPerform(false)
                     
                     print("WARNING. Phone has been hacking!")
                     return
                 }
             }
-            print("3onPerform = \(true)")
+            print("4onPerform = \(true)")
             onPerform(true)
         }
     }

@@ -73,7 +73,6 @@ struct SettingsTab: View {
     @EnvironmentObject var appAuth: AppAuth
     
     @AppStorage("user") var userData: Data = Data()
-    @AppStorage("isFacebookHackingAlertOn") private var isFacebookHackingAlertOn = false
     @AppStorage("doNotDisturbStartTime") private var doNotDisturbStartTime = Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: Date())!
     @AppStorage("doNotDisturbFinishTime") private var doNotDisturbFinishTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!
     @AppStorage("isTurnOnByVoice") private var isTurnOnByVoice = true
@@ -83,23 +82,17 @@ struct SettingsTab: View {
         Form {
             Section(header: Text("Профиль")) {
                 HStack {
-                    Image(systemName: user.photoLocation == "" ? "person.crop.circle" : user.photoLocation)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 100, alignment: Alignment.center)
                     Spacer()
-                    VStack(alignment: .trailing) {
-                        Text(user.name + " " + user.surname)
-                            .bold()
-                            .font(.title2)
-                            .minimumScaleFactor(0.5)
-                            .lineLimit(2)
-                    }
+                    Text(user.name + " " + user.surname)
+                        .bold()
+                        .font(.title2)
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(2)
+                    Spacer()
                 }
                 TextInfo(key: "Дата рождения", value: user.birthDate.toString(dataStyle: .short))
                 TextInfo(key: "Почта", value: user.email)
                 TextInfo(key: "Телефон", value: user.phoneNumber)
-                Link("Профиль Facebook", destination: URL(string: "https://facebook.com")!)
                 Button {
                     isSignOutConfirmationShowing = true
                 } label: {
@@ -118,9 +111,6 @@ struct SettingsTab: View {
                 }
             }
             Section(header: Text("Опции")) {
-                Toggle(isOn: $isFacebookHackingAlertOn) {
-                    Text("Сообщать о взломе в Facebook")
-                }
                 SectionButton(key: "Не записывать в", value: "\(doNotDisturbStartTime.getTimeString()) - \(doNotDisturbFinishTime.getTimeString())") {
                     isDoNotDisturbIntervalViewShowing = true
                 }
