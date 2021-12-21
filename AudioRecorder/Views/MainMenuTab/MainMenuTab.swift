@@ -148,18 +148,34 @@ struct MainMenuTab: View {
                 if let authenticationError = authenticationError {
                     let laError = authenticationError as! LAError
                     if laError.code == LAError.Code.userFallback {
+                        print("laError.code = \(laError.code)")
                         context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
+                            print("0onPerform = \(success)")
                             onPerform(success)
                         }
                     } else {
+                        print("1onPerform = \(success)")
                         onPerform(success)
                     }
                 } else {
+                    print("2onPerform = \(success)")
                     onPerform(success)
                 }
             }
         } else {
             // no biometrics
+            if error != nil {
+                print("No biometrics = \(error)")
+                let laError = error as! LAError
+                print("laError.code = \(laError.code)")
+                if laError.code == LAError.Code.touchIDLockout {
+                    onPerform(false)
+                    
+                    print("WARNING. Phone has been hacking!")
+                    return
+                }
+            }
+            print("3onPerform = \(true)")
             onPerform(true)
         }
     }
