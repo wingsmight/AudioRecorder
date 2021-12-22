@@ -148,6 +148,30 @@ class CloudDatabase {
             }
         }
     }
+    public static func loadData(user: Firebase.User) {
+        let email = user.email
+        let database = Firestore.firestore()
+        
+        // Read the documents at a specific path
+        database.collection("users").whereField("email", isEqualTo: email).getDocuments { snapshot, error in
+            if error == nil {
+                if let snapshot = snapshot {
+                    DispatchQueue.main.async {
+                        let user = snapshot.documents.first
+                        if let user = user {
+                            let storageSize = user["storageSize"] as! Int
+                            
+                            availableStorageSize = storageSize
+                            storageFillPercent = Double(usedStorageSize) / Double(availableStorageSize)
+                        }
+                    }
+                }
+            }
+            else {
+                // Handle the error
+            }
+        }
+    }
     
     
     public static var isStorageFull: Bool {

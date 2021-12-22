@@ -35,6 +35,7 @@ class AppAuth: ObservableObject {
                 // Success
                 self?.signedIn = true
                 handleSuccess()
+                self?.loadDataFromCloud()
             }
         }
     }
@@ -52,6 +53,7 @@ class AppAuth: ObservableObject {
                 // Success
                 self?.signedIn = true
                 handleSuccess()
+                self?.loadDataFromCloud()
             }
         }
     }
@@ -59,6 +61,9 @@ class AppAuth: ObservableObject {
         try? auth.signOut()
             
         self.signedIn = false
+    }
+    private func loadDataFromCloud() {
+        CloudDatabase.loadData(user: AppAuth().currentUser!)
     }
     
     public static func localizeAuthError(_ errorCode: AuthErrorCode) -> String {
