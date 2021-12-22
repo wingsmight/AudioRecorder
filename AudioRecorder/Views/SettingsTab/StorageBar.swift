@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StorageBar: View {
-    @Binding var value: Float
+    @Binding var value: Double
     
     var body: some View {
         GeometryReader { geometry in
@@ -20,7 +20,7 @@ struct StorageBar: View {
                 Rectangle().frame(width: min(CGFloat(self.value) * geometry.size.width, geometry.size.width), height: geometry.size.height)
                     .foregroundColor(Color(UIColor.systemGray))
                     .animation(.linear)
-            }.cornerRadius(45.0)
+            }.cornerRadius(20.0)
         }
     }
 }

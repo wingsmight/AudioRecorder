@@ -121,7 +121,7 @@ struct SignUpView: View {
                         handleSuccess: {
                             let user = User(photoLocation: "", name: self.userName, surname: self.userSurname, birthDate: self.birthDate, email: self.email, phoneNumber: "", facebookProfileUrl: "")
                             
-                            addData(user: user)
+                            CloudDatabase.addData(user: user)
                             User.save(user)
                         })
                 } label: {

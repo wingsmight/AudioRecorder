@@ -80,7 +80,7 @@ struct LogInView: View {
                                 alertBackground()
                             },
                             handleSuccess: {
-                                getData(email: self.email)
+                                CloudDatabase.getData(email: self.email)
                             })
                     } label: {
                         Text("Войти")

@@ -9,63 +9,47 @@ import Foundation
 import Firebase
 import FirebaseStorage
 import FirebaseFirestore
+import SwiftUI
 
 
-//func updateData(todoToUpdate: Todo) {
-//
-//    // Get a reference to the database
-//    let db = Firestore.firestore()
-//
-//    // Set the data to update
-//    db.collection("todos").document(todoToUpdate.id).setData(["name":"Updated: \(todoToUpdate.name)"], merge: true) { error in
-//
-//        // Check for errors
-//        if error == nil {
-//            // Get the new data
-//            self.getData()
-//        }
-//    }
-//}
-//
-//func deleteData(todoToDelete: Todo) {
-//
-//    // Get a reference to the database
-//    let db = Firestore.firestore()
-//
-//    // Specify the document to delete
-//    db.collection("todos").document(todoToDelete.id).delete { error in
-//
-//        // Check for errors
-//        if error == nil {
-//            // No errors
-//
-//            // Update the UI from the main thread
-//            DispatchQueue.main.async {
-//
-//                // Remove the todo that was just deleted
-//                self.list.removeAll { todo in
-//
-//                    // Check for the todo to remove
-//                    return todo.id == todoToDelete.id
-//                }
-//            }
-//        }
-//    }
-//}
+class CloudDatabase {
+    @AppStorage("availableStorageSize") private static var availableStorageSize: Int = Plan.free200MB.size
+    @AppStorage("usedStorageSize") private static var usedStorageSize: Int = 0
+    @AppStorage("storageFillPercent") private static var storageFillPercent: Double = 0.0
 
-func uploadRecord(currentUserId: String, audio: URL, completion: @escaping (Result<URL, Error>) -> Void) {
-    let ref = Storage.storage().reference().child("audioRecords").child(currentUserId).child(audio.lastPathComponent)
     
-    let metadata = StorageMetadata()
-    metadata.contentType = "audio/m4a"
-    
-    guard let audioData = try? Data(contentsOf: audio) else { return }
-    
-    ref.putData(audioData , metadata: metadata) { (metadata, error) in
-        guard let _ = metadata else {
-            completion(.failure(error!))
+    public static func uploadRecord(currentUserId: String, audio: URL, completion: @escaping (Result<URL, Error>) -> Void) {
+        if isStorageFull {
+            completion(.failure(NSError(domain: "Cloud storage is full", code: -1, userInfo: nil)))
+            
             return
         }
+        
+        let ref = Storage.storage().reference().child("audioRecords").child(currentUserId).child(audio.lastPathComponent)
+        
+        let metadata = StorageMetadata()
+        metadata.contentType = "audio/m4a"
+        
+        guard let audioData = try? Data(contentsOf: audio) else { return }
+        
+        ref.putData(audioData , metadata: metadata) { (metadata, error) in
+            guard let _ = metadata else {
+                completion(.failure(error!))
+                return
+            }
+            ref.downloadURL { (url, error) in
+                guard let url = url else {
+                    completion(.failure(error!))
+                    return
+                }
+                completion(.success(url))
+                updateUsedStorageSize(currentUserId: currentUserId)
+            }
+        }
+    }
+    public static func downloadRecord(currentUserId: String, fileName: String, completion: @escaping (Result<URL, Error>) -> Void) {
+        let ref = Storage.storage().reference().child("audioRecords").child(currentUserId).child(fileName)
+        
         ref.downloadURL { (url, error) in
             guard let url = url else {
                 completion(.failure(error!))
@@ -74,74 +58,113 @@ func uploadRecord(currentUserId: String, audio: URL, completion: @escaping (Resu
             completion(.success(url))
         }
     }
-}
-
-func downloadRecord(currentUserId: String, fileName: String, completion: @escaping (Result<URL, Error>) -> Void) {
-    let ref = Storage.storage().reference().child("audioRecords").child(currentUserId).child(fileName)
-    
-    ref.downloadURL { (url, error) in
-        guard let url = url else {
-            completion(.failure(error!))
-            return
-        }
-        completion(.success(url))
-    }
-}
-
-func addData(user: User) {
-    // Get a reference to the database
-    let database = Firestore.firestore()
-    
-    database.collection("users").addDocument(data:
-                                                ["email": user.email,
-                                                 "name": user.name,
-                                                 "surname": user.surname,
-                                                 "photoURL": user.photoLocation, // TODO
-                                                 "birthDate": user.birthDate,
-                                                 "facebookProfileUrl": user.facebookProfileUrl,
-                                                 "phoneNumber": user.phoneNumber]) { error in
-        if error != nil {
-            print(#function, error)
-        } else {
-            
+    public static func addData(user: User) {
+        // Get a reference to the database
+        let database = Firestore.firestore()
+        
+        database.collection("users").addDocument(data:
+                                                    ["email": user.email,
+                                                     "name": user.name,
+                                                     "surname": user.surname,
+                                                     "photoURL": user.photoLocation, // TODO
+                                                     "birthDate": user.birthDate,
+                                                     "facebookProfileUrl": user.facebookProfileUrl,
+                                                     "phoneNumber": user.phoneNumber]) { error in
+            if error != nil {
+                print(#function, error)
+            } else {
+                
+            }
         }
     }
-}
-
-func getData(email: String) {
-    // Get a reference to the database
-    let database = Firestore.firestore()
-    
-    // Read the documents at a specific path
-    database.collection("users").whereField("email", isEqualTo: email).getDocuments { snapshot, error in
-        if error == nil {
-            if let snapshot = snapshot {
-                DispatchQueue.main.async {
-                    let users: [User] = snapshot.documents.map { data in
-                        print("user id = \(data.documentID)")
+    public static func getData(email: String) {
+        // Get a reference to the database
+        let database = Firestore.firestore()
+        
+        // Read the documents at a specific path
+        database.collection("users").whereField("email", isEqualTo: email).getDocuments { snapshot, error in
+            if error == nil {
+                if let snapshot = snapshot {
+                    DispatchQueue.main.async {
+                        let users: [User] = snapshot.documents.map { data in
+                            print("user id = \(data.documentID)")
+                            
+                            return User(photoLocation: data["photoURL"] as! String, name: data["name"] as! String, surname: data["surname"] as! String, birthDate: (data["birthDate"] as! Timestamp).dateValue(), email: data["email"] as! String, phoneNumber: data["phoneNumber"] as! String, facebookProfileUrl: data["facebookProfileUrl"] as! String)
+                        }
                         
-                        return User(photoLocation: data["photoURL"] as! String, name: data["name"] as! String, surname: data["surname"] as! String, birthDate: (data["birthDate"] as! Timestamp).dateValue(), email: data["email"] as! String, phoneNumber: data["phoneNumber"] as! String, facebookProfileUrl: data["facebookProfileUrl"] as! String)
+                        User.save(users[0])
                     }
-                    
-                    User.save(users[0])
+                }
+            }
+            else {
+                // Handle the error
+            }
+        }
+    }
+    public static func updateUsedStorageSize(currentUserId: String) {
+        var storedBytes: Int = 0
+        let ref = Storage.storage().reference().child("audioRecords").child(currentUserId)
+        
+        ref.listAll { storageListResult, error in
+            for item in storageListResult.items {
+                item.getMetadata { itemMetadata, itemError in
+                    storedBytes += Int(truncatingIfNeeded: itemMetadata?.size ?? 0)
+                    usedStorageSize = storedBytes
+                    storageFillPercent = Double(usedStorageSize) / Double(availableStorageSize)
                 }
             }
         }
-        else {
-            // Handle the error
+    }
+    public static func changeStoragePlan(user: Firebase.User, newPlan: Plan, onError: @escaping () -> Void) {
+        availableStorageSize = newPlan.size
+        
+        let email = user.email
+        let database = Firestore.firestore()
+        
+        // Read the documents at a specific path
+        database.collection("users").whereField("email", isEqualTo: email).getDocuments { snapshot, error in
+            if error == nil && snapshot != nil {
+                if let snapshot = snapshot {
+                    DispatchQueue.main.async {
+                        let document = snapshot.documents.first
+                        if let document = document {
+                            document.reference.updateData([
+                                "storageSize": newPlan.size
+                            ])
+                            
+                            storageFillPercent = Double(usedStorageSize) / Double(availableStorageSize)
+                        } else {
+                            onError()
+                        }
+                    }
+                } else {
+                    onError()
+                }
+            }
+            else {
+                // Handle the error
+                onError()
+            }
         }
     }
-}
-
-func getStoredSize(currentUserId: String, onSizeUpdated: @escaping (Int) -> Void) {
-    var storedBytes: Int = 0
-    let ref = Storage.storage().reference().child("audioRecords").child(currentUserId)
     
-    ref.listAll { storageListResult, error in
-        for item in storageListResult.items {
-            item.getMetadata { itemMetadata, itemError in
-                storedBytes += Int(truncatingIfNeeded: itemMetadata?.size ?? 0)
-                onSizeUpdated(storedBytes)
+    
+    public static var isStorageFull: Bool {
+        usedStorageSize >= availableStorageSize
+    }
+    
+    
+    public enum Plan {
+        case free200MB
+        case paid2GB
+        
+
+        public var size: Int {
+            switch self {
+            case .free200MB:
+                return 200 * 1024 * 1024
+            case .paid2GB:
+                return 2 * 1024 * 1024 * 1024
             }
         }
     }

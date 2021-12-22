@@ -62,14 +62,11 @@ struct SettingsTab: View {
     @Binding var colorScheme : AppColorScheme
     
     @State private var isToggleOn : Bool = false
-    @State private var selectedStrength = "Mild"
     @State private var isAppInfoShowing = false
     @State private var isCloudStorageChoiceShowing = false
     @State private var isDoNotDisturbIntervalViewShowing = false
     @State private var isSignOutConfirmationShowing = false
     @State private var storedSize: Int = 0
-    @State private var storageFillPercent: Float = 0.0
-    
     @State private var user: User = User()
     
     @EnvironmentObject var appAuth: AppAuth
@@ -78,7 +75,9 @@ struct SettingsTab: View {
     @AppStorage("doNotDisturbStartTime") private var doNotDisturbStartTime = Calendar.current.date(bySettingHour: 20, minute: 0, second: 0, of: Date())!
     @AppStorage("doNotDisturbFinishTime") private var doNotDisturbFinishTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!
     @AppStorage("isTurnOnByVoice") private var isTurnOnByVoice = true
-    
+    @AppStorage("availableStorageSize") private var availableStorageSize: Int = CloudDatabase.Plan.free200MB.size
+    @AppStorage("usedStorageSize") private var usedStorageSize: Int = 0
+    @AppStorage("storageFillPercent") private var storageFillPercent: Double = 0.0
     
     var body: some View {
         Form {
@@ -132,25 +131,17 @@ struct SettingsTab: View {
                 }
             }
             Section(header: Text("Облако")) {
-                Button {
-                    getStoredSize(currentUserId: AppAuth().currentUser!.uid) { storedSize in
-                        self.storedSize = storedSize
-                        self.storageFillPercent = Float(storedSize) / Float(200 * 1024 * 1024)
-                    }
-                } label: {
-                    Text("Проверить состояние облака")
-                }
                 ZStack {
                     StorageBar(value: $storageFillPercent)
                     HStack {
-                        Text(convertToHumanFileSize(bytes: self.storedSize))
+                        Text(convertToHumanFileSize(bytes: self.usedStorageSize))
                             .padding(.leading)
                         Spacer()
-                        Text("200 MB")
+                        Text(convertToHumanFileSize(bytes: self.availableStorageSize))
                             .padding(.trailing)
                     }
                 }
-                SectionButton(key: "Размер облака", value: "200 MB") {
+                SectionButton(key: "Размер облака", value: convertToHumanFileSize(bytes: self.availableStorageSize)) {
                     self.isCloudStorageChoiceShowing = true
                 }
             }

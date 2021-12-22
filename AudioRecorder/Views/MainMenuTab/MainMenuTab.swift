@@ -43,7 +43,7 @@ struct MainMenuTab: View {
                 
                 Button(action: {
                     if isRecording {
-                        isStopAvailable {isSucceed in
+                        isStopAvailable { isSucceed in
                             if isSucceed {
                                 audioRecorder.stopRecording()
                                 speechDetection.stopAudioEngine()

@@ -11,23 +11,26 @@ struct CloudStorageChoiceView: View {
     @Binding var isShowing: Bool
     
     
+    @AppStorage("availableStorageSize") private var availableStorageSize: Int = CloudDatabase.Plan.free200MB.size
+
+    
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 Button {
-                    
+                    CloudDatabase.changeStoragePlan(user:  AppAuth().currentUser!, newPlan: CloudDatabase.Plan.paid2GB) {
+                        fatalError("\(CloudDatabase.Plan.paid2GB) cannot be bought. Please contact support")
+                    }
                 } label: {
                     PaidCloudPlanView()
                 }
+                .disabled(availableStorageSize >= CloudDatabase.Plan.paid2GB.size)
                 .padding(.top, 10)
                 
                 Spacer()
                 
-                Button {
-                    
-                } label: {
-                    FreeCloudPlanView()
-                }
+                FreeCloudPlanView()
             }
             .navigationBarTitle(Text("Размер облака"), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {

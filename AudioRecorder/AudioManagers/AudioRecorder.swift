@@ -130,7 +130,7 @@ class AudioRecorder: ObservableObject {
         
         stopMonitoring()
         
-        uploadRecord(currentUserId: AppAuth().currentUser!.uid, audio: lastAudioRecord.fileURL) { (result) in
+        CloudDatabase.uploadRecord(currentUserId: AppAuth().currentUser!.uid, audio: lastAudioRecord.fileURL) { (result) in
             switch result {
             case .success(_):
                 print("Audio Record was uploaded successfully")
