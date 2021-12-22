@@ -151,7 +151,6 @@ struct SettingsTab: View {
                 } label: {
                     Text("О принципах работы приложения")
                 }
-                
             }
             Section(header: Text("Контакты")) {
                 Text("...")

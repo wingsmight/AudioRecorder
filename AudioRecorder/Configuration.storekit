@@ -23,6 +23,26 @@
       "productID" : "com.wingsmight.AudioRecorder.SupportDeveloper",
       "referenceName" : "SupportDeveloper",
       "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "99.99",
+      "familyShareable" : false,
+      "internalID" : "4D51487F",
+      "localizations" : [
+        {
+          "description" : "2 GB to store audio records on Cloud",
+          "displayName" : "2 GB of Cloud storage",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "2 GB на облаке для хранения аудио",
+          "displayName" : "2 GB облачного хранилища",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "com.wingsmight.AudioRecorder.CloudStorage_paid2GB",
+      "referenceName" : "CloudStorage_paid2GB",
+      "type" : "NonConsumable"
     }
   ],
   "settings" : {

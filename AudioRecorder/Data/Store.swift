@@ -10,6 +10,7 @@ import Foundation
 
 public class Store {
     public static let products = [
-        "SupportDeveloper" : "com.wingsmight.AudioRecorder.SupportDeveloper"
+        "SupportDeveloper" : "com.wingsmight.AudioRecorder.SupportDeveloper",
+        "CloudStorage_paid2GB" : "com.wingsmight.AudioRecorder.CloudStorage_paid2GB"
     ]
 }

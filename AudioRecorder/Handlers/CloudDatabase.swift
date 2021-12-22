@@ -115,7 +115,7 @@ class CloudDatabase {
             }
         }
     }
-    public static func changeStoragePlan(user: Firebase.User, newPlan: Plan, onError: @escaping () -> Void) {
+    public static func changeStoragePlan(user: Firebase.User, newPlan: Plan, onSuccess: @escaping () -> Void) {
         availableStorageSize = newPlan.size
         
         let email = user.email
@@ -133,17 +133,18 @@ class CloudDatabase {
                             ])
                             
                             storageFillPercent = Double(usedStorageSize) / Double(availableStorageSize)
+                            onSuccess()
                         } else {
-                            onError()
+                            //onError()
                         }
                     }
                 } else {
-                    onError()
+                    //onError()
                 }
             }
             else {
                 // Handle the error
-                onError()
+                //onError()
             }
         }
     }
