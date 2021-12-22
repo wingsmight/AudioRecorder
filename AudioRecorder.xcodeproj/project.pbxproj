@@ -37,6 +37,7 @@
 		CE6F96432710086000D3E18D /* AuthGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F96422710086000D3E18D /* AuthGateView.swift */; };
 		CE704905270D8FE50045B498 /* UrlExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE704904270D8FE50045B498 /* UrlExt.swift */; };
 		CE704908270D9DD60045B498 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE704907270D9DD60045B498 /* Share.swift */; };
+		CE73D3EC2772B033005EA45D /* StorageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE73D3EB2772B033005EA45D /* StorageBar.swift */; };
 		CE7525D626FF80A1003DA83E /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7525D526FF80A1003DA83E /* ViewExt.swift */; };
 		CE773AA726FB65FA00EA8284 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE773AA626FB65FA00EA8284 /* User.swift */; };
 		CE773AAB26FB770600EA8284 /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE773AAA26FB770600EA8284 /* DateExt.swift */; };
@@ -98,6 +99,7 @@
 		CE6F96422710086000D3E18D /* AuthGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGateView.swift; sourceTree = "<group>"; };
 		CE704904270D8FE50045B498 /* UrlExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlExt.swift; sourceTree = "<group>"; };
 		CE704907270D9DD60045B498 /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
+		CE73D3EB2772B033005EA45D /* StorageBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageBar.swift; sourceTree = "<group>"; };
 		CE7525D526FF80A1003DA83E /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
 		CE773AA626FB65FA00EA8284 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CE773AAA26FB770600EA8284 /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				CE6D71DA26F60943005BDA30 /* SettingsTab.swift */,
 				CE773AAF26FB7A4600EA8284 /* AppInfoView.swift */,
 				CE9F908526FF32BF00F53B02 /* TimeIntervalPickerView.swift */,
+				CE73D3EB2772B033005EA45D /* StorageBar.swift */,
 			);
 			path = SettingsTab;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				CE6D71CE26F6042D005BDA30 /* ContentView.swift in Sources */,
 				CE78EF9426FE46A300547BD0 /* Store.swift in Sources */,
 				CED26E12270BEE43007674B8 /* RecordView.swift in Sources */,
+				CE73D3EC2772B033005EA45D /* StorageBar.swift in Sources */,
 				CE7773C526FB93F2000DBBC4 /* PaidCloudPlanView.swift in Sources */,
 				CE7773C326FB93CD000DBBC4 /* FreeCloudPlanView.swift in Sources */,
 				CE62BEBA274B6B4C007D0CA8 /* TimeView.swift in Sources */,

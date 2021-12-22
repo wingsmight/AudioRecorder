@@ -67,6 +67,8 @@ struct SettingsTab: View {
     @State private var isCloudStorageChoiceShowing = false
     @State private var isDoNotDisturbIntervalViewShowing = false
     @State private var isSignOutConfirmationShowing = false
+    @State private var storedSize: Int = 0
+    @State private var storageFillPercent: Float = 0.0
     
     @State private var user: User = User()
     
@@ -131,9 +133,22 @@ struct SettingsTab: View {
             }
             Section(header: Text("Облако")) {
                 Button {
-                    
+                    getStoredSize(currentUserId: AppAuth().currentUser!.uid) { storedSize in
+                        self.storedSize = storedSize
+                        self.storageFillPercent = Float(storedSize) / Float(200 * 1024 * 1024)
+                    }
                 } label: {
                     Text("Проверить состояние облака")
+                }
+                ZStack {
+                    StorageBar(value: $storageFillPercent)
+                    HStack {
+                        Text(convertToHumanFileSize(bytes: self.storedSize))
+                            .padding(.leading)
+                        Spacer()
+                        Text("200 MB")
+                            .padding(.trailing)
+                    }
                 }
                 SectionButton(key: "Размер облака", value: "200 MB") {
                     self.isCloudStorageChoiceShowing = true
@@ -207,4 +222,26 @@ struct SettingsTab_Previews: PreviewProvider {
     static var previews: some View {
         SettingsTab(colorScheme: .constant(AppColorScheme.System))
     }
+}
+
+func convertToHumanFileSize(bytes: Int, systemInternational: Bool = true) -> String {
+    let thresh = systemInternational ? 1000 : 1024
+    var bytes: Int = bytes
+
+    if (abs(bytes) < thresh) {
+        return "\(bytes) B"
+    }
+
+    let units = systemInternational
+        ? ["kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+        : ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"]
+    var u = -1
+
+    repeat {
+        bytes /= thresh
+        u += 1
+    } while (abs(bytes) >= thresh && u < units.count - 1);
+
+
+    return "\(bytes) \(units[u])"
 }

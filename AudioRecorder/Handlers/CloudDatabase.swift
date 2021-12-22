@@ -132,3 +132,17 @@ func getData(email: String) {
         }
     }
 }
+
+func getStoredSize(currentUserId: String, onSizeUpdated: @escaping (Int) -> Void) {
+    var storedBytes: Int = 0
+    let ref = Storage.storage().reference().child("audioRecords").child(currentUserId)
+    
+    ref.listAll { storageListResult, error in
+        for item in storageListResult.items {
+            item.getMetadata { itemMetadata, itemError in
+                storedBytes += Int(truncatingIfNeeded: itemMetadata?.size ?? 0)
+                onSizeUpdated(storedBytes)
+            }
+        }
+    }
+}
