@@ -47,6 +47,7 @@ class SpeechDetection {
                                     }
             }
             
+            
             // Start the stream of audio data.
             audioEngine.prepare()
             try audioEngine.start()
@@ -56,6 +57,8 @@ class SpeechDetection {
     }
     
     func stopAudioEngine() {
+        audioEngine?.pause()
+        audioEngine?.inputNode.removeTap(onBus: 0)
         audioEngine?.stop()
     }
     
