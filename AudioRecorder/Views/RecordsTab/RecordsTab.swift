@@ -14,17 +14,21 @@ struct RecordsTab: View {
     
     @State private var audioPlayer: AVAudioPlayer!
     @State private var expandedChildName: String = ""
+    @State private var selection = Set<AudioRecord>()
+    @State private var editMode = EditMode.inactive
     
 
     var body: some View {
-        List {
-            ForEach(recordings, id: \.createdAt) { recording in
+        List(selection: $selection) {
+            ForEach(recordings, id: \.self) { recording in
                 RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: recording.createdAt, location: recording.location), expandedRecord: $expandedChildName, audioPlayer: self.$audioPlayer)
             }
             .onDelete(perform: tryDelete)
         }
         .navigationTitle("Аудиозаписи")
         .padding(.top, 1)
+        .navigationBarItems(leading: DeleteButton, trailing: EditButton())
+        .environment(\.editMode, self.$editMode)
     }
     
     private func delete(withURL url: URL) {
@@ -45,12 +49,33 @@ struct RecordsTab: View {
         for index in offsets {
             urlsToDelete.append(recordings[index].fileURL)
         }
-        let indexToDelete = offsets.last!
-        for _ in 1...offsets.count {
-            recordings.remove(at: indexToDelete)
-        }
+        recordings.remove(atOffsets: offsets)
         for urlToDelete in urlsToDelete {
             delete(withURL: urlToDelete)
+        }
+    }
+    private func deleteSelection() {
+        var selectedSet = IndexSet()
+        for selectedRecord in selection {
+            if let index = recordings.lastIndex(where: { $0 == selectedRecord })  {
+                selectedSet.insert(index)
+            }
+        }
+        selection = Set<AudioRecord>()
+        
+        tryDelete(at: selectedSet)
+    }
+    
+    
+    private var DeleteButton: some View {
+        if editMode == .inactive || selection.count <= 0 {
+            return Button(action: {}) {
+                Image(systemName: "")
+            }
+        } else {
+            return Button(action: deleteSelection) {
+                Image(systemName: "trash")
+            }
         }
     }
 }

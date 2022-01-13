@@ -87,6 +87,7 @@ struct ContentView: View {
                 .tag(1)
                 NavigationView {
                     RecordsTab()
+                        
                 }
                 .tabItem {
                     Text("")

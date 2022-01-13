@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-struct AudioRecord: Codable {
+struct AudioRecord: Codable, Hashable, Equatable {
     var NIL_COORDINATE: Double = -22222
     
     
@@ -27,6 +27,13 @@ struct AudioRecord: Codable {
             self.locationLatitude = NIL_COORDINATE
             self.locationLongitude = NIL_COORDINATE
         }
+    }
+    
+    static func == (lhs: AudioRecord, rhs: AudioRecord) -> Bool {
+        return lhs.filePath == rhs.filePath
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(filePath)
     }
     
     var fileURL: URL {
