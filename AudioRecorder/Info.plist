@@ -27,7 +27,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Face ID needs to determine that's exactly you want to stop record, otherwise secure message about hacking will send to your FB account</string>
+	<string>Face ID needs to determine that&apos;s exactly you want to stop/delete record</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Location can be used to determine where the audio record was made</string>
 	<key>NSLocationAlwaysUsageDescription</key>

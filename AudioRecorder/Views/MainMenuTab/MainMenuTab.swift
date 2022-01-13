@@ -43,7 +43,7 @@ struct MainMenuTab: View {
                 
                 Button(action: {
                     if isRecording {
-                        isStopAvailable { isSucceed in
+                        Biometrics.isAvailable(reason: "Face ID требуется для определения, что именно вы хотите остановить запись.") { isSucceed in
                             if isSucceed {
                                 audioRecorder.stopRecording()
                                 speechDetection.stopAudioEngine()
@@ -133,51 +133,6 @@ struct MainMenuTab: View {
             try player?.start(atTime: 0)
         } catch {
             print("Failed to play pattern: \(error).")
-        }
-    }
-    func isStopAvailable(onPerform: @escaping (Bool) -> Void) {
-        let context = LAContext()
-        var error: NSError?
-
-        // check whether biometric authentication is possible
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            // it's possible, so go ahead and use it
-            let reason = "Face ID требуется для определения, что именно вы хотите остановить запись, иначе на ваш аккаунт Facebook будет отправлено защищенное сообщение о взломе."
-
-            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
-                if let authenticationError = authenticationError {
-                    let laError = authenticationError as! LAError
-                    if laError.code == LAError.Code.userFallback {
-                        print("laError.code = \(laError.code)")
-                        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
-                            print("0onPerform = \(success)")
-                            onPerform(success)
-                        }
-                    } else {
-                        print("1onPerform = \(success)")
-                        onPerform(success)
-                    }
-                } else {
-                    print("2onPerform = \(success)")
-                    onPerform(success)
-                }
-            }
-        } else {
-            // no biometrics
-            if error != nil {
-                print("No biometrics = \(error)")
-                let laError = error as! LAError
-                print("laError.code = \(laError.code)")
-                if laError.code == LAError.Code.touchIDLockout {
-                    print("3onPerform = \(false)")
-                    onPerform(false)
-                    
-                    print("WARNING. Phone has been hacking!")
-                    return
-                }
-            }
-            print("4onPerform = \(true)")
-            onPerform(true)
         }
     }
 }

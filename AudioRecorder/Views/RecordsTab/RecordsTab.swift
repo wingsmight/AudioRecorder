@@ -21,17 +21,24 @@ struct RecordsTab: View {
             ForEach(recordings, id: \.createdAt) { recording in
                 RecordView(audioRecord: AudioRecord(fileURL: recording.fileURL, createdAt: recording.createdAt, location: recording.location), expandedRecord: $expandedChildName, audioPlayer: self.$audioPlayer)
             }
-            .onDelete(perform: delete)
+            .onDelete(perform: tryDelete)
         }
         .navigationTitle("Аудиозаписи")
         .padding(.top, 1)
     }
     
     private func delete(withURL url: URL) {
-        if audioPlayer.url == url {
+        if audioPlayer != nil && audioPlayer.url == url {
             audioPlayer.stop()
         }
         AudioRecorder.deleteRecording(url: url)
+    }
+    private func tryDelete(at offsets: IndexSet) {
+        Biometrics.isAvailable(reason: "Face ID требуется для определения, что именно вы хотите удалить запись.") { success in
+            if success {
+                delete(at: offsets)
+            }
+        }
     }
     private func delete(at offsets: IndexSet) {
         var urlsToDelete = [URL]()
