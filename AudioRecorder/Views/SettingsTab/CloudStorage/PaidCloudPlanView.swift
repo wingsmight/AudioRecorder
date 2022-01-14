@@ -32,7 +32,7 @@ struct PaidCloudPlanView: View {
                             .padding()
                             .foregroundColor(Color("paidCloudColor"))
                             .shadow(color: .secondary.opacity(0.8), radius: 10)
-                        Text("99.99 $")
+                        Text("4.99 $")
                             .font(SwiftUI.Font.headline)
                             .foregroundColor(.secondary)
                     }
