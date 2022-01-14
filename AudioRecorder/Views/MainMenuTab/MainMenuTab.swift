@@ -101,7 +101,6 @@ struct MainMenuTab: View {
         .onAppear(perform: {
             initHaptics()
         })
-        .navigationTitle("Аудиорегистратор")
     }
     
 
