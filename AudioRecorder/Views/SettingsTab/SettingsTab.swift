@@ -153,8 +153,7 @@ struct SettingsTab: View {
                 }
             }
             Section(header: Text("Контакты")) {
-                Text("...")
-                    .foregroundColor(.secondary)
+                TextInfo(key: "Почта", value: "azzifastgames@gmail.com")
             }
             Section(header: Text("Другое")) {
                 Button {
