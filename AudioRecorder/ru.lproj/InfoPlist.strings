@@ -1,0 +1,13 @@
+/* 
+  InfoPlist.strings
+  AudioRecorder
+
+  Created by Igoryok on 22.01.2022.
+  
+*/
+
+NSFaceIDUsageDescription = "Face ID требуется для определения, что именно вы хотите удалить запись.";
+NSLocationAlwaysAndWhenInUseUsageDescription = "Геолокация может быть использована для определения местоположения, где была сделана аудиозапись";
+NSLocationAlwaysUsageDescription = "Геолокация может быть использована для определения местоположения, где была сделана аудиозапись";
+NSLocationWhenInUseUsageDescription = "Геолокация может быть использована для определения местоположения, где была сделана аудиозапись";
+NSMicrophoneUsageDescription = "Доступ к микрофону необходим приложению для записи голоса при распознавании в пределах слышимости человеческой речи.";

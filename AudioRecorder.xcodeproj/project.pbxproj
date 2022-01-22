@@ -12,6 +12,7 @@
 		CE0286CB270F3A9300D81755 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CE0286CA270F3A9300D81755 /* FirebaseAuth */; };
 		CE2924082770F4D600E0DF4C /* DoNotDisturbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2924072770F4D600E0DF4C /* DoNotDisturbMode.swift */; };
 		CE30ED9727443AA30073C243 /* vosk-model-small-ru-0.22 in Resources */ = {isa = PBXBuildFile; fileRef = CE30ED9627443AA30073C243 /* vosk-model-small-ru-0.22 */; };
+		CE3DA7F2279C396500AA9D2B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE3DA7F4279C396500AA9D2B /* InfoPlist.strings */; };
 		CE59FF35275AEC2A004BDF8D /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE59FF34275AEC2A004BDF8D /* Time.swift */; };
 		CE62BEB4274B6923007D0CA8 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE62BEB3274B6923007D0CA8 /* Stopwatch.swift */; };
 		CE62BEB6274B6947007D0CA8 /* LapTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE62BEB5274B6947007D0CA8 /* LapTime.swift */; };
@@ -75,6 +76,8 @@
 		CE0286C5270EEC4200D81755 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		CE2924072770F4D600E0DF4C /* DoNotDisturbMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoNotDisturbMode.swift; sourceTree = "<group>"; };
 		CE30ED9627443AA30073C243 /* vosk-model-small-ru-0.22 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "vosk-model-small-ru-0.22"; sourceTree = "<group>"; };
+		CE3DA7F3279C396500AA9D2B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CE3DA7F5279C396800AA9D2B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CE59FF34275AEC2A004BDF8D /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		CE62BEB3274B6923007D0CA8 /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
 		CE62BEB5274B6947007D0CA8 /* LapTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LapTime.swift; sourceTree = "<group>"; };
@@ -202,6 +205,7 @@
 				CE6D71E026F60998005BDA30 /* Views */,
 				CE6D71CF26F60430005BDA30 /* Assets.xcassets */,
 				CE6D71D426F60430005BDA30 /* Info.plist */,
+				CE3DA7F4279C396500AA9D2B /* InfoPlist.strings */,
 				CE6D71D126F60430005BDA30 /* Preview Content */,
 				CE773AA826FB660000EA8284 /* Data */,
 				CE78EF8F26FDCF1800547BD0 /* Configuration.storekit */,
@@ -413,6 +417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE6D71D326F60430005BDA30 /* Preview Assets.xcassets in Resources */,
+				CE3DA7F2279C396500AA9D2B /* InfoPlist.strings in Resources */,
 				CE9D67EC2712C890003FB664 /* GoogleService-Info.plist in Resources */,
 				CE30ED9727443AA30073C243 /* vosk-model-small-ru-0.22 in Resources */,
 				CE8F4B012742D1E1002ADDFA /* vosk-model-spk-0.4 in Resources */,
@@ -482,6 +487,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		CE3DA7F4279C396500AA9D2B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE3DA7F3279C396500AA9D2B /* en */,
+				CE3DA7F5279C396800AA9D2B /* ru */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		CEBF0BEC26FA5D6000C9B906 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
