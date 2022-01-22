@@ -16,6 +16,7 @@ struct User: Equatable, Codable {
     var email: String
     var phoneNumber: String
     var facebookProfileUrl: String
+    var cloudSize: Int
     
     
     internal init() {
@@ -26,8 +27,9 @@ struct User: Equatable, Codable {
         self.email = ""
         self.phoneNumber = ""
         self.facebookProfileUrl = ""
+        self.cloudSize = CloudDatabase.Plan.free200MB.size
     }
-    internal init(photoLocation: String, name: String, surname: String, birthDate: Date, email: String, phoneNumber: String, facebookProfileUrl: String) {
+    internal init(photoLocation: String, name: String, surname: String, birthDate: Date, email: String, phoneNumber: String, facebookProfileUrl: String, cloudSize: Int) {
         self.photoLocation = photoLocation
         self.name = name
         self.surname = surname
@@ -35,6 +37,7 @@ struct User: Equatable, Codable {
         self.email = email
         self.phoneNumber = phoneNumber
         self.facebookProfileUrl = facebookProfileUrl
+        self.cloudSize = cloudSize
     }
     
     
@@ -45,7 +48,8 @@ struct User: Equatable, Codable {
         lhs.birthDate == rhs.birthDate &&
         lhs.email == rhs.email &&
         lhs.phoneNumber == rhs.phoneNumber &&
-        lhs.facebookProfileUrl == rhs.facebookProfileUrl
+        lhs.facebookProfileUrl == rhs.facebookProfileUrl &&
+        lhs.cloudSize == rhs.cloudSize
     }
     static func load() -> User {
         let userData: Data = UserDefaults.standard.data(forKey: "user") ?? Data()

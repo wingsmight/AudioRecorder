@@ -69,7 +69,8 @@ class CloudDatabase {
                                                      "photoURL": user.photoLocation, // TODO
                                                      "birthDate": user.birthDate,
                                                      "facebookProfileUrl": user.facebookProfileUrl,
-                                                     "phoneNumber": user.phoneNumber]) { error in
+                                                     "phoneNumber": user.phoneNumber,
+                                                     "storageSize": user.cloudSize]) { error in
             if error != nil {
                 print(#function, error)
             } else {
@@ -89,7 +90,7 @@ class CloudDatabase {
                         let users: [User] = snapshot.documents.map { data in
                             print("user id = \(data.documentID)")
                             
-                            return User(photoLocation: data["photoURL"] as! String, name: data["name"] as! String, surname: data["surname"] as! String, birthDate: (data["birthDate"] as! Timestamp).dateValue(), email: data["email"] as! String, phoneNumber: data["phoneNumber"] as! String, facebookProfileUrl: data["facebookProfileUrl"] as! String)
+                            return User(photoLocation: data["photoURL"] as! String, name: data["name"] as! String, surname: data["surname"] as! String, birthDate: (data["birthDate"] as! Timestamp).dateValue(), email: data["email"] as! String, phoneNumber: data["phoneNumber"] as! String, facebookProfileUrl: data["facebookProfileUrl"] as! String, cloudSize: data["storageSize"] as! Int)
                         }
                         
                         User.save(users[0])
