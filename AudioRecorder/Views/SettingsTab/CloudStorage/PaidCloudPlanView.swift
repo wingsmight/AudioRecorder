@@ -45,16 +45,6 @@ struct PaidCloudPlanView: View {
         .padding(.bottom, 3)
         .padding(.top, 3)
         .shadow(radius: 20)
-//        .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { isPressing in
-//            withAnimation(.easeInOut(duration: 1.0)) {
-//                self.isPressed = isPressing
-//            }
-//            if isPressing {
-//                print("My long pressed starts")
-//            } else {
-//                print("My long pressed ends")
-//            }
-//        }, perform: { })
     }
 }
 

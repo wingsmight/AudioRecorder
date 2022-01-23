@@ -119,7 +119,7 @@ struct SignUpView: View {
                             alertBackground()
                         },
                         handleSuccess: {
-                            let user = User(photoLocation: "", name: self.userName, surname: self.userSurname, birthDate: self.birthDate, email: self.email, phoneNumber: "", facebookProfileUrl: "", cloudSize: CloudDatabase.Plan.paid2GB.size)
+                            let user = User(photoLocation: "", name: self.userName, surname: self.userSurname, birthDate: self.birthDate, email: self.email, phoneNumber: "", facebookProfileUrl: "", cloudSize: CloudDatabase.Plan.free200MB.size)
                             
                             CloudDatabase.addData(user: user)
                             User.save(user)
