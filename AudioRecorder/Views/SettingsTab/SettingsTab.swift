@@ -91,9 +91,7 @@ struct SettingsTab: View {
                         .lineLimit(2)
                     Spacer()
                 }
-                TextInfo(key: "Дата рождения", value: user.birthDate.toString(dataStyle: .short))
                 TextInfo(key: "Почта", value: user.email)
-                TextInfo(key: "Телефон", value: user.phoneNumber)
                 Button {
                     isSignOutConfirmationShowing = true
                 } label: {
@@ -180,7 +178,7 @@ struct SettingsTab: View {
                     Text("Поблагодарить разработчика")
                 }
                 Button {
-                    SwiftyStoreKit.restorePurchases(completion: {_ in 
+                    SwiftyStoreKit.restorePurchases(completion: {_ in
                         
                     })
                 } label: {

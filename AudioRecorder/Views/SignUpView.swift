@@ -42,21 +42,6 @@ struct SignUpView: View {
                 
                 TextFieldView(label: "Фамилия", text: $userSurname)
                 
-                HStack {
-                    Text("Дата рождения:")
-                        .font(.title3)
-                        .foregroundColor(Color(UIColor.tertiaryLabel))
-                    
-                    Spacer()
-                    
-                    DatePicker("", selection: $birthDate, displayedComponents: .date)
-                        .labelsHidden()
-                }
-                .padding()
-                .background(Color(UIColor.systemGray5))
-                .cornerRadius(5.0)
-                .padding(.vertical, 8)
-                
                 SecureField(
                     "Пароль",
                     text: $password
