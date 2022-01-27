@@ -179,6 +179,13 @@ struct SettingsTab: View {
                 } label: {
                     Text("Поблагодарить разработчика")
                 }
+                Button {
+                    SwiftyStoreKit.restorePurchases(completion: {_ in 
+                        
+                    })
+                } label: {
+                    Text("Восстановить покупки")
+                }
             }
         }
         .onAppear() {
