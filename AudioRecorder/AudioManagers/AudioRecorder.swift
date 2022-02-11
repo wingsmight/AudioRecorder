@@ -34,6 +34,11 @@ class AudioRecorder: ObservableObject {
             try AVAudioSession.sharedInstance().setAllowHapticsAndSystemSoundsDuringRecording(true)
             try AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: [.defaultToSpeaker, .mixWithOthers, .allowBluetooth, .allowBluetoothA2DP])
             try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+            try AVAudioSession.InterruptionType =
+            
+            if #available(iOS 14.5, *) {
+                try AVAudioSession.sharedInstance().setPrefersNoInterruptionsFromSystemAlerts(true)
+            }
         } catch {
             print("Failed to set up recording session")
         }

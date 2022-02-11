@@ -23,6 +23,10 @@ class SpeechDetection {
     
     func startAudioEngine(onDetected: @escaping (String) -> Void) {
         do {
+            NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handleInterruption(notification:)),
+                                                   name: NSNotification.Name.AVAudioSessionInterruption,
+                                                   object: theSession)
+            
             // Create a new audio engine.
             audioEngine = AVAudioEngine()
             
@@ -79,6 +83,46 @@ class SpeechDetection {
             return result != nil ? result! : ""
         } catch {
             return ""
+        }
+    }
+    
+    func handleInterruption(notification: NSNotification) {
+        print("handleInterruption")
+        guard let value = (notification.userInfo?[AVAudioSessionInterruptionTypeKey] as? NSNumber)?.uintValue,
+            let interruptionType =  AVAudioSessionInterruptionType(rawValue: value)
+            else {
+                print("notification.userInfo?[AVAudioSessionInterruptionTypeKey]", notification.userInfo?[AVAudioSessionInterruptionTypeKey])
+                return }
+        switch interruptionType {
+        case .began:
+            print("began")
+            vox.pause()
+            music.pause()
+            print("audioPlayer.playing", vox.isPlaying)
+            /**/
+            do {
+                try theSession.setActive(false)
+                print("AVAudioSession is inactive")
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+            pause()
+        default :
+            print("ended")
+            if let optionValue = (notification.userInfo?[AVAudioSessionInterruptionOptionKey] as? NSNumber)?.uintValue, AVAudioSessionInterruptionOptions(rawValue: optionValue) == .shouldResume {
+                print("should resume")
+                // ok to resume playing, re activate session and resume playing
+                /**/
+                do {
+                    try theSession.setActive(true)
+                    print("AVAudioSession is Active again")
+                    vox.play()
+                    music.play()
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+                play()
+            }
         }
     }
 }
