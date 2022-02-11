@@ -148,9 +148,6 @@ struct ContentView: View {
             let locationManager = CLLocationManager()
             locationManager.requestAlwaysAuthorization()
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            print("UIApplication.willEnterForegroundNotification")
-        }
         .alert(isPresented: $isMicPermissionDenyAlertShowing) {
             Alert(
                 title: Text("Предоставьте доступ"),

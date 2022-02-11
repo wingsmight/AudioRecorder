@@ -43,31 +43,9 @@ struct MainMenuTab: View {
                 
                 Button(action: {
                     if isRecording {
-                        Biometrics.isAvailable(reason: "Face ID требуется для определения, что именно вы хотите остановить запись.") { isSucceed in
-                            if isSucceed {
-                                audioRecorder.stopRecording()
-                                speechDetection.stopAudioEngine()
-                                stopwatch.pause()
-                                
-                                isRecording = false
-                                isRecordingToastShowing = isRecording
-                            }
-                        }
+                        stopRecording()
                     } else {
-                        speechDetection.startAudioEngine { recognizedText in
-                            if !audioRecorder.isRecording {
-                                audioRecorder.startRecording()
-                                stopwatch.reset()
-                            } else {
-                                audioRecorder.resetAutoStop()
-                                if stopwatch.mode != .running {
-                                    stopwatch.start()
-                                }
-                            }
-                        }
-                        
-                        isRecording = true
-                        isRecordingToastShowing = isRecording
+                        startRecording()
                     }
                     
                     vibrate(intensity: 0.7, sharpness: 0.7)
@@ -100,10 +78,36 @@ struct MainMenuTab: View {
         }
         .onAppear(perform: {
             initHaptics()
+            
+            NotificationCenter.default.addObserver(forName: AVAudioSession.interruptionNotification, object: AVAudioSession.sharedInstance(), queue: .main, using: handleInterruption)
         })
     }
     
-
+    
+    func startRecording() {
+        speechDetection.startAudioEngine { recognizedText in
+            if !audioRecorder.isRecording {
+                audioRecorder.startRecording()
+                stopwatch.reset()
+            } else {
+                audioRecorder.resetAutoStop()
+                if stopwatch.mode != .running {
+                    stopwatch.start()
+                }
+            }
+        }
+        
+        isRecording = true
+        isRecordingToastShowing = isRecording
+    }
+    func stopRecording() {
+        audioRecorder.stopRecording()
+        speechDetection.stopAudioEngine()
+        stopwatch.pause()
+        
+        isRecording = false
+        isRecordingToastShowing = isRecording
+    }
     func initHaptics() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
 
@@ -133,6 +137,30 @@ struct MainMenuTab: View {
         } catch {
             print("Failed to play pattern: \(error).")
         }
+    }
+    func handleInterruption(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+                let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+                let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
+                    return
+            }
+
+            switch type {
+            case .began:
+                stopRecording()
+                
+                break
+            case .ended:
+                guard let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else { return }
+                let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
+                if options.contains(.shouldResume) {
+                    startRecording()
+                } else {
+                    print("An interruption ended. Don't resume playback.")
+                }
+                break
+            default: ()
+            }
     }
 }
 
