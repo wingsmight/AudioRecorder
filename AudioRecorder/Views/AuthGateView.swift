@@ -21,6 +21,10 @@ struct AuthGateView: View {
             LogInView()
                 .onAppear {
                     appAuth.signedIn = appAuth.isSignedIn
+                    
+                    if !appAuth.signedIn {
+                        UserDefaults.standard.set(true, forKey: "isTurnOnByVoice")
+                    }
                 }
         }
     }
